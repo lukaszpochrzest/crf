@@ -1,0 +1,206 @@
+T1	Proposition 1944 1977	poczekać na decyzję w technicznym
+T2	Reason 1982 2027	musimy mieć jakąś minimalną ilość uczestników
+E1	Reason:T2 Reason_of:T1
+A1	Reception E1 0
+T3	Proposition 2488 2555	przeprowadzimy debatę w mniejszej ilości osób niż jest przewidziane
+T4	Reason 2446 2486	nie podjęto żadnej decyzji w tym temacie
+E2	Reason:T4 Reason_of:T3
+A2	Reception E2 0
+T5	Reason 2571 2626	Jest za dużo spraw naraz i nami nikt się nie chce zająć
+E3	Reason:T5 Reason_of:T3
+A3	Reception E3 -0.4
+T6	Proposition 5083 5166	zastanowić się, w jaki sposób można uniknąć i walczyć z tym, że sprzedaje się prace
+T7	Reason 5269 5298	dla mnie jest to równie ważne
+E4	Reason:T7 Reason_of:T6
+A4	Reception E4 0.4
+T8	Reason 7382 7417	nie chcę też go tak zupełnie urywać
+E5	Reason:T8 Reason_of:T9
+A5	Reception E5 0.4
+T9	Proposition 7321 7377	Chciałby jeszcze na koniec coś skomentować w tym temacie
+T10	Proposition 7784 7820	pytanie jakoś zgrabnie mi podyktować
+T11	Reason 7825 7838	nie nadążyłem
+E6	Reason:T11 Reason_of:T10
+A6	Reception E6 0
+T12	Proposition 8728 8801	przejść do właśnie do tych propozycji działań z materiałów informacyjnych
+T13	Proposition 9050 9073	propozycja numer cztery
+T14	Reason 9081 9122	zaproponowane zostały zajęcia warsztatowe
+E7	Reason:T14 Reason_of:T13
+A7	Reception E7 0
+T15	Proposition 9681 9762	zajęcia, które byłyby prowadzone w mniejszych grupach i na samym początku studiów
+T16	Reason 9770 9788	bardziej użyteczne
+E8	Reason:T16 Reason_of:T15
+A8	Reception E8 0.4
+T17	Proposition 10239 10259	warsztaty i praktyka
+T18	Reason 10268 10290	epsze niż sucha teoria
+E9	Reason:T18 Reason_of:T17
+A9	Reception E9 1
+T19	Proposition 10087 10105	zajęcia praktyczne
+T20	Reason 10113 10202	lepsze i w lepszy sposób pozwoliłyby zapoznać się z tym, co tak naprawdę powinniśmy robić
+E10	Reason:T20 Reason_of:T19
+A10	Reception E10 1
+T21	Proposition 10701 10718	krótkiego wykładu
+T22	Reason 10768 10815	nie absorbowałoby to właśnie kadry akademickiej
+E11	Reason:T22 Reason_of:T21
+A11	Reception E11 0.6
+T23	Proposition 10880 10890	bez testu,
+T24	Reason 10977 11054	ktoś chce się nauczyć czegoś to się nauczy bez jakiejś formy sprawdzania tego
+E12	Reason:T24 Reason_of:T23
+A12	Reception E12 -0.6
+T25	Proposition 11302 11327	robić to w dużych grupach
+T26	Reason 11473 11533	mało z tego zapamiętałam na sali właśnie było ponad 200 osób
+E13	Reason:T26 Reason_of:T25
+A13	Reception E13 -0.8
+T27	Proposition 11822 11854	azywały się bardzo podchwytliwie
+T28	Reason 11900 11963	zachęcić studentów do oddolnego uczestnictwa w takich zajęciach
+E14	Reason:T28 Reason_of:T27
+A14	Reception E14 0.8
+T29	Proposition 12497 12511	za warsztatami
+T30	Reason 12387 12412	uczyliśmy siebie nawzajem
+E15	Reason:T30 Reason_of:T29
+A15	Reception E15 1
+T31	Reason 12422 12468	zrobiło się z tego coś przydatnego i ciekawego
+E16	Reason:T31 Reason_of:T29
+A16	Reception E16 1
+T32	Proposition 13259 13385	na konkretnych przykładach były przedstawiane elementy gdzie plagiat został poczyniony a które elementy za plagiat nie uchodzą
+T33	Reason 13409 13467	przetworzenie tej wiedzy teoretycznej na wiedzę praktyczną
+E17	Reason:T33 Reason_of:T32
+A17	Reception E17 0.4
+T34	Proposition 13884 13928	rozwiązania przedstawione tylko teoretycznie
+T35	Reason 13945 13959	nic nie wynika
+E18	Reason:T35 Reason_of:T34
+A18	Reception E18 -1
+T36	Reason 13983 14035	traktowane przez studentów jako jeden z nudniejszych
+E19	Reason:T36 Reason_of:T34
+A19	Reception E19 -0.8
+T37	Proposition 14283 14305	przeprowadzeniem testu
+T38	Proposition 15232 15265	te zajęcia powinny być dobrowolne
+T39	Reason 15722 15892	jeśli ktoś uważa, że jest wystarczająco wrażliwy, jak i również ma warsztat który pozwoli mu tego plagiatu uniknąć to powinien mieć również możliwość wyboru opcji minimum
+E20	Reason:T39 Reason_of:T38
+A20	Reception E20 0
+T40	Reason 15531 15634	każdy z nas również decydowałby o tym, czy chce dodatkowo w takich zajęciach warsztatowych wziąć udział
+E21	Reason:T40 Reason_of:T38
+A21	Reception E21 0
+T41	Proposition 16150 16211	na zasadzie dobrowolności powinniśmy te zajęcia przeprowadzać
+T42	Reason 16335 16401	wytrąca narzędzie w formie jakby dyscyplinowania karania studentów
+E22	Reason:T42 Reason_of:T41
+A22	Reception E22 -1
+T43	Reason 16473 16584	student mógłby powiedzieć że te zajęcia nie były obligatoryjne, on nie posiadł takiej wiedzy, co jest plagiatem
+E23	Reason:T43 Reason_of:T41
+A23	Reception E23 -0.8
+T44	Reason 16692 16781	mógłby to być też środek taki do pozbawienia kontroli i możliwości ze strony Uniwersytetu
+E24	Reason:T44 Reason_of:T41
+A24	Reception E24 1
+T45	Reason 17057 17112	sami siebie nie pozbawiali przez rozwiązania dobrowolne
+E25	Reason:T45 Reason_of:T41
+A25	Reception E25 -1
+T46	Reason 17439 17584	student nie będzie chciał się czegoś nauczyć to bez względu na to, czy to będą zajęcia dobrowolne czy obowiązkowe to i tak się on tego nie nauczy
+E26	Reason:T46 Reason_of:T41
+A26	Reception E26 1
+T47	Reason 17672 17722	nieznajomość prawa nie zwalnia z jego egzekwowania
+E27	Reason:T47 Reason_of:T41
+A27	Reception E27 1
+T48	Reason 18046 18102	nieznajomość prawa szkodzi ale nikogo nie usprawiedliwia
+E28	Reason:T48 Reason_of:T41
+A28	Reception E28 1
+T49	Proposition 18558 18674	możliwość żeby wziąć takie zajęcia nie tylko na pierwszym roku ale również w roku kiedy pisze się tę pracę dyplomową
+T50	Reason 18484 18528	ktoś naprawdę chce to potraktować na serio i
+E29	Reason:T50 Reason_of:T49
+A29	Reception E29 0.6
+T51	Proposition 20909 20967	wykrywalności wydaje mi się to za sprawę stosunkowo trudną
+T52	Reason 20977 21020	Internet jest w tej chwili bardzo szeroki f
+E30	Reason:T52 Reason_of:T51
+A30	Reception E30 0
+T53	Reason 21250 21313	nawet sam wykładowca nie zna tych wszystkich prac internetowych
+E31	Reason:T53 Reason_of:T51
+A31	Reception E31 0.4
+T54	Proposition 21618 21670	wykrywanie plagiatów jest w tej chwili bardzo trudne
+T55	Reason 21674 21780	niekoniecznie musi to być najzwyczajniejsze w świecie skopiowanie pierwszego lepszego linku z wyszukiwarki
+E32	Reason:T55 Reason_of:T54
+A32	Reception E32 -0.4
+T56	Reason 21793 21911	bardziej wyrafinowana powiedzmy forma w postaci tłumaczenia żywcem tekstu która będzie o wiele trudniejsza do wykrycia
+E33	Reason:T56 Reason_of:T54
+A33	Reception E33 -0.8
+T57	Proposition 22357 22439	ktoś zadaje jednocześnie prace kilkudziesięciu studentom do napisania zaliczeniową
+T58	Reason 22447 22527	nie ma takiej możliwości żeby poświęcić tyle czasu na każdą pracę i sprawdzić ją
+E34	Reason:T58 Reason_of:T57
+A34	Reception E34 -0.4
+T60	Proposition 22776 22913	wykładowca może trochę w subiektywny sposób widzi na ile student jest zaangażowany w pisanie tej pracy i na ile jest to jego własna praca
+T59	Reason 22574 22638	kontakt z promotorem jest nieporównywalnie no bardziej ułatwiony
+E35	Reason:T59 Reason_of:T60
+A35	Reception E35 0.2
+T61	Reason 22641 22679	po prostu spędza się dużo więcej czasu
+E36	Reason:T61 Reason_of:T60
+A36	Reception E36 0.2
+T62	Reason 22682 22746	dużo więcej się rozmawia na temat pracy napisanej przez studenta
+E37	Reason:T62 Reason_of:T60
+A37	Reception E37 0.2
+T63	Proposition 23090 23138	najlepszą formą jest jednak kontakt z promotorem
+T64	Reason 23151 23198	oni najbardziej szczegółowo czytają nasze prace
+E38	Reason:T64 Reason_of:T63
+A38	Reception E38 0.4
+T65	Reason 23223 23274	moja promotorka no tak przeglądała bardzo pobieżnie
+E39	Reason:T65 Reason_of:T63
+A39	Reception E39 -0.6
+T66	Reason 23277 23314	tylko o niej dyskutowaliśmy miejscami
+E40	Reason:T66 Reason_of:T63
+A40	Reception E40 -0.4
+T67	Proposition 23393 23445	się czyta czyjąś pracę tak solidnie a nie po łebkach
+T68	Reason 23449 23568	można po prostu zadawać pytania można tak jakby zachęcać studentów do tego żeby podawali źródło do wszystkich twierdzeń
+E41	Reason:T68 Reason_of:T67
+A41	Reception E41 0.4
+T69	Proposition 23762 23835	powoływanie jakiegoś jednego pracownika który sprawdzałby wszystkie prace
+T70	Reason 23938 23953	mniej skuteczne
+E42	Reason:T70 Reason_of:T69
+A42	Reception E42 -0.8
+T71	Reason 23967 23994	powodowało prace papierkowe
+E43	Reason:T71 Reason_of:T69
+A43	Reception E43 -0.6
+T72	Proposition 24235 24297	bardzo ryzykowne jest dawanie im władzy tak naprawdę absolutne
+T73	Reason 24419 24459	potem jest już bardzo trudno to podważyć
+E44	Reason:T73 Reason_of:T72
+A44	Reception E44 -0.6
+T74	Proposition 24711 24764	promotor byłby też chętny jakoś zaszkodzić studentowi
+T75	Reason 24774 24825	promotor jest po to żeby pomóc nam napisać tę pracę
+E45	Reason:T75 Reason_of:T74
+A45	Reception E45 0.4
+T76	Reason 25004 25033	zawsze byli skłonni do pomocy
+E46	Reason:T76 Reason_of:T74
+A46	Reception E46 0.4
+T77	Reason 25144 25176	dawałby raczej szansę na poprawę
+E47	Reason:T77 Reason_of:T74
+A47	Reception E47 0.4
+T78	Proposition 27953 28054	powinny się one nasilać coraz bardziej wraz z coraz większa wiedzą studenta oraz z tak zwaną recydywą
+T79	Reason 28230 28274	mogłoby być bardziej skuteczne w przyszłości
+E48	Reason:T79 Reason_of:T78
+A48	Reception E48 0.2
+T80	Proposition 29686 29762	dosyć surowymi karami jeżeli chodzi o popełnienie plagiatu takiego umyślnego
+T81	Reason 29791 29885	nigdy nie wiadomo tak naprawdę czy plagiat był popełniony świadomie czy nie czy celowo czy nie
+E49	Reason:T81 Reason_of:T80
+A49	Reception E49 -0.4
+T82	Proposition 29940 30004	powołana komisja ma decydować czy to było umyślne czy nieumyślne
+T83	Reason 30011 30036	nie budzi mojego zaufania
+E50	Reason:T83 Reason_of:T82
+A50	Reception E50 -0.6
+T84	Reason 30041 30082	mogłoby tutaj dochodzić jednak do nadużyć
+E51	Reason:T84 Reason_of:T82
+A51	Reception E51 -0.6
+T85	Proposition 30677 30728	rozwiązanie trzecie kiedy od razu jest jakaś nagana
+T86	Reason 30806 30857	nigdy nie wiadomo że może zrobił jednak nieumyślnie
+E52	Reason:T86 Reason_of:T85
+A52	Reception E52 -0.4
+T87	Proposition 35093 35240	każdy miał takie narzędzia i mógł się nauczyć samodzielnego formułowania takich logicznych wniosków i kreatywności w wyrażaniu swoich myśli i sądów
+T88	Reason 35270 35298	jest to troszeczkę nierealne
+E53	Reason:T88 Reason_of:T87
+A53	Reception E53 -0.6
+T89	Proposition 55282 55315	zainteresowanie drugim kierunkiem
+T90	Reason 55364 55419	ostatni rok, kiedy ten drugi kierunek można było zacząć
+E54	Reason:T90 Reason_of:T89
+A54	Reception E54 0
+T91	Proposition 59896 59915	jest to obowiązkowe
+T92	Reason 59923 59999	w tym wirtualnym dziekanacie nic nie zrobię, dopóki tej ankiety nie wypełnię
+E55	Reason:T92 Reason_of:T91
+A55	Reception E55 -0.2
+T93	Proposition 60610 60655	ankietę wypełnić właśnie w formie papierowej.
+T94	Reason 60523 60572	duży odstęp czasu jest, wg mnie, sporym problemem
+E56	Reason:T94 Reason_of:T93
+A56	Reception E56 -0.2

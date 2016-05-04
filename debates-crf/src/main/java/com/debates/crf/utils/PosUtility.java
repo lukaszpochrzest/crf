@@ -1,4 +1,4 @@
-package com.debates.crf.gui;
+package com.debates.crf.utils;
 
 import morfologik.stemming.IStemmer;
 import morfologik.stemming.WordData;
@@ -13,36 +13,39 @@ import java.util.List;
  */
 public class PosUtility {
 
+    /**
+     *
+     */
     private static HashSet<String> morfeuszPoses = new HashSet<>(Arrays.asList(
             "subst",
-//            "depr",
+            "depr",
             "adj",
-//            "adja",
-//            "adjp",
+            "adja",
+            "adjp",
             "adv",
             "num",
             "ppron12",
-//            "ppron3",
-//            "siebie",
-//            "fin",
-//            "bedzie",
-//            "aglt",
-//            "praet",
-//            "impt",
-//            "imps",
-//            "inf",
-//            "pcon",
-//            "pant",
-//            "ger",
-//            "pact",
-//            "ppas",
-//            "winien",
+            "ppron3",
+            "siebie",
+            "fin",
+            "bedzie",
+            "aglt",
+            "praet",
+            "impt",
+            "imps",
+            "inf",
+            "pcon",
+            "pant",
+            "ger",
+            "pact",
+            "ppas",
+            "winien",
             "pred",
             "prep",
             "conj",
             "qub",
-//            "xxs",
-//            "xxx",
+            "xxs",
+            "xxx",
             "verb",  //  mine
             "interj",  //  mine
             "comp",  //  mine
@@ -61,7 +64,8 @@ public class PosUtility {
                 .split("\\+", 2)[0];
 
         if(!morfeuszPoses.contains(pos)) {
-            throw new RuntimeException("Morfeusz doesnt include " + pos + " (of word " + word + ")");
+            throw new RuntimeException("Morfeusz doesnt include " + pos + " (of word " + word + ")." +
+                    "HACK - add it to com.debates.crf.utils.PosUtility");
         }
 
         return pos;

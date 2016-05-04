@@ -1,0 +1,87 @@
+T1	Proposition 616 735	Moim zdaniem plagiat to korzystanie z cudzej własności do osiągnięcia jakichś celów: materialnych, bądź niematerialnych
+T2	Proposition 3549 3711	w tym problemie bardzo ważne jest zrozumienie subtelnych różnic między uprawnionym zapożyczeniem treści od innego autora i nieuprawnionym zapożyczeniem- plagiatem
+T3	Proposition 3853 3908	Prawdopodobnie to zwiększa koszty całej tej organizacji
+T4	Reason 3913 4035	to zwiększa zaangażowanie prowadzących i takiej ścisłej kontroli, bezpośredniego kontaktu ze studentami przez prowadzącego
+E1	Reason:T4 Reason_of:T3
+A1	Reception E1 0.4
+T5	Proposition 6031 6103	każdy obywatel jest zobowiązuje się do znajomości i przestrzegania prawa
+T6	Reason 6105 6173	W związku z tym uczelnia nie jest zobowiązana do uczenia o plagiacie
+E2	Reason:T6 Reason_of:T5
+A2	Reception E2 0.2
+T7	Proposition 6105 6173	W związku z tym uczelnia nie jest zobowiązana do uczenia o plagiacie
+T8	Reason 6184 6248	każdy z nas powinien znać prawo i powinien te prawa przestrzegać
+E3	Reason:T8 Reason_of:T7
+A3	Reception E3 0.4
+T9	Proposition 8158 8233	wykładowcy powinni przestrzegać studentów ucząc na konkretnych przykładach.
+T10	Proposition 8848 8881	proponuję przejść do innego wątku
+T11	Reason 8908 9055	mniej więcej przedstawiliście swoje poglądy na temat tego czym jest plagiat i jak uczelnie powinny się odnosić w stosunku do tego co jest plagiatem
+E4	Reason:T11 Reason_of:T10
+A4	Reception E4 0.4
+T12	Proposition 9987 10032	To wszystko powinno być powiedziane wcześniej
+T13	Reason 10039 10113	student się nie musiał borykać z przepisywaniem pracy i modyfikowaniem jej
+E5	Reason:T13 Reason_of:T12
+A5	Reception E5 0.2
+T14	Proposition 12046 12285	nieświadome cytowanie, albo używanie czyjejś idei, niewiadomego pochodzenia i traktowanie jej jako swojej, to znaczy takich ogólnych prawd, czegoś coś się należy człowiekowi tak po prostu, jest w ogóle kompletnie mało z prawem ma wspólnego
+T15	Proposition 14025 14075	pomysł uczelni zagranicznych, czyli obniżania ocen
+T16	Reason 14267 14361	Bo szczerze mówiąc nie wiem gdzie to upomnienie w papierach sobie leży i kto je później widzi.
+E6	Reason:T16 Reason_of:T15
+A6	Reception E6 -0.4
+T17	Proposition 14653 14759	jeśli byśmy przeszli kurs i rozumieli konsekwencje plagiatu, to ta kara też nie powinna być aż tak łagodna
+T18	Reason 14764 14820	skoro wiemy czego nie wolno to nie powinniśmy tego robić
+E7	Reason:T18 Reason_of:T17
+A7	Reception E7 -0.2
+T19	Proposition 15861 15923	zróżnicowała, czy to był pierwszy raz, czy jakikolwiek kolejny
+T20	Reason 15935 15951	to by zadziałało
+E8	Reason:T20 Reason_of:T19
+A8	Reception E8 0.4
+T21	Proposition 16346 16422	trzeba zróżnicować na to czy to był pierwszy raz, czy kolejny, od wagi pracy
+T22	Proposition 16511 16549	A kara to nie jakieś wpisy, czy nagany
+T23	Reason 16554 16569	to nie skutkuje
+E9	Reason:T23 Reason_of:T22
+A9	Reception E9 -0.4
+T24	Proposition 19436 19524	Uczelnia powinna przygotowywać do późniejszej pracy, a nie tylko do zaliczania egzaminów
+T25	Proposition 19748 19845	Jeżeli idziemy na studia to chcemy wyjść nie tylko bogaci w wiedzę, ale i umiejętności praktyczne
+T26	Proposition 21163 21321	uczelnia powinna głównie operować w teoretyczny rozwój, czy badawczy, ale nie próbując za wszelką cenę dogonić tego co jest aktualnie potrzebne na rynku pracy
+T27	Reason 21351 21385	rynek pracy też ciągle się zmienia
+E10	Reason:T27 Reason_of:T26
+A10	Reception E10 0.2
+T28	Proposition 25183 25245	jestem jednak za praktycznymi zajęciami, takimi aktywizującymi
+T29	Reason 25250 25270	one są najważniejsze
+E11	Reason:T29 Reason_of:T28
+A11	Reception E11 1
+T30	Proposition 28326 28469	kluczem do lepszej edukacji jest by naprawdę szkolić wykładowców, żeby ich kontrolować, żeby również mieć na względzie zdanie i ocenę studentów
+T31	Proposition 29662 29730	warto inwestować w sposoby nauczania, a nie tylko dzielić się wiedzą
+T32	Reason 29735 30005	są przykłady osób, które mają wspaniałe wykształcenie i na papierku to wszystko pięknie wygląda, ale przekazać wiedzy nie potrafią, nie chcą się rozwijać, nie chcą się uczyć nowych metod nauczania, w związku z tym ten kontakt ze studentami jest coraz bardziej utrudniony
+E12	Reason:T32 
+A12	Reception E12 -0.4
+T33	Proposition 33727 33809	to byłaby bardzo piękna idea, gdybyśmy mogli studiować za darmo na drugim kierunku
+T34	Reason 33815 33879	to chyba wiązałoby się z podwyżką dla pracowników szkół wyższych
+E13	Reason:T34 Reason_of:T33
+A13	Reception E13 0.2
+T35	Proposition 34904 35002	pracodawcy specjalnie nie widzą różnicy w pracownikach, którzy mają dwa kierunki, a jeden kierunek
+T36	Reason 35013 35124	często zdarza się tak, że ludzie wybierają drugi kierunek np. dlatego, że mogą sobie przepisać dużo przedmiotów
+E14	Reason:T36 Reason_of:T35
+A14	Reception E14 -0.4
+T37	Proposition 41083 41232	jeśli drugi kierunek byłby płatny w takiej pełnej odpłatności to po prostu uczelnie miałyby więcej pieniędzy, żeby móc zrealizować swoje kolejne cele
+T38	Reason 41274 41334	skutecznie by to odstraszało ludzi, którzy zajmowali miejsca
+E15	Reason:T38 Reason_of:T37
+A15	Reception E15 -0.6
+T39	Proposition 46910 46978	nie można swojej pracy wykorzystać przy pisaniu swojej drugiej pracy
+T40	Reason 46983 47145	to powinno być niezależne od siebie prace, które coś wnoszą nowego, a nie że skopiowanie jakiegoś dużego fragmentu z poprzedniej pracy, żeby sobie ułatwić zadanie
+E16	Reason:T40 Reason_of:T39
+A16	Reception E16 0.2
+T41	Proposition 49538 49683	Fajnie, że intencją nadrzędną było to, żeby jak największej ilości studentów udostępnić ten drugi kierunek, czyli żeby nie tylko elita studiowała
+T42	Reason 49768 50154	jeżeli mamy problem z rynkiem pracy później i mamy przeedukowanych ludzi i nie ma osób, które by wykonywały proste prace, wszyscy po studiach są z papierkiem i myślą, że będą managerami, to elita, która ma duże zdolności naukowe niech się kształci na dwóch kierunkach, niech pisze doktoraty, więcej czasu spędza na uczelniach i niech wymyśla jakieś nowoczesne rozwiązania i wymyśla nowe
+E17	Reason:T42 Reason_of:T41
+A17	Reception E17 0.4
+T43	Proposition 51259 51334	Odpłatność za studia to jest coś nowego i o tym powinniśmy więcej rozmawiać
+T44	Reason 51339 51362	możemy mieć na to wpływ
+E18	Reason:T44 Reason_of:T43
+A18	Reception E18 0.6
+T45	Reason 51367 51408	nic nie jest jeszcze ostatecznie ustalone
+E19	Reason:T45 Reason_of:T43
+A19	Reception E19 -0.4
+T46	Proposition 51608 51813	nie wiem czy to coś zmieni, czy ci eksperci faktycznie wezmą sobie do serca nasze uwagi, czy wątpliwości, ale warto rozmawiać i może w przyszłości coś ruszy zwłaszcza jeśli chodzi o kompetencje wykładowców
+T47	Reason 51818 51968	pani doktor powiedziała, że są te ankiety ewaluacyjne są oceniane i po dwóch, czy trzech błędnych ocenach coś powinno się zadziać, jakieś konsekwencje
+E20	Reason:T47 Reason_of:T46
+A20	Reception E20 -0.2

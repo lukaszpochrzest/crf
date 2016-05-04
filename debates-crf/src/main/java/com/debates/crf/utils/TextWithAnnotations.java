@@ -1,4 +1,4 @@
-package com.debates.crf;
+package com.debates.crf.utils;
 
 import java.io.File;
 

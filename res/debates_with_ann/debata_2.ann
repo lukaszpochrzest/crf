@@ -1,0 +1,77 @@
+T1	Proposition 30140 30184	plagiat to jednak powinien być karany surowo
+T2	Reason 30191 30230	studenci się przed tym no przestrzegali
+E1	Reason:T2 Reason_of:T1
+A1	Reception E1 0.4
+T4	Proposition 2091 2162	plagiatem jest chyba przepisywanie wszelkich sprawozdań na laboratoria.
+T5	Proposition 2972 3089	plagiat jest szeroko pojętym wzorowaniem się na pracy innych i nie mówieniem, o tym że wzorujemy się na czyjejś pracy
+T6	Proposition 5512 5604	plagiat jest kiedy jedna osoba bierze tekst od autora i nie poda kto był autorem tego tekstu
+T7	Proposition 6854 6958	plagiat to jest wykorzystanie czyjegoś tekstu, no rysunku, albo nie wiem chociażby jakiejś muzyki, pracy
+T8	Proposition 7598 7673	plagiatem jest przypisywanie sobie cudzych jakiś osiągnięć intelektualnych.
+T10	Proposition 9767 9838	taką propozycję czy moglibyśmy odwołać się do materiałów informacyjnych
+T3	Proposition 1211 1338	plagiat to jest coś takiego, że kiedy powiedzmy nie wiem, korzystamy z czyichś  opracowań to nie podajemy źródła tych opracowań
+T9	Proposition 11326 11419	żebyśmy porozmawiali o tych propozycjach jak podnosić świadomość studentów dotyczącą plagiatu
+T11	Proposition 11591 11702	odnieść do propozycji pierwszej czyli do takiej minimalistycznej wersji uczelni, która jedynie tworzy regulamin
+T12	Proposition 12850 12884	żebyśmy się trzymali tego porządku
+T13	Reason 12895 12916	mamy ograniczony czas
+E2	Reason:T13 Reason_of:T12
+A2	Reception E2 0
+T14	Proposition 13555 13617	zrobienie po prostu regulaminu i danie wszystkim do podpisania
+T15	Reason 13622 13693	każdy podpisuje- „tak zapoznałem się”, a tak naprawdę nikt nie zagląda.
+E3	Reason:T15 Reason_of:T14
+A3	Reception E3 -0.6
+T16	Proposition 15850 15904	żeby bezpośrednio poprzedzały pisanie pracy dyplomowej
+T17	Reason 15915 16018	jeśli byłyby to zajęcia typu szkolenie biblioteczne przed studiami to niewiele by to nam z tego zostało
+E4	Reason:T17 Reason_of:T16
+A4	Reception E4 -0.4
+T18	Proposition 17502 17678	nakazywać wydziałom przeprowadzać  w taki sposób zajęcia np. powiedzieć, żeby wydziały np. zrobiły chociaż dla każdego roku studentów jakieś takie zajęcia praktyczne z plagiatu
+T19	Proposition 18211 18340	nie zajmowała się to osoba taka, która jest przeciążona tymi zajęciami  dla studentów tylko mogłaby to być jakaś osoba z zewnątrz
+T20	Reason 18410 18459	to nie obciąża w pewien sposób kadry akademickiej
+E5	Reason:T20 Reason_of:T19
+A5	Reception E5 0.4
+T21	Proposition 20815 20862	Tobie na razie Tomku póki co nie udzielam głosu
+T22	Reason 20867 20888	jesteś bardzo aktywny
+E6	Reason:T22 Reason_of:T21
+A6	Reception E6 1
+T23	Proposition 21822 21897	najlepszym wyjściem byłoby gdyby to po porostu promotor sprawdzał  tę pracę
+T24	Reason 21899 21978	On przede wszystkim zna tę literaturę fachową i jakieś wyniki badań czy wnioski
+E7	Reason:T24 Reason_of:T23
+A7	Reception E7 0.4
+T25	Reason 21981 22089	jeśli to byłoby bardzo podobne do czegoś innego co ktoś inny już stworzył, to myślę, że to wykrywałby jednak
+E8	Reason:T25 Reason_of:T23
+A8	Reception E8 0.2
+T26	Proposition 24463 24538	Z jednej strony żeby tym wykrywaniem plagiatu zajmowała się konkretna osoba
+T27	Proposition 24870 24926	on też mógłby się wspomagać takim programem komputerowym
+T28	Reason 24928 25032	to byłoby dla niego trochę ułatwienie gdyż w ten sposób nie musiałby całej pracy przewertowywać i czytać
+E9	Reason:T28 Reason_of:T27
+A9	Reception E9 0.2
+T29	Proposition 25460 25501	na pierwszej linii powinien stać promotor
+T30	Reason 25521 25627	najlepiej zna się na temacie ponieważ zna wyniki badań, zna różnego rodzaju raporty ma wiedze na ten temat
+E10	Reason:T30 Reason_of:T29
+A10	Reception E10 0.6
+T31	Proposition 27012 27096	powinno czyli… kary połączone z jasną informacją co Ci grozi jeśli popełnisz plagiat
+T32	Reason 27178 27245	silnym straszakiem do tego, żeby jednak nie popełniać tego plagiatu
+E11	Reason:T32 
+T33	Proposition 31170 31348	pewno osoba, która w zależności od plagiatu czy to będzie jakiś naprawdę, no spory czy jakiś trochę mniejszy, no powinny być kary dość proporcjonalne wg. popełnionego wykroczenia
+T34	Proposition 35110 35304	Moim zdaniem studia powinny być bardzo ukierunkowane na pracę, nie na jakieś teorie stare tylko na praktykę, formę warsztatu, wykładów, żeby ludzie mogli zdobywać wymagane doświadczenie do pracy
+T35	Reason 35318 35392	zwykle pracodawcy wymagają doświadczenia, a studia tego no… nie gwarantują
+E12	Reason:T35 Reason_of:T34
+A11	Reception E12 -0.2
+T36	Proposition 35663 35945	przygotowanie do pracy to takie czysto bez teoretycznych i bardziej filozoficznych zagadnień informatyki  znaczy no nie miało by zbyt wielkiego sensu, przecież my musimy kształcić ludzi i żeby po studiach, po studiach wyższych żeby mieli taki ogólnie pojęty pogląd na świat na życie
+T37	Reason 36047 36131	muszą być też ludzie, którzy wniosą coś nowego prawda, do tego co mamy już stworzone
+E13	Reason:T37 Reason_of:T36
+A12	Reception E13 0.4
+T38	Proposition 54317 54362	to było bardzo przydatne to co mówią eksperci
+T39	Reason 54372 54460	naprawdę to do tej pory nie widziałam zupełnie sensu w tej odpłatności za drugi kierunek
+E14	Reason:T39 Reason_of:T38
+A13	Reception E14 -0.2
+T40	Proposition 59878 59967	chciałam się nie zgodzić trochę z tym, że 7% to mało i że można po prostu zwiększyć ilość
+T41	Reason 59972 60074	studentów jest naprawdę bardzo bardzo bardzo dużo w Polsce i te 7% to też by jakby dużo tych studentów
+E15	Reason:T41 Reason_of:T40
+A14	Reception E15 0.4
+T42	Proposition 60887 61022	nie powinno się takim ludziom, którzy po prostu są zdolniejsi, którzy radzą sobie po prostu na drugim kierunku, kłaść też kłód pod nogi
+T43	Reason 61030 61137	jednak oni mogą bardzo dużo wnieść dla naszego państwa i powinni jednak mieć jakieś zwolnienia z tych opłat
+E16	Reason:T43 Reason_of:T42
+A15	Reception E16 0.4
+T44	Proposition 62144 62225	Zgodzę się z poprzednikami, że 7% to nie jest mało to właśnie oznacza dla uczelni
+T45	Proposition 66549 66658	Myślę, że tego typu organizacja studiów leży w gestii uczelni, nie w gestii yy powiedzmy w gestii prawodawców
+T46	Proposition 72567 72629	fajnie by było jakby sami angażowali się też w proces edukacji

@@ -1,6 +1,6 @@
-package com.debates.crf;
+package com.debates.crf.feature;
 
-import com.debates.crf.gui.PosUtility;
+import com.debates.crf.utils.PosUtility;
 import org.crf.crf.CrfFeature;
 
 import static org.crf.utilities.PosTaggerUtilities.equalObjects;

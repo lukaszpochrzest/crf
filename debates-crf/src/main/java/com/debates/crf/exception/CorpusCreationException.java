@@ -1,4 +1,4 @@
-package com.debates.crf;
+package com.debates.crf.exception;
 
 /**
  * Created by lukasz on 14.04.16.

@@ -1,0 +1,60 @@
+T1	Proposition 557 606	Uważam, że najlepszą propozycją jest propozycja 4
+T2	Reason 646 756	z doświadczenia wiem, że zajęcia warsztatowe są najbardziej efektywne i przynoszą najlepsze zamierzone skutki.
+E1	Reason:T2 
+A1	Reception E1 0.6
+T3	Proposition 2223 2274	kluczowe jest to, żeby zrozumieć, czym jest plagiat
+T4	Reason 2279 2386	tak naprawdę ciężko egzekwować wiedzę o plagiacie, jeśli tak naprawdę wcześniej nie było takiego przedmiotu
+E2	Reason:T4 Reason_of:T3
+A2	Reception E2 0.2
+T5	Proposition 2878 3000	musiałyby robić osoby, które rzeczywiście mają o tym spore pojęcie, znają się na dydaktyce i generalnie znają dobrze temat
+T6	Reason 3029 3196	bo wiedza wiedzą, ale też w pewien sposób trzeba weryfikować to, co już powstaje i na pewno nie będą to same warsztaty, albo np. tylko wykładowcy mieliby to stwierdzać
+E3	Reason:T6 Reason_of:T5
+A3	Reception E3 0.2
+T7	Proposition 5095 5143	nie za bardzo mamy okazję cokolwiek splagiatować
+T8	Reason 5154 5220	wszystko opiera się na tym co robimy, to znaczy na tym co malujemy
+E4	Reason:T8 Reason_of:T7
+A4	Reception E4 0.2
+T9	Proposition 5855 5899	nie bardzo ma możliwość popełnienia plagiatu
+T10	Reason 5904 5958	niewielu tam piszą poza pracą dyplomową na samym końcu
+E5	Reason:T10 Reason_of:T9
+A5	Reception E5 -0.2
+T11	Proposition 7255 7286	kary mogą faktycznie ograniczać
+T12	Reason 7380 7464	bo będą się obawiać później odbycia kary, wydalenia ze studiów, albo nagany pisemnej
+E6	Reason:T12 Reason_of:T11
+A6	Reception E6 -0.4
+T13	Proposition 7736 7908	Znaczy że uczelnia powinna określić program minimum prowadzonych zajęć, a wydziały powinny zadecydować same jak to zrobią, ile godzin poświęcą i jak to będzie zrealizowane.
+T14	Proposition 10608 10636	nie wiem czy to jest plagiat
+T15	Reason 10641 10837	wyrażamy się podobnymi zdaniami w sporej części miliardach zdań i sformułowań zapewne znajdzie się inna osoba, która w podobny sposób zdanie sformułowała gdzieś na blogu, w jakimś dowolnym miejscu
+E7	Reason:T15 Reason_of:T14
+A7	Reception E7 0
+T16	Proposition 12212 12301	jeżeli ktoś popełnia plagiat to albo robi to nie intencjonalnie tak jak powiedział Tomek-
+T17	Proposition 15440 15548	nie było coś w formie wykładu, tylko żeby uczestnicy mogli sami, żeby jakieś ćwiczenia zostały zaproponowane
+T18	Proposition 15555 15602	nie tylko teoretycznie mówić co to jest plagiat
+T19	Proposition 19431 19472	nie można uznać moich wniosków za plagiat
+T20	Reason 19483 19604	przedstawiłem swoje wnioski, na podstawie swoich badań i przyrównałem je do wniosków, które zostały wyciągnięte wcześniej
+E8	Reason:T20 Reason_of:T19
+A8	Reception E8 0.4
+T21	Proposition 26549 26598	powinniśmy odejść już trochę od tematyki plagiatu
+T22	Reason 26603 26652	z tego co rozumiem to już jest osobny temat teraz
+E9	Reason:T22 
+A9	Reception E9 0
+T23	Proposition 28426 28471	wykłady powinny być na 1 i 2 roku licencjatu,
+T24	Reason 28567 28598	na tym móc budować swoją wiedzę
+E10	Reason:T24 Reason_of:T23
+A10	Reception E10 0.2
+T25	Proposition 30298 30426	powinno być trochę więcej materiałów i zadań, które mielibyśmy wykonywać i które przygotowują nas do wykonywania pracy zawodowej
+T26	Proposition 31034 31093	wykład też może być ciekawy, jeśli jest ciekawie prowadzony
+T27	Proposition 40475 40534	by było fajnym rozwiązaniem jak polepszyć dydaktykę obecnie
+T28	Proposition 41125 41149	mogłabym to robić lepiej
+T29	Reason 41158 41182	miała na to więcej czasu
+E11	Reason:T29 Reason_of:T28
+A11	Reception E11 0.6
+T30	Proposition 44734 44837	to było traktowane na takiej samej płaszczyźnie jak jakakolwiek praca też naukowa, czy jakakolwiek inna
+T31	Proposition 46266 46354	w sumie to chyba najtrudniej dobrać jakiekolwiek kryterium, takie żeby było sprawiedliwe
+T32	Reason 46359 46459	jeśli weźmiemy średnią ze studiów to bardzo łatwo jest zdobyć średnią 5.0 na studiach pedagogicznych
+E12	Reason:T32 Reason_of:T31
+A12	Reception E12 -0.4
+T33	Reason 54664 54699	nie mam doświadczenia w tej kwestii
+E13	Reason:T33 Reason_of:T34
+T34	Proposition 54614 54654	nie mam nic do powiedzenia na ten temat,
+A13	Reception E13 -0.4

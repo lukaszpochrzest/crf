@@ -1,5 +1,8 @@
 package com.debates.crf;
 
+import com.debates.crf.exception.CorpusCreationException;
+import com.debates.crf.stemming.MyWordStemmer;
+import com.debates.crf.utils.TextWithAnnotations;
 import com.jjlteam.domain.Document;
 import com.jjlteam.domain.Proposition;
 import com.jjlteam.domain.Reason;
@@ -23,9 +26,16 @@ public class CrfPerformer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
+    /**
+     * performs CRF on test data (testTwa) using training data(trainingTwas)
+     *
+     * @param trainingTwas
+     * @param testTwa
+     * @throws IOException
+     * @throws CorpusCreationException
+     */
     @SuppressWarnings("unchecked")
     public static void perform(List<TextWithAnnotations> trainingTwas,
-//                               List<String> stopList,
                                TextWithAnnotations testTwa) throws IOException, CorpusCreationException {
 
         if(trainingTwas.isEmpty()) {
@@ -33,30 +43,11 @@ public class CrfPerformer {
             return;
         }
 
+        // prepare training corpus
         List<List<? extends TaggedToken<String, String>>> corpus = new ArrayList<>();
-
         for(TextWithAnnotations twa : trainingTwas) {
-           corpus.addAll(createCorpus(twa/*, stopList*/));
+           corpus.addAll(createCorpus(twa));
         }
-
-//        /** */
-//        System.out.println(testTwa.getTextFile().getName());
-//        for(List<? extends TaggedToken<String, String>> sequence : createCorpus(testTwa, stopList)) {
-//            if(sequence.isEmpty()) {
-//                continue;
-//            }
-//            for(TaggedToken<String, String> tt : sequence) {
-//                System.out.print(tt.getToken() + "(" + tt.getTag() + ") ");
-//            }
-//            System.out.println();
-//        }
-//
-//        if(true) {
-//            return;
-//        }
-//        /** */
-
-
 
         // Create trainer factory
         DebateCrfTrainerFactory<String, String> trainerFactory = new DebateCrfTrainerFactory<>();
@@ -85,68 +76,78 @@ public class CrfPerformer {
         // Create a CrfInferencePerformer, to find tags for test data
         CrfInferencePerformer<String, String> inferencePerformer = new CrfInferencePerformer<>(crfModel);
 
-        // Test:
-//        List<String> test = Arrays.asList("This is a sequence for test data".split("\\s+"));
-//        List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(test);
-//        // Print the result:
-//        for (TaggedToken<String, String> taggedToken : result)
-//        {
-//            System.out.println("Tag for: "+taggedToken.getToken()+" is "+taggedToken.getTag());
-//        }
-        List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa/*, stopList*/);
+        //  create test corpus
+        List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa);
+
+        // infer tags
         for(List<? extends TaggedToken<String, String>> testSentence : testCorpus) {
+
+            //  extract sentence from testSentence
             List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
 
+            //  infer tags for the sentence
             List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(sentence);
 
-            if(result.size() != testSentence.size()) {
-                throw new RuntimeException();
-            }
-
-            // Print the result:
-            int i = 0;
-            for (TaggedToken<String, String> taggedToken : result) {
-                System.out.print(taggedToken.getToken() +
-                        "(" +
-                            taggedToken.getTag().substring(0,2) +
-                                "/" +
-                            testSentence.get(i).getTag().substring(0,2) +
-                        ") ");
-                ++i;
-            }
-            System.out.println();
+            print(result, testSentence);
         }
     }
 
-    public static void save(Object object, File file)
-    {
-        try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file)))
-        {
-            stream.writeObject(object);
+    /**
+     * prints testSentence in format:
+     *  WORD0(PREDICTED_TAG0, REAL_TAG0) WORD1(PREDICTED_TAG1, REAL_TAG1)
+     * @param taggedSentence
+     * @param testSentence
+     */
+    private static void print(List<TaggedToken<String, String>> taggedSentence,
+                              List<? extends TaggedToken<String, String>> testSentence) {
+        // Print the result:
+        int i = 0;
+        for (TaggedToken<String, String> taggedToken : taggedSentence) {
+            System.out.print(taggedToken.getToken() +
+                    "(" +
+                    taggedToken.getTag().substring(0,2) +
+                    "/" +
+                    testSentence.get(i).getTag().substring(0,2) +   //TODO get(i) potentially so inefficent..
+                    ") ");
+            ++i;
         }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Failed to save",e);
-        }
+        System.out.println();
     }
 
-    public static Object load(File file)
-    {
-        try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file)))
-        {
-            return stream.readObject();
-        }
-        catch (ClassNotFoundException | IOException e)
-        {
-            throw new RuntimeException("Failed to load",e);
-        }
-    }
+//    public static void save(Object object, File file)
+//    {
+//        try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file)))
+//        {
+//            stream.writeObject(object);
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException("Failed to save",e);
+//        }
+//    }
+//
+//    public static Object load(File file)
+//    {
+//        try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file)))
+//        {
+//            return stream.readObject();
+//        }
+//        catch (ClassNotFoundException | IOException e)
+//        {
+//            throw new RuntimeException("Failed to load",e);
+//        }
+//    }
 
 
-    private static List<List<? extends TaggedToken<String, String>>> createCorpus (
-            TextWithAnnotations twa
-//            , List<String> stopList
-    )
+    /**
+     * Transforms TextWithAnnotation into corpus, which is a tokenized String from TextWithAnnotation.textFile
+     * tagged with com.debates.crf.Tag tags
+     * @param twa
+     * @return
+     * @throws IOException
+     * @throws CorpusCreationException
+     */
+    private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
 
         final String wordLetters = "[a-zA-Z0-9\\-\'zżźćńółęąśŻŹĆĄŚĘŁÓŃ]";
@@ -159,7 +160,7 @@ public class CrfPerformer {
         List<Proposition> propositions = new ArrayList<>(parsedAnnDocument.getPropositions().values());
         List<Reason> reasons = new ArrayList<>(parsedAnnDocument.getReasons().values());
 
-        //  sort propositions and reasosn asc according to startIndex
+        //  sort propositions and reasons asc according to startIndex
         Collections.sort(propositions, (Proposition o1, Proposition o2) ->
                 o1.getStartIndex().compareTo(o2.getStartIndex()));
         Collections.sort(reasons, (Reason o1, Reason o2) ->
@@ -196,7 +197,7 @@ public class CrfPerformer {
             }
 
 
-            /** JLL block of code - want to work on the same data, so processing needs to be quite the same  */
+            /** JLL block of code(ive been given) - want to work on the same data, so processing needs to be quite the same  */
 
             // if the first letter is a word character or before a word character is a white character
             if(

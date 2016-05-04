@@ -1,11 +1,13 @@
-package com.debates.crf;
+package com.debates.crf.feature.filter;
 
 import org.crf.crf.filters.Filter;
 
 /**
  * Created by lukasz on 20.04.16.
+ *
+ * only for performance reasons
  */
-public class PreviousPosAndTagFilter extends Filter<String, String> {
+public class PosAndTagFilter extends Filter<String, String> {
 
     private final String pos;
     private final String currentTag;
@@ -13,7 +15,7 @@ public class PreviousPosAndTagFilter extends Filter<String, String> {
     private transient int hashCodeValue = 0;
     private transient boolean hashCodeCalculated = false;
 
-    public PreviousPosAndTagFilter(String pos, String currentTag) {
+    public PosAndTagFilter(String pos, String currentTag) {
         this.pos = pos;
         this.currentTag = currentTag;
     }
@@ -45,7 +47,7 @@ public class PreviousPosAndTagFilter extends Filter<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PreviousPosAndTagFilter other = (PreviousPosAndTagFilter) obj;
+        PosAndTagFilter other = (PosAndTagFilter) obj;
         if (currentTag == null)
         {
             if (other.currentTag != null)

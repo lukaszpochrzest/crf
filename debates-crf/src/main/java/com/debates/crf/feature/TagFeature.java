@@ -1,4 +1,4 @@
-package com.debates.crf;
+package com.debates.crf.feature;
 
 import org.crf.crf.CrfFeature;
 

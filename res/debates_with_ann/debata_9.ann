@@ -1,0 +1,119 @@
+T1	Proposition 18878 18914	wprowadzić takie zajęcia warsztatowe
+T2	Reason 19048 19181	studentowi chodzi o to, żeby jak najszybciej tylko wyklikać jakieś odpowiedzi też często na te pytania można znaleźć już w internecie
+E1	Reason:T2 Reason_of:T1
+A1	Reception E1 -1
+T3	Proposition 20509 20542	będzie bardzo duże ryzyko nadużyć
+T4	Reason 20447 20480	jeśli nie będzie takich solidnych
+E2	Reason:T4 Reason_of:T3
+A2	Reception E2 0
+T5	Proposition 24023 24141	uzmysłowienie studentów eeee studentom tego że jeżeli piszą swoja pracę z jakiegoś źródła to… naprawdę to nie ma sensu
+T6	Reason 24160 24205	chodzi eeee bardziej o to żeby napisać samemu
+E3	Reason:T6 Reason_of:T5
+A3	Reception E3 0.4
+T7	Proposition 26396 26418	należałoby to połączyć
+T8	Proposition 29318 29355	efektywny jest system zautomatyzowany
+T9	Reason 29275 29316	jedynym systemem który może być skuteczny
+E4	Reason:T9 Reason_of:T8
+A4	Reception E4 0.6
+T10	Reason 29421 29484	żyjemy w czasach gdzie eee tych prac pisemnych jest bardzo dużo
+E5	Reason:T10 Reason_of:T8
+A5	Reception E5 -0.2
+T11	Proposition 29976 30005	wyłącznie system automatyczny
+T12	Reason 30370 30488	ma oczywiście inne wady, które ludzie starają się omijać na przykład yyy na przykład wstawianie literek białą czcionką
+E6	Reason:T12 Reason_of:T11
+A6	Reception E6 -0.4
+T13	Proposition 31363 31419	podział właśnie, tych umyślnych i nieumyślnych plagiatów
+T14	Proposition 38346 38366	nacisk na yy karanie
+T15	Reason 38254 38294	studenci tutaj czują się bardzo bezkarni
+E7	Reason:T15 Reason_of:T14
+A7	Reception E7 -1
+T16	Proposition 39133 39174	kara powinna być jak najbardziej dotkliwa
+T17	Reason 39086 39125	bezczelnie kopiują całe, całe fragmenty
+E8	Reason:T17 Reason_of:T16
+A8	Reception E8 -1
+T18	Proposition 39302 39366	niezaliczenie automatycznie ćwiczeń i obowiązek powtórzenia tego
+T19	Reason 39371 39405	to jest w pełni świadome działanie
+E9	Reason:T19 Reason_of:T18
+A9	Reception E9 -1
+T20	Proposition 40701 40763	powinna ta sprawa być załatwiona tylko między nim a wykładowcą
+T21	Proposition 41153 41228	Nawet nie ma prawa poprawiać już tej pracy, tylko pisanie pracy jeszcze raz
+T22	Reason 41240 41290	to by go jakoś w jakiś sposób oduczyło oszukiwania
+E10	Reason:T22 Reason_of:T21
+A10	Reception E10 -0.6
+T23	Proposition 43027 43076	zawieszeniu w prawach studenta na przykład na rok
+T24	Reason 42878 42964	dana osoba najważniejszą pracę w swoim życiu, w postaci pracy magisterskiej skopiowała
+E11	Reason:T24 Reason_of:T23
+A11	Reception E11 -0.6
+T25	Proposition 44429 44543	uczelnie powinny łożyć przede wszystkim na to uświadamianie przynajmniej w ciągu kilku.. ym teraz najbliższych lat
+T26	Reason 44350 44422	w naszym społeczeństwie mamy niską świadomość co do popełniania plagiatu
+E12	Reason:T26 Reason_of:T25
+A12	Reception E12 -0.6
+T27	Proposition 46513 46598	jeżeli mówimy o edukacji w tej kwestii to trzeba byłoby już zacząć na poziomie liceum
+T28	Proposition 46999 47058	jeżeli chodzi o kary coś w ramach tak zwanej resocjalizacji
+T29	Proposition 47445 47565	powinien mieć niezaliczone te ćwiczenia oraz przejść jeszcze raz obowiązkowo przez kurs ochrony własności intelektualnej
+T30	Proposition 57590 57685	ten element związany ze wskaźnikiem obiektywnym włączyć także do tego naszego wspólnego pytania
+T31	Reason 57690 57796	z tego co widzę na czacie w tym momencie trwają prace związane z połączeniem pytania pierwszego i drugiego
+E13	Reason:T31 Reason_of:T30
+A13	Reception E13 0
+T32	Proposition 63678 63782	powinno być więcej zajęć, które przygotowują do pracy, przede wszystkim więcej laboratoriów i warsztatów
+T33	Reason 63787 63820	tego jest naprawdę yy bardzo mało
+E14	Reason:T33 Reason_of:T32
+A14	Reception E14 -0.8
+T34	Proposition 68351 68426	wykładowca powinien uświadomić im jak ważny jest sposób logicznego myślenia
+T35	Proposition 75239 75310	zajęć praktycznych ym powinno być ich jednak trochę więcej niż wykładów
+T36	Proposition 75336 75387	powinna się też zmienić ym technika ich prowadzenia
+T37	Proposition 75450 75485	powinno być więcej jednak wystąpień
+T38	Reason 75498 75678	studenci przez to uczą się em pewnych e uczą się dobrej prezentacji, sposobu wypowiadania się, obycia i to też im się przydaje yy właśnie też w yy na rynku i w kwestiach zawodowych
+E15	Reason:T38 Reason_of:T37
+A15	Reception E15 0.8
+T39	Proposition 78998 79087	musimy wprowadzić rzeczywiście system oceniania z którego wyciągamy wnioski dla studentów
+T40	Reason 79094 79232	ponieważ są wykładowcy którzy, szczególnie profesorowie, którzy nie mają jakby daru nauczania, a muszą uczyć, żeby zostać na uniwersytecie
+E16	Reason:T40 Reason_of:T39
+A16	Reception E16 -0.4
+T41	Proposition 82030 82150	należałoby w jakiś sposób yy zweryfikować [urywane słowa] jak wpływają na zmianę nastawienia poszczególnych prowadzących
+T42	Proposition 86058 86100	powinny jak najbardziej taką szansę dostać
+T43	Proposition 86527 86629	osoby tak na drugim kierunku powinny być zwalniane z opłat pod konkretnymi warunkami jasno określonymi
+T44	Reason 86338 86516	trzeba jakoś na te studia zarobić, a przy dwóch kierunkach iii pracy jest no, jest to praktycznie niemożliwe, żeby te trzy rzeczy ze sobą pogodzić eee z racji właśnie braku czasu
+E17	Reason:T44 Reason_of:T43
+A17	Reception E17 -0.2
+T45	Proposition 87932 87975	dochody nie powinny być tutaj wyznacznikiem
+T46	Reason 87981 88006	bo to, to nie o to chodzi
+E18	Reason:T46 Reason_of:T45
+A18	Reception E18 0
+T47	Proposition 90903 91082	osoby z wysokimi wynikami, które mają pasję, mają chęć do działania oraz do tego, żeby być na kilku kierunkach i realizować swój wcześniej zamierzony plan mogły to zrobić za darmo
+T48	Reason 91084 91184	To jest wspaniała sprawa jeżeli ktoś chce, ktoś potrafi, ktoś może poświęcić zarezerwować sobie czas
+E19	Reason:T48 Reason_of:T47
+A19	Reception E19 0.6
+T49	Reason 91186 91333	To tak jak najbardziej przyda się jemu, jak i również uniwersytetowi, duże prawdopodobieństwo jest takie, że taka osoba może wybrać karierę naukową
+E20	Reason:T49 Reason_of:T47
+A20	Reception E20 1
+T50	Proposition 93529 93623	średnia jest… podstawową, podstawowym kryterium eee do oceny, do odpłatności za drugi kierunek
+T51	Proposition 94025 94096	nie odsetek studentów z najlepszą średnią tylko od średniej 4,5 wszyscy
+T52	Reason 93938 93999	Ze stypendium tam jest problem, że tam jest odsetek studentów
+E21	Reason:T52 Reason_of:T51
+A21	Reception E21 0
+T53	Proposition 95786 95839	jakaś rozmowa – czemu chcesz studiować drugi kierunek
+T54	Reason 95854 95941	żeby to też się jakoś liczyło, a nie same oceny, wiadomo każdemu się noga może podwinąć
+E22	Reason:T54 Reason_of:T53
+A22	Reception E22 0.2
+T55	Proposition 103704 103767	jakieś warsztaty dotyczące szczegółowego wykorzystywania źródeł
+T56	Proposition 105972 106133	nie koncentrować się tylko i wyłącznie na plagiacie już występującym na uczelni, ale także na takim wcześniejszym etapie edukacji zwrócić szczególnie na to uwagę
+T57	Reason 106291 106371	te wcześniejsze elementy edukacji na jakimś tam ee w jakimś tam stopniu zawiodły
+E23	Reason:T57 Reason_of:T56
+A23	Reception E23 -0.6
+T58	Proposition 107773 107812	podwyższanie rangi zajęć ilearningowych
+T59	Reason 109593 109691	sporo osób z moich znajomych pochodzi do elearningu jako do formy szybkiego załatwienia zaliczenia
+E24	Reason:T59 Reason_of:T58
+A24	Reception E24 -1
+T60	Proposition 115534 115604	lepiej byłoby się zastanowić nad jakością, a nie nad ilością studentów
+T61	Reason 115420 115521	w Polsce i tak jest za dużo studentów, za dużo studentów, absolwentów yy przyjmowanych na rynek pracy
+E25	Reason:T61 Reason_of:T60
+A25	Reception E25 -0.4
+T62	Proposition 118661 118713	opłata za drugi kierunek jest bardzo dobrym pomysłem
+T63	Reason 118791 118960	spotkałam się z przypadkami, że yy ktoś studiuje drugi kierunek dla samej legitymacji, albo studiuje równocześnie dwa kierunki i tak naprawdę żadnego nie studiuje dobrze
+E26	Reason:T63 Reason_of:T62
+A26	Reception E26 -0.4
+T64	Proposition 122252 122378	brać również udział w różnego rodzaju innych czynnościach czy to właśnie kołach naukowych czy różnego rodzaju stowarzyszeniach
+T65	Reason 122384 122611	aby aktywnie działać, ażeby te umiejętności i doświadczenia, które zdobywamy na studiach wykorzystywać już właśnie w tego typu różnego rodzaju organizacjach żeby później być jakby bardziej elastycznym i dostępnym na rynku pracy
+E27	Reason:T65 Reason_of:T64
+A27	Reception E27 0.8

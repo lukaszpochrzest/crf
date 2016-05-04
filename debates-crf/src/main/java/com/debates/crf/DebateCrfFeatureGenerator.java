@@ -1,6 +1,11 @@
 package com.debates.crf;
 
-import com.debates.crf.gui.PosUtility;
+import com.debates.crf.feature.PosAndTagFeature;
+import com.debates.crf.feature.PreviousPosAndTagFeature;
+import com.debates.crf.feature.TagFeature;
+import com.debates.crf.feature.filter.PosAndTagFilter;
+import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
+import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
 import org.crf.crf.filters.TwoTagsFilter;
@@ -54,13 +59,16 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         super(corpus, tags);
     }
 
+    /**
+     * Place where fi "predicates" are generated (f - feature)
+     */
     @Override
     public void generateFeatures() {
         setFilteredFeatures = new LinkedHashSet<>();
         addTagFeatures();
-        addTagTransitionFeatures();
-        addPosAndTagFeatures();
-        addPreviousPosAndTagFeatures();
+//        addTagTransitionFeatures();
+//        addPosAndTagFeatures();
+//        addPreviousPosAndTagFeatures();
     }
 
     @Override
@@ -68,21 +76,14 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         return setFilteredFeatures;
     }
 
+    /**
+     * generates features like:
+     * is_current_label_PROPOSITION_START
+     * is_current_label_PROPOSITION
+     *
+     * (check com.debates.crf.Tag)
+     */
     private void addTagFeatures() {
-//        for (List<? extends TaggedToken<String, String> > sentence : corpus)
-//        {
-//            for (TaggedToken<String, String> taggedToken : sentence)
-//            {
-//                setFilteredFeatures.add(
-//                        new CrfFilteredFeature<String, String>(
-//                                new CaseInsensitiveTokenAndTagFeature(taggedToken.getToken(), taggedToken.getTag()),
-//                                new CaseInsensitiveTokenAndTagFilter(taggedToken.getToken(), taggedToken.getTag()),
-//                                true
-//                        )
-//                );
-//            }
-//        }
-
         tags.forEach(
                 tag -> setFilteredFeatures.add(new CrfFilteredFeature<>(
                         new TagFeature(tag),
@@ -92,26 +93,13 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
     }
 
     /**
-     * copied form org.crf.postagging.postaggers.crf.features.StandardFeatureGenerator
+     * copied from org.crf.postagging.postaggers.crf.features.StandardFeatureGenerator
+     *
+     * generates features like:
+     * is_current_label_PROPOSITION_and_previous_label_PREPOSITION_START
+     * is_current_label_REASON_and_previous_label_REASON_START
      */
     private void addTagTransitionFeatures() {
-//        for (String tag : tags) {
-//            setFilteredFeatures.add(
-//                    new CrfFilteredFeature<>(
-//                            new TagTransitionFeature(null, tag),
-//                            new TwoTagsFilter<>(tag, null),
-//                            true)
-//            );
-//
-//            for (String previousTag : tags) {
-//                setFilteredFeatures.add(
-//                        new CrfFilteredFeature<>(
-//                                new TagTransitionFeature(previousTag, tag),
-//                                new TwoTagsFilter<>(tag, previousTag),
-//                                true)
-//                );
-//            }
-//        }
         for(String tag : TAGS_THAT_MAY_BE_FIRST_IN_TEXT_ARRAY) {
             setFilteredFeatures.add(
                     new CrfFilteredFeature<>(
@@ -133,6 +121,10 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         }
     }
 
+    /**
+     * generates features like:
+     * is_current_label_PROPOSITION_and_is_current_token_ADJECTIVE
+     */
     private void addPosAndTagFeatures() {
         for (List<? extends TaggedToken<String, String> > sentence : corpus) {
             for (TaggedToken<String, String> taggedToken : sentence) {
@@ -146,6 +138,10 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         }
     }
 
+    /**
+     * generates features like:
+     * is_current_label_PROPOSITION_and_is_previous_token_ADJECTIVE
+     */
     private void addPreviousPosAndTagFeatures() {
         for (List<? extends TaggedToken<String, String> > sentence : corpus) {
             String previousPos = null;

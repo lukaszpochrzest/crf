@@ -1,0 +1,140 @@
+T1	Proposition 2297 2314	to warto rozważyć
+T2	Proposition 971 1001	Zacznijmy od pierwszego tematu
+T3	Proposition 352 464	W trakcie dyskusji starajmy się też odwoływać do materiałów informacyjnych, które zostały wcześniej sformułowane
+T4	Proposition 466 598	Postarajmy się w taki sposób to wszystko przeprowadzić, żeby wystarczająco omówić wszystkie propozycje działań przez was przemyślane
+T5	Proposition 1022 1082	Zacznijmy może od takich najbardziej fundamentalnych kwestii
+T6	Proposition 1293 1367	Plagiat to jest po prostu przywłaszczenie czyjejś własności intelektualnej
+T7	Reason 2482 2570	Czasami może to wyglądać tak, że pewne słowa, pewne zwroty frazeologiczne się powtarzają
+E1	Reason:T7 Reason_of:T6
+A1	Reception E1 -0.2
+T8	Proposition 4233 4256	rozwiązanie warsztatowe
+T9	Proposition 4376 4451	jest jeden wykład kilkugodzinny, a później test do rozwiązania w Internecie
+T10	Reason 4540 4606	Z biegiem lat ktoś może zapomnieć dokładnie, czego się tam nauczył
+E2	Reason:T10 Reason_of:T9
+A2	Reception E2 -0.4
+T11	Proposition 5179 5226	najbardziej odpowiednia jest metoda warsztatowa
+T12	Proposition 5675 5831	ważny jest ten moment przeprowadzania testów, żeby one były przeprowadzane w momencie, kiedy rzeczywiście ta wiedza, kiedy na temat plagiatów jest potrzebna
+T13	Reason 5377 5435	w trakcie tych zajęć zostanie podana jakaś dogłębna wiedza
+E3	Reason:T13 Reason_of:T11
+A3	Reception E3 0.4
+T14	Proposition 6266 6308	powinny być one raczej w formie warsztatów
+T15	Reason 6310 6413	bo to jest na pewno bardziej absorbujące, a jak jest bardziej absorbujące to też więcej się zapamiętuje
+E4	Reason:T15 Reason_of:T14
+A4	Reception E4 0.6
+T16	Reason 6709 6825	bo możemy więcej się zapytać jak w ogóle sformułować swoje prace i w jaki sposób je napisać, żeby nie były plagiatem
+E5	Reason:T16 Reason_of:T14
+A5	Reception E5 0.4
+T17	Proposition 7699 7823	spójna polityka dla wszystkich wydziałów i instytutów jest lepszym rozwiązaniem niż pozostawienie samym sobie tym jednostkom
+T18	Proposition 7834 8025	żeby panowała pewna sprawiedliwość jak wyznaczamy pewne zasady postępowania z osobą, która dopuściła się plagiatu, to chyba warto, żeby na różnych wydziałach te osoby były traktowane tak samo
+T19	Proposition 8244 8307	uczelnie nie powinny uciekać od odpowiedzialności w tej kwestii
+T20	Proposition 8309 8384	Na uczelniach powinny się odbywać zajęcia dotyczące tego, czym jest plagiat
+T21	Proposition 9397 9481	kontrolę sprawował jakiś jeden pracownik, który korzystałby z programu komputerowego
+T22	Reason 9494 9546	pracownicy dydaktyczni są na pewno przeciążeni pracą
+E6	Reason:T22 Reason_of:T21
+A6	Reception E6 -0.4
+T23	Reason 9715 9840	eliminowałoby jakąkolwiek stronniczość ze strony promotora i sprawiałaby, że praca byłaby sprawdzana z większym obiektywizmem
+E7	Reason:T23 Reason_of:T21
+A7	Reception E7 0.4
+T24	Proposition 10293 10346	program, który mówi mi czy popełniłam plagiat czy nie
+T25	Reason 10348 10392	może być dla niektórych studentów krzywdząca
+E8	Reason:T25 
+T26	Reason 12360 12399	program eliminuje czynnik typowo ludzki
+E9	Reason:T26 Reason_of:T24
+A8	Reception E9 0.4
+T27	Reason 12586 12656	on właśnie do tego służy, żeby wykrywać te najcięższe postaci plagiatu
+E10	Reason:T27 Reason_of:T24
+A9	Reception E10 0.4
+T28	Reason 13118 13205	Nie analizuje ich aż tak dokładnie, żeby móc wykryć czy ta praca jest plagiatem czy nie
+E11	Reason:T28 Reason_of:T21
+A10	Reception E11 -0.6
+T29	Proposition 13431 13504	mogłaby się zebrać jakaś komisja i dopiero badać ten przypadek dokładniej
+T30	Reason 13940 13979	sam wykładowca może być już znieczulony
+E12	Reason:T30 Reason_of:T21
+A11	Reception E12 -0.2
+T31	Proposition 15936 16042	kieruje studenta, który pierwszy raz popełnia plagiat, na zajęcia, które mają go dokształcić w tym temacie
+T32	Proposition 18894 18955	kierowanie studentów na dodatkowe zajęcia z prawa autorskiego
+T33	Proposition 18959 19031	jeśli chodzi o kwestie finansowania tych zajęć to powinny być one płatne
+T34	Reason 19042 19107	uczelnia nie ponosiła konsekwencji tego, że ktoś jest plagiatorem
+E13	Reason:T34 Reason_of:T33
+A12	Reception E13 -0.2
+T35	Reason 19286 19366	To jest po prostu zabranie człowiekowi 5ciu lat życia, które poświęcił na studia
+E14	Reason:T35 
+A13	Reception E14 -0.2
+T36	Reason 19436 19517	musi czekać rok, żeby powtarzać jakiś przedmiot, albo bronić się pół roku później
+E15	Reason:T36 
+A14	Reception E15 -0.2
+T37	Proposition 21517 21599	publikowania w Internecie i ogólnej dostępności prac licencjackich i magisterskich
+T38	Reason 21675 21801	przeczytanie jakiejś pracy licencjackiej czy magisterskiej też może być pouczające i twórcze w zajmowaniu się jakimś problemem
+E16	Reason:T38 Reason_of:T37
+A15	Reception E16 0.6
+T39	Reason 21923 22005	takich prac również by nie można splagiatować, bo są one w elektronicznym archiwum
+E17	Reason:T39 Reason_of:T37
+A16	Reception E17 0.4
+T40	Reason 22025 22085	próba splagiatowania tej pracy również byłaby szybko odkryta
+E18	Reason:T40 Reason_of:T37
+A17	Reception E18 0.4
+T41	Proposition 22142 22198	dostęp na takich samych zasadach jak do prac doktorskich
+T42	Proposition 22328 22381	moje pytanie można wyrzucić jeśli mamy się zdecydować
+T43	Proposition 22227 22298	Trochę się tych punktów nazbierało, więc na jakiś się musimy zdecydować
+T44	Proposition 22640 22686	Może nasze pytanie wybierzemy przez głosowanie
+T45	Reason 22688 22710	tak będzie najszybciej
+E19	Reason:T45 Reason_of:T44
+A18	Reception E19 0.8
+T46	Proposition 23072 23094	Czyli raczej odrzucamy
+T47	Proposition 23827 23872	ukierunkowany na szeroki rozwój intelektualny
+T48	Proposition 23886 23959	ściśle ukierunkowany na zdobycie umiejętności ściśle potrzebnych do pracy
+T49	Reason 24201 24224	rynek pracy się zmienia
+E20	Reason:T49 Reason_of:T48
+A19	Reception E20 0
+T50	Reason 24404 24437	trudno dostosować także narzędzia
+E21	Reason:T50 Reason_of:T48
+A20	Reception E21 0
+T51	Proposition 24536 24589	dostosowywanie do rynku pracy jest pewnym zagrożeniem
+T52	Reason 24591 24674	bo to jest stan rynku pracy na dzisiaj i to jest teraz i nawet nie w przyszłym roku
+E22	Reason:T52 
+A21	Reception E22 -0.2
+T53	Proposition 24961 25019	może przejdziemy do pytań, które będą też bardziej pomocne
+T54	Reason 25021 25103	bo one już wprost się odwołują do zagadnień zawartych w materiałach informacyjnych
+E23	Reason:T54 Reason_of:T53
+A22	Reception E23 0.4
+T55	Proposition 25693 25780	teraz byśmy przeszli do ostatniej rundy pytań, które będą związane z programami studiów
+T56	Proposition 27968 27996	Przejdźmy do trzeciej debaty
+T57	Proposition 27247 27303	chciałbym zakończyć tę debatę na temat metod kształcenia
+T58	Proposition 28530 28604	Ja może w obronie, bo pojawiła się lekka krytyka pod kątem tych materiałów
+T59	Reason 28606 28702	Bo jednak tu jest jednak opcja kompromisu, bardziej obiektywnego spojrzenia na kwestie kryteriów
+E24	Reason:T59 Reason_of:T58
+A23	Reception E24 0.2
+T60	Proposition 32896 32971	seminaria to jest dobre miejsce, żeby się uczyć jak nie popełniać plagiatów
+T61	Proposition 33442 33504	tematyka plagiatu powinna być poruszana również na seminariach
+T62	Proposition 34804 34898	przydałaby się jakaś odpowiedź ze strony studentów, której nie mieliśmy możliwości sformułować
+T63	Proposition 36640 36743	wprowadzić wymóg podnoszenia kompetencji dydaktycznych przez pracowników uczelni, pracowników naukowych
+T64	Reason 36837 36936	jak studenci mają się uczyć to ona rozumie że dobrowolnie pracownicy naukowi będą pracować nad sobą
+E25	Reason:T64 Reason_of:T63
+A24	Reception E25 0.2
+T65	Proposition 40476 40560	może byśmy się odnieśli tak bardziej konkretnie do kwestii tych ankiet ewaluacyjnych
+T66	Reason 40562 40647	Bo tam padła dość istotna kwestia i to była pewna forma krytyki pod adresem studentów
+E26	Reason:T66 Reason_of:T65
+A25	Reception E26 -0.2
+T67	Proposition 42888 42948	ważna właśnie jest ta kwestia kiedy te ankiety są wypełniane
+T68	Reason 43047 43160	Bo jeśli studentowi ma zależeć na wypełnianie tej ankiety, to powinna ona mieć wpływ na zajęcia z tym prowadzącym
+E27	Reason:T68 Reason_of:T67
+A26	Reception E27 0.2
+T69	Proposition 43810 43877	przeprowadzanie ankiet w trakcie zajęć jest najlepszym rozwiązaniem
+T70	Reason 43909 43945	najlepsze są wtedy wyciągane wnioski
+E28	Reason:T70 Reason_of:T69
+A27	Reception E28 0.6
+T71	Reason 43947 44031	wiemy na które zajęcia warto, a na które nie i czy coś się zmieni po takiej ankiecie
+E29	Reason:T71 Reason_of:T69
+A28	Reception E29 0.6
+T72	Proposition 44073 44123	bezzasadne jest wypełnianie ankiet w trakcie zajęć
+T73	Reason 44125 44303	bo jeśli nawet one nie dadzą nic studentom mającym zajęcia z danym profesorem, to zmiany muszą wejść od przyszłego roku, żeby zaoszczędzić kiepskiej dydaktyki przyszłym studentom
+E30	Reason:T73 Reason_of:T72
+A29	Reception E30 0.2
+T74	Proposition 45525 45550	trzeba zadbać o ich treść
+T75	Reason 45611 45664	Póki to nie jest spójne to one nie mają żadnego sensu
+E31	Reason:T75 Reason_of:T74
+A30	Reception E31 -0.2
+T76	Proposition 47810 47853	Pan pod plagiatu był najlepiej przygotowany
+T77	Reason 47855 47903	bo on miał tą wiedzę i posługiwał się przepisami
+E32	Reason:T77 
+A31	Reception E32 0.4

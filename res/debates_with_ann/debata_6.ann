@@ -1,0 +1,186 @@
+T1	Proposition 659 703	myśleć o tych pytaniach już podczas dyskusji
+T2	Proposition 1006 1016	powiedzieć
+T3	Proposition 1515 1559	wyrażali swoje opinie szanując opinie innych
+T4	Proposition 1561 1595	starajmy się mówić na tyle zwięźle
+T5	Reason 1602 1637	dać szansę wypowiedzi innym osobom,
+E1	Reason:T5 Reason_of:T4
+A1	Reception E1 0.8
+T6	Proposition 3288 3337	przywłaszczenie sobie cudzej pracy intelektualnej
+T7	Proposition 3753 3865	rozszerzyła o te prace, którymi się handluje na rynku typu sprzedam pracę licencjacką, napiszę pracę magisterską
+T8	Reason 3867 3895	dla mnie to też jest plagiat
+E2	Reason:T8 Reason_of:T7
+A2	Reception E2 0.4
+T9	Reason 3942 3986	handlujemy cudzą wytwórczością intelektualną
+E3	Reason:T9 Reason_of:T7
+A3	Reception E3 -0.4
+T10	Proposition 4263 4310	powinien być obwarowany nawet surowszymi karami
+T11	Reason 4324 4428	większość osób, które popełniają to wykroczenie pisania prac na zamówienie jest mimo wszystko studentami
+E4	Reason:T11 Reason_of:T10
+A4	Reception E4 -0.4
+T12	Proposition 8028 8073	nie wiem czy ktokolwiek przykuł do tego uwagę
+T13	Reason 7941 8005	było to w takim bloku różnych spotkań podczas dnia adaptacyjnego
+E5	Reason:T13 Reason_of:T12
+A5	Reception E5 0
+T14	Proposition 8618 8661	większość na tych wykładach po prostu spała
+T15	Reason 8675 8723	wiedza potem nie była egzekwowana w jakiś sposób
+E6	Reason:T15 Reason_of:T14
+A6	Reception E6 -0.8
+T16	Proposition 8964 9013	jakiś test, który by sprawdzał wiedzę przyswojoną
+T17	Reason 9069 9085	to mogłoby pomóc
+E7	Reason:T17 Reason_of:T16
+A7	Reception E7 0.6
+T18	Proposition 12012 12044	system funkcjonuje po prostu źle
+T19	Reason 12154 12182	rezultaty były dość śmieszne
+E8	Reason:T19 Reason_of:T18
+A8	Reception E8 -0.4
+T20	Reason 12196 12296	odnośniki procentowe wskazywały korzystanie ze źródeł zupełnie niezwiązanych z tematem pracy rocznej
+E9	Reason:T20 Reason_of:T18
+A9	Reception E9 -1
+T21	Proposition 13282 13323	najważniejsza jest jakby pomoc wykładowcy
+T22	Reason 13494 13531	on powinien się orientować w tematyce
+E10	Reason:T22 Reason_of:T21
+A10	Reception E10 0.2
+T23	Proposition 15778 15803	złą formę przeprowadzenia
+T24	Reason 15709 15762	nie bardzo było dużo czasu, żeby to w ogóle przyswoić
+E11	Reason:T24 Reason_of:T23
+A11	Reception E11 -0.6
+T25	Proposition 16256 16265	warsztaty
+T26	Reason 16325 16359	więcej informacji zostaje w głowie
+E12	Reason:T26 Reason_of:T25
+A12	Reception E12 0.8
+T27	Reason 16364 16405	się trzeba zaangażować w to co się dzieje
+E13	Reason:T27 Reason_of:T25
+A13	Reception E13 0.6
+T28	Proposition 16629 16647	omówić warsztatowo
+T29	Reason 16784 16822	więcej by zapamiętali na następne lata
+E14	Reason:T29 Reason_of:T28
+A14	Reception E14 0.4
+T30	Proposition 18146 18249	powinna być tworzona jakaś strona internetowa, która zawierałaby wszystkie te przepisy w jednym miejscu
+T31	Proposition 18296 18355	być taki kurs internetowy na 3 roku, może być fakultatywny,
+T32	Proposition 18618 18633	tych warsztatów
+T33	Reason 18688 18732	trudne do zrealizowania ze względu na koszty
+E15	Reason:T33 Reason_of:T32
+A15	Reception E15 -0.4
+T34	Proposition 19419 19456	stworzona jakaś platforma internetowa
+T35	Proposition 19859 19892	kazusów było naprawdę bardzo dużo
+T36	Reason 19913 19966	nie można było zrobić bazy odpowiedzi do tych kazusów
+E16	Reason:T36 Reason_of:T35
+A16	Reception E16 -0.2
+T37	Proposition 22025 22129	studenci pierwszego roku są, idą na szkolenie, a później przy składaniu pracy jest podpisywany regulamin
+T38	Reason 22498 22557	nie zawsze jest możliwość przeprowadzenia takich warsztatów
+E17	Reason:T38 
+A17	Reception E17 -0.4
+T39	Proposition 22665 22755	że sporządzenie takiego regulaminu i po prostu odwołanie do konieczności przestrzegania go
+T40	Reason 22771 22787	dobrą propozycją
+E18	Reason:T40 Reason_of:T39
+A18	Reception E18 0.6
+T41	Proposition 23582 23623	większość studentów nie czyta regulaminów
+T42	Reason 23632 23674	są po prostu nieprzyjaznym językiem pisane
+E19	Reason:T42 Reason_of:T41
+A19	Reception E19 -0.4
+T43	Proposition 24687 24775	specyfikacja szkoleń z zakresu prawa autorskiego na poszczególne wydziały jest niezbędna
+T44	Reason 24786 24889	zupełnie inaczej się pisze pracę z dziedziny humanistycznej, a zupełnie inaczej z dziedziny technicznej
+E20	Reason:T44 Reason_of:T43
+A20	Reception E20 0
+T45	Proposition 25622 25661	zawsze te szkolenia prowadzili prawnicy
+T46	Reason 25677 25738	doskonale nam powiedzą o sankcjach, regulacjach i definicjach
+E21	Reason:T46 Reason_of:T45
+A21	Reception E21 0.4
+T47	Reason 25748 25802	nie podadzą takich konkretnych praktycznych przykładów
+E22	Reason:T47 Reason_of:T45
+A22	Reception E22 -0.6
+T48	Proposition 26192 26312	wydziały powinny być odpowiedzialne za konkretne, za realizację tego szkolenia, czy przekazywanie informacji o plagiacie
+T49	Proposition 26701 26779	taka osoba mogłaby prowadzić warsztaty bądź jakieś ćwiczenia na temat plagiatu
+T50	Reason 26782 26832	nie trzeba było zatrudniać specjalistów z zewnątrz
+E23	Reason:T50 Reason_of:T49
+A23	Reception E23 0.8
+T51	Proposition 28135 28169	kary nie powinny być bardzo surowe
+T52	Proposition 28261 28280	wydalenie z uczelni
+T53	Proposition 28286 28337	zawieszenie w prawach studenta na rok czy na dłużej
+T54	Proposition 28384 28452	osobą, która powinna zapobiegać plagiatowi jest promotor, wykładowca
+T55	Proposition 29595 29684	największe kompetencje do tego typu sprawdzania mają dani wykładowcy od danego przedmiotu
+T56	Reason 29809 29878	ponieważ oni wiedzą, znaczy znają zakres literatury z danej dziedziny
+E24	Reason:T56 Reason_of:T55
+A24	Reception E24 0.6
+T57	Proposition 30381 30445	powinno się zdecydowanie rozróżniać plagiat umyślny i nieumyślny
+T58	Proposition 31009 31058	natychmiastowymi karami odgórnymi bardzo surowymi
+T59	Reason 31063 31091	nie zawsze to jest adekwatne
+E25	Reason:T59 Reason_of:T58
+A25	Reception E25 -0.6
+T60	Proposition 31229 31248	wydalanie z uczelni
+T61	Proposition 34392 34482	promotor powinien odpowiadać za że tak powiem wyłapywanie tego czy jest to plagiat czy nie
+T62	Proposition 34484 34557	nie powinna to być tylko kwestia systemu komputerowego i oddzielnej osoby
+T63	Reason 35016 35058	system jest po prostu zawodny moim zdaniem
+E26	Reason:T63 Reason_of:T62
+A26	Reception E26 -0.6
+T64	Reason 35061 35147	potrzeba do tego właśnie osoby, która jest, że tak powiem w danej dziedzinie zanurzona
+E27	Reason:T64 Reason_of:T62
+A27	Reception E27 0.4
+T65	Proposition 38547 38648	oni mogliby być jakby tą kadrą, która mogłaby im pomagać w czytaniu prac licencjackich, magisterskich
+T66	Proposition 39167 39224	anty-plagiat mogą jakoś to połączyć w jedną spójną całość
+T67	Proposition 41104 41125	byłyby pod jedną bazą
+T68	Reason 41159 41233	uniemożliwilibyśmy sobie po prostu rozwoju w jakimś tam mniejszym zakresie
+E28	Reason:T68 Reason_of:T67
+A28	Reception E28 -0.6
+T69	Proposition 42180 42251	studia powinny być ukierunkowane na szeroko pojęty rozwój intelektualny
+T70	Proposition 42261 42337	powinny być ściśle podporządkowane zdobyciu umiejętności potrzebnych w pracy
+T71	Proposition 42522 42661	studia nie mogą służyć wyłącznie zdobyciu praktycznych umiejętności i sprawić, żeby absolwent danego kierunku był atrakcyjny na rynku pracy
+T72	Reason 42684 42726	studia mają umożliwić rozwój intelektualny
+E29	Reason:T72 Reason_of:T71
+A29	Reception E29 0.8
+T73	Proposition 42862 42894	nie można się do tego ograniczać
+T74	Reason 42899 42928	wtedy to przestaną być studia
+E30	Reason:T74 Reason_of:T73
+A30	Reception E30 -0.4
+T75	Proposition 47082 47117	zwiększyć liczbę zajęć praktycznych
+T76	Proposition 47163 47203	wydzielać ścieżkę praktyczną jako osobną
+T77	Reason 47214 47339	sporo rzeczy praktycznych z dobrej teorii powinno wynikać i również dobra teoria też powinna wspierać te działania praktyczne
+E31	Reason:T77 Reason_of:T76
+A31	Reception E31 0.8
+T78	Proposition 48054 48183	materiał pokrywany na danym kierunku studiów nie powinien być za szeroki, natomiast jak najbardziej nie powinien być też za wąski
+T79	Reason 48191 48366	ogólna wiedza jest później tak naprawdę w praktyce wykorzystywana czasami nawet w większym stopniu niż, znaczy może nie w większym, ale w podobnym stopniu co wiedza kierunkowa
+E32	Reason:T79 Reason_of:T78
+A32	Reception E32 0.8
+T80	Proposition 48715 48770	owinno się prowadzić więcej takich praktycznych działań
+T81	Proposition 49734 49874	przynajmniej część wykładów miałaby charakter fakultatywny, natomiast część zajęć praktycznych w tym warsztaty miałyby charakter obowiązkowy
+T82	Proposition 49876 49996	wykłady w sali uczelnianej byłyby zastępowane po części wykładami udostępnianymi za pośrednictwem platform internetowych
+T83	Reason 50011 50090	uważam, że jesteśmy w XXI wieku i wykłady powinny być udostępniane w internecie
+E33	Reason:T83 Reason_of:T82
+A33	Reception E33 1
+T84	Proposition 50502 50538	ćwiczenia, ewentualnie konwersatoria
+T85	Reason 50563 50595	to jest dla mnie najlepsza forma
+E34	Reason:T85 Reason_of:T84
+A34	Reception E34 0.8
+T86	Proposition 60753 60833	studenci chodzili na wykłady ogólnouniwersyteckie z innej dziedziny niż studiują
+T87	Reason 60983 61014	to naprawdę rozszerza horyzonty
+E35	Reason:T87 Reason_of:T86
+A35	Reception E35 1
+T88	Proposition 61545 61660	obowiązku chodzenia, wyrobienia tak zwanych ogunów, tak czyli przedmiotów ogólnouniwersyteckich spoza swojej branży
+T89	Reason 61887 61953	to jednak jest bardzo fajny pomysł i warto może by to przetestować
+E36	Reason:T89 Reason_of:T88
+A36	Reception E36 0.2
+T90	Proposition 64970 65078	zwolnić niektórych profesorów, doktorów z obowiązku przeprowadzenia pewnej liczby godzin zajęć dydaktycznych
+T91	Reason 65108 65168	nie każdy jest do tego powołany, nie każdy do umie po prostu
+E37	Reason:T91 Reason_of:T90
+A37	Reception E37 -0.2
+T92	Proposition 66617 66702	wprowadzeniem większej ilości zajęć na platformach internetowych dla uczelni wyższych
+T93	Proposition 73435 73503	opublikować wyniki tych ankiet ewaluacyjnych do wglądu dla studentów
+T94	Reason 73767 73831	wtedy można by było trafniej wybrać ćwiczenia w swoim programie,
+E38	Reason:T94 Reason_of:T93
+A38	Reception E38 0.6
+T95	Proposition 76624 76811	wszyscy studenci, których średnia ocen w trakcie studiów na pierwszym kierunku jest powyżej 4.5 powinni mieć możliwość wzięcia drugiego, studiowania na drugim kierunku bez wnoszenia opłat
+T96	Reason 76936 77008	średnia jednak wskazuje, że no widać tak to zaangażowanie w swoje studia
+E39	Reason:T96 Reason_of:T95
+A39	Reception E39 0.2
+T97	Proposition 78011 78113	propozycje, które zawierają jednoczesne różnicowanie według statusu materialnego są o tyle niesensowne
+T98	Reason 78131 78234	przepisy polskie dotyczące tego, który status materialny jest trudny czasami są strasznie niepraktyczne
+E40	Reason:T98 Reason_of:T97
+A40	Reception E40 -0.4
+T99	Proposition 79794 79996	wszystkie osoby, które kwalifikują się w 10 % najlepszych studentów na danym roku, które otrzymałyby stypendium rektora powinny być zwolnione z opłaty za drugi kierunek jeśli ten drugi kierunek studiują
+T100	Reason 80096 80128	to jest dobry zapis moim zdaniem
+E41	Reason:T100 Reason_of:T99
+A41	Reception E41 0.8
+T101	Proposition 83834 83849	próg procentowy
+T102	Reason 83916 83995	od razu pokazuje no na różnych po prostu kierunkach jest różny poziom trudności
+E42	Reason:T102 Reason_of:T101
+A42	Reception E42 0
