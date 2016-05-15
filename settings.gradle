@@ -1,3 +1,4 @@
 rootProject.name = 'debates'
 include 'debates-crf'
+include 'debates-analyzer'
 
