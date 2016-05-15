@@ -3,8 +3,10 @@ package com.debates.crf;
 import com.debates.crf.feature.PosAndTagFeature;
 import com.debates.crf.feature.PreviousPosAndTagFeature;
 import com.debates.crf.feature.TagFeature;
+import com.debates.crf.feature.WordAndTagFeature;
 import com.debates.crf.feature.filter.PosAndTagFilter;
 import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
+import com.debates.crf.feature.filter.WordAndTagFeatureFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
@@ -66,7 +68,9 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
     public void generateFeatures() {
         setFilteredFeatures = new LinkedHashSet<>();
         addTagFeatures();
-//        addTagTransitionFeatures();
+        addTagTransitionFeatures();
+        addPropositionsFeatures();
+        addReasonFeatures();
 //        addPosAndTagFeatures();
 //        addPreviousPosAndTagFeatures();
     }
@@ -118,6 +122,39 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
                             new TwoTagsFilter<>(currTag, prevTag),
                             true)
             );
+        }
+    }
+
+    private static final String[] PROPOSITION_BEGIN = new String[]{
+        "można", "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby",
+        "powinniśmy", "powinny", "powinno", "powinna", "powinien",
+        "myśleć",
+        "gdyby"
+    };
+
+    private static final String[] REASON_BEGIN = new String[]{
+        "ponieważ", "bo", "gdyż"
+    };
+
+    private void addPropositionsFeatures()
+    {
+        for( String keyWord : PROPOSITION_BEGIN ) {
+            setFilteredFeatures.add(new CrfFilteredFeature<>(
+                    new PosAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),
+                    new PosAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),
+                    true
+            ));
+        }
+    }
+
+    private void addReasonFeatures()
+    {
+        for( String keyWord : REASON_BEGIN ) {
+            setFilteredFeatures.add(new CrfFilteredFeature<>(
+                    new WordAndTagFeature( keyWord, Tag.REASON_START.toString() ),
+                    new WordAndTagFeatureFilter( keyWord, Tag.REASON_START.toString() ),
+                    true
+            ));
         }
     }
 

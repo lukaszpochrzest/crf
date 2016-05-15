@@ -35,7 +35,7 @@ public class Main {
             //  lets do some crf
             final List<TextWithAnnotations> trainingData = loadTrainingData(trainingDataDir);
 
-            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, 7);
+            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, trainingData.size() - 1);
             TextWithAnnotations testTwa = trainingData.get(0);
 
             CrfPerformer.perform(trainingTwas, testTwa);

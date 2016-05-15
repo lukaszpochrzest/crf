@@ -1,0 +1,155 @@
+T1	Proposition 246 310	wziąć pod uwagę osoby, które popełniają ten plagiat nieświadomie
+T2	Reason 367 405	zwiększyć świadomość na temat plagiatu
+E1	Reason:T2 Reason_of:T1
+A1	Reception E1 0
+T3	Proposition 1314 1341	teraz możesz coś powiedzieć
+T4	Reason 1346 1373	widziałam, że się zgłosiłaś
+E2	Reason:T4 Reason_of:T3
+T5	Proposition 1688 1732	nie wystarczy na początku studiów powiedzieć
+T6	Reason 1737 1769	na III roku tego się nie pamięta
+E3	Reason:T6 Reason_of:T5
+A2	Reception E3 -0.4
+A3	Reception E2 0
+T7	Reason 2089 2124	wiele osób nie wie albo nie pamięta
+E4	Reason:T7 Reason_of:T5
+A4	Reception E4 -0.4
+T8	Proposition 1487 1538	przed każda ważną pracą powinno powtarzać te zasady
+T9	Reason 2804 2830	czułbym się jakieś dziecko
+E5	Reason:T9 Reason_of:T8
+A5	Reception E5 -1
+T10	Reason 2832 2886	studia by mi się kojarzyły z chodzeniem do podstawówki
+E6	Reason:T10 Reason_of:T8
+A6	Reception E6 -1
+T11	Reason 3232 3451	ja osobiście mieliśmy zajęcia z plagiatu, może nie stricte z plagiatu, co z wartości intelektualnych no i ja jednak byłbym wdzięczny, gdyby one były powtórzone przed przed pisaniem jakiejś pracy poważniejszej dyplomowej
+E7	Reason:T11 Reason_of:T8
+A7	Reception E7 0.4
+T12	Proposition 3453 3717	Byłbym bardzo wdzięczny gdyby uczelnia oprócz tych wykładów mogła przygotować jakieś broszury, jakie materiały, do których potem w trakcie  studiów, już nie mowie ze przed pisaniem jakieś poważniejszych, ale prac zaliczeniowych, jakichś pomniejszych w trakcie roku
+T13	Reason 3994 4116	potem studentowi łatwo się do tego odnieść, bo ma to w każdym miejscu, o każdym czasie w sumie i to byłoby duże ułatwienie
+E8	Reason:T13 Reason_of:T12
+A8	Reception E8 0.4
+T14	Proposition 4551 4733	część broszury mogłaby być przygotowana międzyuczelnianie na temat ogólnie plagiatu, a pozostała część broszury mogłaby być przygotowana pod dana uczelnię albo pod dany wydział nawet
+T15	Proposition 4757 4861	to może powiecie jakie macie doświadczenia w tym względzie, jeśli chodzi o naukę o plagiacie na studiach
+T16	Proposition 8184 8296	mi się najbardziej podoba propozycja numer dwa, w której to uczelnia określa minimalny program zajęć o plagiacie
+T17	Reason 8387 8541	na różnych wydziałach są różne typy prac w trakcie studiów i jest też różna specyfika przygotowywania pracy licencjackiej, magisterskiej czy inżynierskiej
+E9	Reason:T17 Reason_of:T16
+A9	Reception E9 0.2
+T18	Proposition 9057 9359	powinien być przygotowany jakiś regulamin, który powinien być podpisany przez każdego studenta, żeby nie było jakichś niedomówień, że ktoś, coś nie wiedział, ktoś nie był pewien, na pewno powinno to być poparte jakimiś zajęciami, wykładami, żeby student wiedział na czym stoi, został jakoś przygotowany
+T19	Proposition 9539 9627	powinna pomagać studentom jeśli chodzi o nauczenie, przygotowanie informacji o plagiacie
+T20	Proposition 9648 9818	niegłupim pomysłem byłoby to żeby każda praca, przygotowana przez studenta, wiem, że mogłoby to być problematyczne, żeby każda praca była sprawdzana pod względem plagiatu
+T21	Reason 9820 9987	ponieważ pozwoliłoby to studentom w trakcie trwania toku nauki, już na początku oswajać się z tym, czym jest plagiat, jak z nim walczy i jak go wykrywać, jak go unikać
+E10	Reason:T21 Reason_of:T20
+A10	Reception E10 0.6
+T22	Reason 9989 10077	I taki student, który nieświadomie popełni plagiat, mógłby się sporo dzięki temu nauczyć
+E11	Reason:T22 Reason_of:T20
+A11	Reception E11 0.6
+T23	Reason 11227 11350	będzie to prowadziło to marnotrawienia zasobów uniwersytetu, jeżeli każdy wydział będzie przygotowywał takie zajęcia osobno
+E12	Reason:T23 Reason_of:T16
+A12	Reception E12 -0.4
+T24	Reason 12048 12183	ponieważ trzeba tworzyć programy skonfigurowane dla każdego wydziału, może nie każdego, ale pewnie parę podtypów trzeba będzie stworzyć
+E13	Reason:T24 Reason_of:T16
+A13	Reception E13 -0.2
+T25	Proposition 12289 12478	trzeba stworzyć, tak jak Tobiasz powiedział może niekoniecznie dla każdego kierunku, każdego wydziału oddzielnie programu nauczania o plagiacie, ale ileś tych różnych programów musi powstać
+T26	Reason 12480 12571	ponieważ dla każdego kierunku, dla każdego sposobu nauczania inne rzeczy będą najważniejsze
+E14	Reason:T26 
+A14	Reception E14 0.2
+T27	Proposition 12862 12896	myślę ogólna wiedza jest potrzebna
+T28	Proposition 13197 13257	Ogólna wiedza o tym, czym jest plagiat, jest potrzebna teraz
+T29	Proposition 13785 13887	powinno się sprawdzać też stan wiedzy na temat plagiatu u osób, które opiekują się pracami dyplomowymi
+T30	Proposition 14202 14271	Myślę też, że weryfikacja powinna być też później robiona przez ludzi
+T31	Proposition 15236 15286	Myślę, że te prace elektroniczne łatwiej sprawdzić
+T32	Proposition 17975 18112	Według mnie tutaj propozycja trzecia jest dość sensowna mowa tutaj o konkretnej osobie, która byłaby oddelegowana do wykrywania plagiatów
+T33	Reason 18950 19033	ponieważ wiadomo do kogo można by się zgłaszać, gdyby był jakiś problem z plagiatem
+E15	Reason:T33 Reason_of:T32
+A15	Reception E15 0.4
+T34	Reason 19035 19074	Wiadomo by było kto jest odpowiedzialny
+E16	Reason:T34 Reason_of:T32
+A16	Reception E16 0.2
+T35	Reason 19130 19289	taka osoba odsiewała by część prac, dopiero te, które są podejrzane by trafiały dalej do ekspertów czy wykładowców i to mogłoby bardzo ładnie odciążyć te osoby
+E17	Reason:T35 Reason_of:T32
+A17	Reception E17 0.2
+T36	Proposition 20305 20431	należy zadbać o to, aby osoby prowadzące zajęcia miały wystarczająco dużo czasu aby sprawdzać prace właśnie pod kątem plagiatu
+T37	Reason 20647 21010	z jedną, centralną osobą sprawdzająca jest też taki problem, że ona pewnie będzie miała bardzo ograniczona wiedzę na każdy z tych tematów, a są niektóre takie dziedziny no, że dany wykładowca po prostu czyta wszystkie artykuły, które pojawiają się w danej dziedzinie i jest w stanie już czytając pracę sprawdzić czy dana praca jest plagiatem, czy tez nim nie jest
+E18	Reason:T37 Reason_of:T32
+A18	Reception E18 -0.8
+T38	Proposition 21257 21315	powinno się przede wszystkim skierować na jakieś szkolenie
+T39	Proposition 22855 22914	może jakaś pomoc w przygotowaniu wykładów na temat plagiatu
+T40	Proposition 23030 23142	może taka osoba, która dopuściła się plagiatu, mogłaby później pomagać w wykrywaniu innych plagiatów innych osób
+T41	Proposition 23219 23273	to powinno być związane ze szkodliwością tego plagiatu
+T42	Proposition 24113 24253	w przypadku prac realizowanych w trakcie studiów za pierwszym razem powinna być to głównie edukacja oraz obowiązek ponownego napisania pracy
+T43	Proposition 24265 24355	w przypadku prac dyplomowych, to już moim zdaniem powinno być skreślenie z listy studentów
+T44	Reason 24357 24445	ponieważ to jest praca na podstawie, której dana osoba ma mieć przyznany stopień naukowy
+E19	Reason:T44 Reason_of:T43
+A19	Reception E19 0
+T45	Proposition 28957 29012	studia na uniwersytetach, powinny być dosyć uniwersalne
+T46	Reason 28561 28724	żyjemy teraz w czasach, które bardzo szybko się zmieniają, tak naprawdę nikt nie jest w stanie przewidzieć za pięć, sześć lat ludzie z jaką wiedza będą poszukiwani
+E20	Reason:T46 Reason_of:T45
+A20	Reception E20 0.2
+T47	Proposition 31034 31070	nadmiernie nie specjalizować studiów
+T48	Reason 31072 31112	ponieważ to jest taka dosyć zgubna droga
+E21	Reason:T48 Reason_of:T47
+A21	Reception E21 -0.2
+T49	Proposition 33964 34061	moim zdaniem pewne takie zastane umiejętności, które wśród studentów powinna wykształcać uczelnia
+T50	Reason 34280 34311	Nie wiedzą, gdzie szukać wiedzy
+E22	Reason:T50 Reason_of:T49
+A22	Reception E22 -0.4
+T51	Proposition 35155 35243	pracodawcy nie mogą wymagać tego, żebyśmy na studiach uczyli się dokładnie pod ten zawód
+T52	Reason 35254 35389	jest dużo takich zawodów, które są bardzo wyspecjalizowane i nie dałoby rady wyszkolić 200 osób rocznie tylko i wyłącznie pod ten zawód
+E23	Reason:T52 Reason_of:T51
+A23	Reception E23 -0.2
+T53	Reason 35421 35494	każda osoba będzie zmieniać pracę pięć razy do końca aktywności zawodowej
+E24	Reason:T53 Reason_of:T51
+A24	Reception E24 0
+T54	Proposition 35504 35570	uczelnia powinna dawać możliwość rozwoju troszkę bardziej ogólnego
+T55	Proposition 35574 35630	pracownicy powinni rozwijać już tak bardziej precyzyjnie
+T56	Proposition 37703 37776	osoby prowadzące każdy z typów zajęć powinny premiować zdolność studentów
+T57	Reason 37778 37886	ponieważ bardzo częstym zarzutem ze środowiska akademickiego jest to, że oni często są bardzo niesamodzielni
+E25	Reason:T57 
+A25	Reception E25 -0.4
+T58	Proposition 37990 38054	mogą to zmienić sami wykładowcy premiując samodzielność studenta
+T59	Proposition 40644 40683	powinien być ten kontakt z absolwentami
+T60	Reason 40685 40755	Wiedza na temat tego, co im się przydało po studiach jest bardzo cenna
+E26	Reason:T60 Reason_of:T59
+A26	Reception E26 0.6
+T61	Proposition 40757 40835	Powinni oni wracać na uczelnię i dostarczać tej informacji, jakie były zajęcia
+T62	Proposition 42909 42982	każda uczelnia powinna mieć bazę multimediów dotyczącą prowadzonych zajęć
+T63	Reason 42776 42849	można go obejrzeć w dowolnym momencie, można go podzielić na kilka części
+E27	Reason:T63 Reason_of:T62
+A27	Reception E27 0.8
+T64	Proposition 43214 43264	myślę, że dobrym sposobem byłby nagrane te wykłady
+T65	Reason 43417 43542	to co jest dla nas oczywiste można przeskoczyć z danego wykładu, to co jest trudniejsze można dwa, trzy, cztery razy obejrzeć
+E28	Reason:T65 Reason_of:T64
+A28	Reception E28 0.8
+T66	Proposition 47412 47516	wykładowcy, którzy mają zajęcia ze studentami pierwszego roku powinny być zapoznawane z programem liceum
+T67	Proposition 52649 52752	powinna istnieć taka możliwość bezpłatnego zapisywania się na przedmioty oferowane na innych wydziałach
+T68	Reason 52839 52904	Wtedy nie byłoby po prostu sensu w studiowaniu na drugim kierunku
+E29	Reason:T68 Reason_of:T67
+A29	Reception E29 0.2
+T69	Proposition 53711 53747	zwalnianie z tych opłat nie ma sensu
+T70	Reason 53749 53805	bo w ogóle nie istniałoby studiowanie na drugim kierunku
+E30	Reason:T70 Reason_of:T69
+A30	Reception E30 -0.2
+T71	Proposition 54257 54307	powinno być bezpłatne dla osób z wysokimi wynikami
+T72	Proposition 54462 54595	Jeżeli są na pierwszym kierunku i dobrze im idzie i chcą się jeszcze rozwijać no to myślę, że powinno być im to udostępnione za darmo
+T73	Proposition 55170 55208	powinni zwraca uwagę na bazę dłużników
+T74	Proposition 55909 55952	powinno być dla wszystkich studentów płatna
+T76	Reason 56569 56669	na pierwszym kierunku idzie im słabo i jeszcze chcą pchać się na drugi, to jest całkowicie bez sensu
+E32	Reason:T76 Reason_of:T77
+A32	Reception E32 -0.6
+T77	Proposition 56679 56731	myślę, że najważniejszym kryterium powinny być oceny
+T75	Reason 56759 56873	jeżeli komuś nie idzie na pierwszym kierunku, to nie widzę sensu by powinien za darmo móc studiować drugi kierunek
+E31	Reason:T75 Reason_of:T77
+A31	Reception E31 -0.6
+T78	Reason 57030 57122	osoby, które mają nie najlepsze wyniki w nauce przez trudny start mogą czuć się pokrzywdzone
+E33	Reason:T78 Reason_of:T77
+A33	Reception E33 -1
+T79	Reason 57440 57553	osoby musza pracować by pomóc w otrzymaniu rodziny, no to wtedy rzeczywiście mogą mieć mniej czasu na studiowanie
+E34	Reason:T79 
+A34	Reception E34 -0.2
+T80	Reason 57700 57827	jest dużo stypendiów tych na przykład też Jana Pawła II jakaś fundacja, która pomaga takim osobom z niskim statusem materialnym
+E35	Reason:T80 
+A35	Reception E35 -0.4
+T81	Proposition 59797 59857	możliwość zewnętrznego dotowania studenta na drugim kierunku
+T82	Proposition 60161 60262	Uczelnie, wydziały mogą w tym kierunku działać po prostu proaktywnie to znaczy zachęcać firmy do tego
+T83	Reason 60899 60983	wyniki byłyby lepsze, mógłbym się bardziej rozwijać gdybym tej pracy mieć nie musiał
+E36	Reason:T83 Reason_of:T81
+A36	Reception E36 0.4
