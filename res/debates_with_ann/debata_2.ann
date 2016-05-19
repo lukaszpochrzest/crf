@@ -2,11 +2,11 @@ T1	Proposition 30140 30184	plagiat to jednak powinien być karany surowo
 T2	Reason 30191 30230	studenci się przed tym no przestrzegali
 E1	Reason:T2 Reason_of:T1
 A1	Reception E1 0.4
-T4	Proposition 2091 2162	plagiatem jest chyba przepisywanie wszelkich sprawozdań na laboratoria.
+T4	Proposition 2091 2162	plagiatem jest chyba przepisywanie wszelkich sprawozdań na laboratoria
 T5	Proposition 2972 3089	plagiat jest szeroko pojętym wzorowaniem się na pracy innych i nie mówieniem, o tym że wzorujemy się na czyjejś pracy
 T6	Proposition 5512 5604	plagiat jest kiedy jedna osoba bierze tekst od autora i nie poda kto był autorem tego tekstu
 T7	Proposition 6854 6958	plagiat to jest wykorzystanie czyjegoś tekstu, no rysunku, albo nie wiem chociażby jakiejś muzyki, pracy
-T8	Proposition 7598 7673	plagiatem jest przypisywanie sobie cudzych jakiś osiągnięć intelektualnych.
+T8	Proposition 7598 7673	plagiatem jest przypisywanie sobie cudzych jakiś osiągnięć intelektualnych
 T10	Proposition 9767 9838	taką propozycję czy moglibyśmy odwołać się do materiałów informacyjnych
 T3	Proposition 1211 1338	plagiat to jest coś takiego, że kiedy powiedzmy nie wiem, korzystamy z czyichś  opracowań to nie podajemy źródła tych opracowań
 T9	Proposition 11326 11419	żebyśmy porozmawiali o tych propozycjach jak podnosić świadomość studentów dotyczącą plagiatu
@@ -16,7 +16,7 @@ T13	Reason 12895 12916	mamy ograniczony czas
 E2	Reason:T13 Reason_of:T12
 A2	Reception E2 0
 T14	Proposition 13555 13617	zrobienie po prostu regulaminu i danie wszystkim do podpisania
-T15	Reason 13622 13693	każdy podpisuje- „tak zapoznałem się”, a tak naprawdę nikt nie zagląda.
+T15	Reason 13622 13693	każdy podpisuje- „tak zapoznałem się”, a tak naprawdę nikt nie zagląda
 E3	Reason:T15 Reason_of:T14
 A3	Reception E3 -0.6
 T16	Proposition 15850 15904	żeby bezpośrednio poprzedzały pisanie pracy dyplomowej

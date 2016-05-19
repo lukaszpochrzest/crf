@@ -35,7 +35,7 @@ public class Main {
             //  lets do some crf
             final List<TextWithAnnotations> trainingData = loadTrainingData(trainingDataDir);
 
-            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, 7);
+            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, trainingData.size());
             TextWithAnnotations testTwa = trainingData.get(0);
 
             CrfPerformer.perform(trainingTwas, testTwa);
@@ -50,9 +50,16 @@ public class Main {
 
 
         final File dirWithTrainingData = new File(trainingDataDir);
+        /*if (dirWithTrainingData.isFile())
+            throw new IOException("Path is files");
+
         if(!dirWithTrainingData.isDirectory()) {
-            throw new IOException("Path should be a directory");
+            throw new Exception();
         }
+
+        */
+
+
 
         List<TextWithAnnotations> trainData = new ArrayList<>();
 

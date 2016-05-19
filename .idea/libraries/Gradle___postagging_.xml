@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: :postagging:">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/debates-crf/libs/postagging.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

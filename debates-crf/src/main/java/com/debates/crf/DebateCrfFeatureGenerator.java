@@ -1,8 +1,10 @@
 package com.debates.crf;
 
+import com.debates.crf.feature.DebateFeature;
 import com.debates.crf.feature.PosAndTagFeature;
 import com.debates.crf.feature.PreviousPosAndTagFeature;
 import com.debates.crf.feature.TagFeature;
+import com.debates.crf.feature.filter.DebateFeatureFilter;
 import com.debates.crf.feature.filter.PosAndTagFilter;
 import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
 import com.debates.crf.utils.PosUtility;
@@ -66,6 +68,9 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
     public void generateFeatures() {
         setFilteredFeatures = new LinkedHashSet<>();
         addTagFeatures();
+        addTagTransitionFeatures();
+        addPropositions();
+        addReasons();
 //        addTagTransitionFeatures();
 //        addPosAndTagFeatures();
 //        addPreviousPosAndTagFeatures();
@@ -83,6 +88,42 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
      *
      * (check com.debates.crf.Tag)
      */
+
+    private static final String[] PROPOSITION_BEGIN = new String[]{
+            "mo¿na", "mog³o", "mogli", "mogliœmy", "móg³by","mog³aby", "mog³oby",
+            "powinniœmy", "powinny", "powinno", "powinna", "powinien", "powinni",
+            "trzeba", "uwa¿aæ","wed³ug", "zdaniem", "wolno", "nale¿y",
+            "myœleæ",
+            "gdyby"
+    };
+
+    private static final String[] REASON_BEGIN = new String[]{
+            "poniewa¿", "bo", "gdy¿", "wtedy", "ale"
+    };
+
+    private void addPropositions()
+    {
+        for( String keyWord : PROPOSITION_BEGIN ) {
+            setFilteredFeatures.add(new CrfFilteredFeature<>(
+                    new PosAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),
+                    new PosAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),
+                    true
+            ));
+        }
+    }
+
+    private void addReasons()
+    {
+        for( String keyWord : REASON_BEGIN ) {
+            setFilteredFeatures.add(new CrfFilteredFeature<>(
+                    new DebateFeature( keyWord, Tag.REASON_START.toString() ),
+                    new DebateFeatureFilter( keyWord, Tag.REASON_START.toString() ),
+                    true
+            ));
+        }
+    }
+
+
     private void addTagFeatures() {
         tags.forEach(
                 tag -> setFilteredFeatures.add(new CrfFilteredFeature<>(

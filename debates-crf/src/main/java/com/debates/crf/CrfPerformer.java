@@ -38,31 +38,34 @@ public class CrfPerformer {
     public static void perform(List<TextWithAnnotations> trainingTwas,
                                TextWithAnnotations testTwa) throws IOException, CorpusCreationException {
 
-        if(trainingTwas.isEmpty()) {
+        if (trainingTwas.isEmpty()) {
             LOGGER.info("No training data");
             return;
         }
 
         // prepare training corpus
         List<List<? extends TaggedToken<String, String>>> corpus = new ArrayList<>();
-        for(TextWithAnnotations twa : trainingTwas) {
-           corpus.addAll(createCorpus(twa));
+        for (TextWithAnnotations twa : trainingTwas) {
+            corpus.addAll(createCorpus(twa));
         }
 
-        // Create trainer factory
-        DebateCrfTrainerFactory<String, String> trainerFactory = new DebateCrfTrainerFactory<>();
+        int i = 0;
 
-        // Create trainer
-        DebateCrfTrainer<String,String> trainer = trainerFactory.createTrainer(
-                corpus,
-                new DebateCrfFeatureGeneratorFactory(),
-                new DebateFilterFactory());
 
-        // Run training with the loaded corpus.
-        trainer.train(corpus);
+    // Create trainer factory
+    DebateCrfTrainerFactory<String, String> trainerFactory = new DebateCrfTrainerFactory<>();
 
-        // Get the model
-        CrfModel<String, String> crfModel = trainer.getLearnedModel();
+    // Create trainer
+    DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
+            corpus,
+            new DebateCrfFeatureGeneratorFactory(),
+            new DebateFilterFactory());
+
+    // Run training with the loaded corpus.
+    trainer.train(corpus);
+
+    // Get the model
+    CrfModel<String, String> crfModel = trainer.getLearnedModel();
 
 //        // Save the model into the disk.
 //        File file = new File("example.ser");
@@ -73,24 +76,30 @@ public class CrfPerformer {
 //        // Later... Load the model from the disk
 //        crfModel = (CrfModel<String, String>) load(file);
 
-        // Create a CrfInferencePerformer, to find tags for test data
-        CrfInferencePerformer<String, String> inferencePerformer = new CrfInferencePerformer<>(crfModel);
+    // Create a CrfInferencePerformer, to find tags for test data
+    CrfInferencePerformer<String, String> inferencePerformer = new CrfInferencePerformer<>(crfModel);
 
-        //  create test corpus
-        List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa);
+    //  create test corpus
+    List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa);
 
-        // infer tags
-        for(List<? extends TaggedToken<String, String>> testSentence : testCorpus) {
+    // infer tags
+    for(List<? extends TaggedToken<String, String>> testSentence
+    :testCorpus)
 
-            //  extract sentence from testSentence
-            List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
+    {
 
-            //  infer tags for the sentence
-            List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(sentence);
+        //  extract sentence from testSentence
+        List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
 
-            print(result, testSentence);
-        }
+        //  infer tags for the sentence
+        List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(sentence);
+
+        print(result, testSentence);
     }
+
+}
+
+
 
     /**
      * prints testSentence in format:
@@ -107,7 +116,7 @@ public class CrfPerformer {
                     "(" +
                     taggedToken.getTag().substring(0,2) +
                     "/" +
-                    testSentence.get(i).getTag().substring(0,2) +   //TODO get(i) potentially so inefficent..
+                    testSentence.get(i).getTag() +   //TODO get(i) potentially so inefficent..
                     ") ");
             ++i;
         }
@@ -150,7 +159,29 @@ public class CrfPerformer {
     private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
 
-        final String wordLetters = "[a-zA-Z0-9\\-\'zżźćńółęąśŻŹĆĄŚĘŁÓŃ]";
+        final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
+                "\u0119" +
+                "\u0142" +
+                "u\u017C" +
+                "\u017A" +
+                "\u0144" +
+                "\u0107" +
+                "\u015B" +
+                "\u0104" +
+                "\u0118" +
+                "\u00D3" +
+                "\u0141" +
+                "\u0179" +
+                "\u017B" +
+                "\u0143" +
+                "\u015A" +
+                "\u0106" +
+           //     "\\." +
+           //     "\\," +
+                "\\-" +
+                "\\%" +
+                "\u22ee]"; //...
+
 
         /** read propositions   **/
 
@@ -180,24 +211,36 @@ public class CrfPerformer {
         List<List<? extends TaggedToken<String, String>>> result = new LinkedList<>();
 
         File textFile = twa.getTextFile();
-        String text = IOUtils.toString(new FileInputStream(textFile));
+        String text = IOUtils.toString(new FileInputStream(textFile), "UTF8");
 
         List<TaggedToken<String, String>> currSequence = new ArrayList<>();
 
 //        Tag previousTag = Tag.OTHER;
 
+        Tag previousTag = null;
+        int realIdx =-1;
         for(int leftIdx = 0; leftIdx < text.length(); ++leftIdx) {
 
             char currChar = text.charAt(leftIdx);
 
+
             if(currChar == '\n' || currChar == '\r') {
+                if (currChar == '\n')
+                    realIdx++;
                 result.add(currSequence);
                 currSequence = new ArrayList<>();
                 continue;
             }
 
+            if (currChar == ' ') {
+                realIdx++;
+                continue;
+            }
 
-            /** JLL block of code(ive been given) - want to work on the same data, so processing needs to be quite the same  */
+            realIdx++;
+
+
+            // JLL block of code(ive been given) - want to work on the same data, so processing needs to be quite the same
 
             // if the first letter is a word character or before a word character is a white character
             if(
@@ -219,7 +262,7 @@ public class CrfPerformer {
 
                 //  is it proposition ?
                 if(currProposition != null) {
-                    if(leftIdx > currProposition.getEndIndex()) {
+                    if(realIdx > currProposition.getEndIndex()) {
                         if(propositionsSortedIterator.hasNext()) {
                             currProposition = propositionsSortedIterator.next();
                         } else {
@@ -227,20 +270,32 @@ public class CrfPerformer {
                         }
                     }
                     if(currProposition != null) {
-                        if(leftIdx >= currProposition.getStartIndex() &&
-                                rightIdx == currProposition.getEndIndex()) {
+
+                        int compareRight = rightIdx - (leftIdx - realIdx);
+                        if(realIdx >= currProposition.getStartIndex() &&
+                                compareRight == currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_END;
-                        } else if(leftIdx == currProposition.getStartIndex() &&
-                                rightIdx <= currProposition.getEndIndex()) {
+                        } else if(realIdx == currProposition.getStartIndex() &&
+                                compareRight <= currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_START;
-                        } else if(leftIdx >= currProposition.getStartIndex() &&
-                                rightIdx <= currProposition.getEndIndex()) {
-                            tag = Tag.PROPOSITION;
+                        } else if(realIdx >= currProposition.getStartIndex() &&
+                                compareRight < currProposition.getEndIndex()) {
+                                tag = Tag.PROPOSITION;
+
 
 //                            if(previousTag != Tag.PROPOSITION && previousTag != Tag.PROPOSITION_START) {
 //                                tag = Tag.PROPOSITION_START;
 //                            }
 
+                        } else if (realIdx >= currProposition.getStartIndex() &&
+                                compareRight > currProposition.getEndIndex() &&
+                                (text.charAt(compareRight-1) == ',' || text.charAt(compareRight-1) == '.'))
+                        {
+                            int r= compareRight;
+                            int re = realIdx;
+
+                                System.out.println(text.substring(realIdx, compareRight));
+                                tag = Tag.PROPOSITION_END;
                         }
                     }
                 }
@@ -248,7 +303,7 @@ public class CrfPerformer {
 
                 //  is it reason?
                 if(currReason != null) {
-                    if(leftIdx > currReason.getEndIndex()) {
+                    if(realIdx > currReason.getEndIndex()) {
                         if(reasonSortedIterator.hasNext()) {
                             currReason = reasonSortedIterator.next();
                         } else {
@@ -256,15 +311,20 @@ public class CrfPerformer {
                         }
                     }
                     if(currReason != null) {
-                        if(leftIdx >= currReason.getStartIndex() &&
-                                rightIdx == currReason.getEndIndex()) {
+                        int compareRight = rightIdx - (leftIdx - realIdx);
+                        if(realIdx >= currReason.getStartIndex() &&
+                                compareRight == currReason.getEndIndex()) {
                             tag = Tag.REASON_END;
-                        } else if(leftIdx == currReason.getStartIndex() &&
-                                rightIdx <= currReason.getEndIndex()) {
+                        } else if(realIdx == currReason.getStartIndex() &&
+                                compareRight <= currReason.getEndIndex()) {
                             tag = Tag.REASON_START;
-                        } else if(leftIdx >= currReason.getStartIndex() &&
-                                rightIdx <= currReason.getEndIndex()) {
-                            tag = Tag.REASON;
+                        } else if(realIdx >= currReason.getStartIndex() &&
+                                compareRight <= currReason.getEndIndex()) {
+
+                            if (text.charAt(compareRight) == ',')
+                                tag = Tag.REASON_END;
+                            else
+                                tag = Tag.REASON;
 
 //                            if(previousTag != Tag.REASON && previousTag != Tag.REASON_START) {
 //                                tag = Tag.REASON_START;
@@ -274,16 +334,25 @@ public class CrfPerformer {
                     }
                 }
 
+                previousTag = tag;
+                final String stem;
 
                 final String selectedWord = text.substring(leftIdx, rightIdx).toLowerCase();
 
-                final String stem = myWordStemmer.getStemNotNull(selectedWord);
+                if (selectedWord.charAt(selectedWord.length()-1) == '.' || selectedWord.charAt(selectedWord.length()-1) == ',' ) {
+                    stem = myWordStemmer.getStemNotNull(selectedWord.substring(0, selectedWord.length()-1));
+                  //  System.out.print("lala");//stem = myWordStemmer.getStemNotNull(selectedWord.substring(0,selectedWord.length()-2))+"L"+leftIdx+"REAL"+realIdx + "RIGHT"+rightIdx;
+                  //  leftIdx++;
+                }
+                    else
+                    stem = myWordStemmer.getStemNotNull(selectedWord);
 
                 currSequence.add(new TaggedToken<>(stem, tag.name()));
 
 //                previousTag = tag;
             }
         }
+
         if(currProposition != null || currReason != null) {
             throw new CorpusCreationException("Not all the propositions or reasons were properly parsed");
         }
