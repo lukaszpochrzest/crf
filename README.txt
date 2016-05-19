@@ -1,5 +1,8 @@
 intellij import:
-[TODO]
+
+Build:
+
+Run:
 
 build:
 $ cd debates
