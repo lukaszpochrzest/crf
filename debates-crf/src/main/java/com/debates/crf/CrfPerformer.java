@@ -14,6 +14,7 @@ import org.crf.crf.run.CrfInferencePerformer;
 import org.crf.utilities.TaggedToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
 import java.io.*;
 import java.util.*;
@@ -159,28 +160,13 @@ public class CrfPerformer {
     private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
 
+        //LOGGER.info("created");
+
         final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
-                "\u0119" +
-                "\u0142" +
-                "u\u017C" +
-                "\u017A" +
-                "\u0144" +
-                "\u0107" +
-                "\u015B" +
-                "\u0104" +
-                "\u0118" +
-                "\u00D3" +
-                "\u0141" +
-                "\u0179" +
-                "\u017B" +
-                "\u0143" +
-                "\u015A" +
-                "\u0106" +
-           //     "\\." +
-           //     "\\," +
-                "\\-" +
-                "\\%" +
-                "\u22ee]"; //...
+                "\u0119" + "\u0142" + "u\u017C" + "\u017A" + "\u0144" + "\u0107" + "\u015B" + "\u0104" +
+                "\u0118" + "\u00D3" + "\u0141" + "\u0179" + "\u017B" + "\u0143" + "\u015A" + "\u0106" +
+                "\\-" + "\\%" + "\u22ee]"; //...
+        final String punctuationsEndSentence = "[./?!]";
 
 
         /** read propositions   **/
@@ -215,11 +201,14 @@ public class CrfPerformer {
 
         List<TaggedToken<String, String>> currSequence = new ArrayList<>();
 
-//        Tag previousTag = Tag.OTHER;
-
+        // tag for previous stem is null
         Tag previousTag = null;
+        // real index so we do not count \n and \r twice
         int realIdx =-1;
         for(int leftIdx = 0; leftIdx < text.length(); ++leftIdx) {
+
+            // if there was punctuation mark at the end of the sentence
+            boolean wasTherePunctuationMark = false;
 
             char currChar = text.charAt(leftIdx);
 
@@ -254,6 +243,8 @@ public class CrfPerformer {
                 for (; rightIdx < text.length(); ++rightIdx) {
                     if (!Character.toString(text.charAt(rightIdx)).matches(wordLetters)) {
                         // white character
+                        if (Character.toString(text.charAt(rightIdx)).matches(punctuationsEndSentence) )
+                            wasTherePunctuationMark = true;
                         break;
                     }
                 }
@@ -273,33 +264,22 @@ public class CrfPerformer {
 
                         int compareRight = rightIdx - (leftIdx - realIdx);
                         if(realIdx >= currProposition.getStartIndex() &&
-                                compareRight == currProposition.getEndIndex()) {
+                                    compareRight == currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_END;
                         } else if(realIdx == currProposition.getStartIndex() &&
                                 compareRight <= currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_START;
+                        } else if (realIdx >= currProposition.getStartIndex() &&
+                                compareRight + 1 == currProposition.getEndIndex()
+                              && wasTherePunctuationMark == true &&
+                                ((previousTag == Tag.PROPOSITION || previousTag == Tag.PROPOSITION_START)) ){
+                            tag = Tag.PROPOSITION_END;
                         } else if(realIdx >= currProposition.getStartIndex() &&
                                 compareRight < currProposition.getEndIndex()) {
-                                tag = Tag.PROPOSITION;
-
-
-//                            if(previousTag != Tag.PROPOSITION && previousTag != Tag.PROPOSITION_START) {
-//                                tag = Tag.PROPOSITION_START;
-//                            }
-
-                        } else if (realIdx >= currProposition.getStartIndex() &&
-                                compareRight > currProposition.getEndIndex() &&
-                                (text.charAt(compareRight-1) == ',' || text.charAt(compareRight-1) == '.'))
-                        {
-                            int r= compareRight;
-                            int re = realIdx;
-
-                                System.out.println(text.substring(realIdx, compareRight));
-                                tag = Tag.PROPOSITION_END;
+                            tag = Tag.PROPOSITION;
                         }
                     }
                 }
-
 
                 //  is it reason?
                 if(currReason != null) {
@@ -318,38 +298,22 @@ public class CrfPerformer {
                         } else if(realIdx == currReason.getStartIndex() &&
                                 compareRight <= currReason.getEndIndex()) {
                             tag = Tag.REASON_START;
-                        } else if(realIdx >= currReason.getStartIndex() &&
-                                compareRight <= currReason.getEndIndex()) {
-
-                            if (text.charAt(compareRight) == ',')
-                                tag = Tag.REASON_END;
-                            else
-                                tag = Tag.REASON;
-
-//                            if(previousTag != Tag.REASON && previousTag != Tag.REASON_START) {
-//                                tag = Tag.REASON_START;
-//                            }
-
+                        } else if (realIdx >= currReason.getStartIndex()
+                                && compareRight + 1 == currReason.getEndIndex()
+                                && wasTherePunctuationMark == true && ((previousTag == Tag.REASON || previousTag == Tag.REASON_START))) {
+                            tag = Tag.REASON_END;
+                        }
+                            else if(realIdx >= currReason.getStartIndex() &&
+                                    compareRight < currReason.getEndIndex()) {
+                            tag = Tag.REASON;
                         }
                     }
                 }
 
                 previousTag = tag;
-                final String stem;
-
                 final String selectedWord = text.substring(leftIdx, rightIdx).toLowerCase();
-
-                if (selectedWord.charAt(selectedWord.length()-1) == '.' || selectedWord.charAt(selectedWord.length()-1) == ',' ) {
-                    stem = myWordStemmer.getStemNotNull(selectedWord.substring(0, selectedWord.length()-1));
-                  //  System.out.print("lala");//stem = myWordStemmer.getStemNotNull(selectedWord.substring(0,selectedWord.length()-2))+"L"+leftIdx+"REAL"+realIdx + "RIGHT"+rightIdx;
-                  //  leftIdx++;
-                }
-                    else
-                    stem = myWordStemmer.getStemNotNull(selectedWord);
-
+                final String stem = myWordStemmer.getStemNotNull(selectedWord);
                 currSequence.add(new TaggedToken<>(stem, tag.name()));
-
-//                previousTag = tag;
             }
         }
 

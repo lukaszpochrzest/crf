@@ -42,7 +42,7 @@ T21	Proposition 10701 10718	krótkiego wykładu
 T22	Reason 10768 10815	nie absorbowałoby to właśnie kadry akademickiej
 E11	Reason:T22 Reason_of:T21
 A11	Reception E11 0.6
-T23	Proposition 10880 10890	bez testu,
+T23	Proposition 10880 10890	bez testu
 T24	Reason 10977 11054	ktoś chce się nauczyć czegoś to się nauczy bez jakiejś formy sprawdzania tego
 E12	Reason:T24 Reason_of:T23
 A12	Reception E12 -0.6
