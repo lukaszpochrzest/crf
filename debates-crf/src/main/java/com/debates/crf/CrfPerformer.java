@@ -14,6 +14,7 @@ import org.crf.crf.run.CrfInferencePerformer;
 import org.crf.utilities.TaggedToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
 import java.io.*;
 import java.util.*;
@@ -38,22 +39,25 @@ public class CrfPerformer {
     public static void perform(List<TextWithAnnotations> trainingTwas,
                                TextWithAnnotations testTwa) throws IOException, CorpusCreationException {
 
-        if(trainingTwas.isEmpty()) {
+        if (trainingTwas.isEmpty()) {
             LOGGER.info("No training data");
             return;
         }
 
         // prepare training corpus
         List<List<? extends TaggedToken<String, String>>> corpus = new ArrayList<>();
-        for(TextWithAnnotations twa : trainingTwas) {
-           corpus.addAll(createCorpus(twa));
+        for (TextWithAnnotations twa : trainingTwas) {
+            corpus.addAll(createCorpus(twa));
         }
+
+        int i = 0;
+
 
         // Create trainer factory
         DebateCrfTrainerFactory<String, String> trainerFactory = new DebateCrfTrainerFactory<>();
 
         // Create trainer
-        DebateCrfTrainer<String,String> trainer = trainerFactory.createTrainer(
+        DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
                 corpus,
                 new DebateCrfFeatureGeneratorFactory(),
                 new DebateFilterFactory());
@@ -80,7 +84,10 @@ public class CrfPerformer {
         List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa);
 
         // infer tags
-        for(List<? extends TaggedToken<String, String>> testSentence : testCorpus) {
+        for(List<? extends TaggedToken<String, String>> testSentence
+                :testCorpus)
+
+        {
 
             //  extract sentence from testSentence
             List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
@@ -90,7 +97,10 @@ public class CrfPerformer {
 
             print(result, testSentence);
         }
+
     }
+
+
 
     /**
      * prints testSentence in format:
@@ -107,7 +117,7 @@ public class CrfPerformer {
                     "(" +
                     taggedToken.getTag().substring(0,2) +
                     "/" +
-                    testSentence.get(i).getTag().substring(0,2) +   //TODO get(i) potentially so inefficent..
+                    testSentence.get(i).getTag() +   //TODO get(i) potentially so inefficent..
                     ") ");
             ++i;
         }
@@ -150,7 +160,14 @@ public class CrfPerformer {
     private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
 
-        final String wordLetters = "[a-zA-Z0-9\\-\'zżźćńółęąśŻŹĆĄŚĘŁÓŃ]";
+        //LOGGER.info("created");
+
+        final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
+                "\u0119" + "\u0142" + "u\u017C" + "\u017A" + "\u0144" + "\u0107" + "\u015B" + "\u0104" +
+                "\u0118" + "\u00D3" + "\u0141" + "\u0179" + "\u017B" + "\u0143" + "\u015A" + "\u0106" +
+                "\\-" + "\\%" + "\u22ee]"; //...
+        final String punctuationsEndSentence = "[./?!]";
+
 
         /** read propositions   **/
 
@@ -180,24 +197,39 @@ public class CrfPerformer {
         List<List<? extends TaggedToken<String, String>>> result = new LinkedList<>();
 
         File textFile = twa.getTextFile();
-        String text = IOUtils.toString(new FileInputStream(textFile));
+        String text = IOUtils.toString(new FileInputStream(textFile), "UTF8");
 
         List<TaggedToken<String, String>> currSequence = new ArrayList<>();
 
-//        Tag previousTag = Tag.OTHER;
-
+        // tag for previous stem is null
+        Tag previousTag = null;
+        // real index so we do not count \n and \r twice
+        int realIdx =-1;
         for(int leftIdx = 0; leftIdx < text.length(); ++leftIdx) {
+
+            // if there was punctuation mark at the end of the sentence
+            boolean wasTherePunctuationMark = false;
 
             char currChar = text.charAt(leftIdx);
 
+
             if(currChar == '\n' || currChar == '\r') {
+                if (currChar == '\n')
+                    realIdx++;
                 result.add(currSequence);
                 currSequence = new ArrayList<>();
                 continue;
             }
 
+            if (currChar == ' ') {
+                realIdx++;
+                continue;
+            }
 
-            /** JLL block of code(ive been given) - want to work on the same data, so processing needs to be quite the same  */
+            realIdx++;
+
+
+            // JLL block of code(ive been given) - want to work on the same data, so processing needs to be quite the same
 
             // if the first letter is a word character or before a word character is a white character
             if(
@@ -211,6 +243,8 @@ public class CrfPerformer {
                 for (; rightIdx < text.length(); ++rightIdx) {
                     if (!Character.toString(text.charAt(rightIdx)).matches(wordLetters)) {
                         // white character
+                        if (Character.toString(text.charAt(rightIdx)).matches(punctuationsEndSentence) )
+                            wasTherePunctuationMark = true;
                         break;
                     }
                 }
@@ -219,7 +253,7 @@ public class CrfPerformer {
 
                 //  is it proposition ?
                 if(currProposition != null) {
-                    if(leftIdx > currProposition.getEndIndex()) {
+                    if(realIdx > currProposition.getEndIndex()) {
                         if(propositionsSortedIterator.hasNext()) {
                             currProposition = propositionsSortedIterator.next();
                         } else {
@@ -227,28 +261,29 @@ public class CrfPerformer {
                         }
                     }
                     if(currProposition != null) {
-                        if(leftIdx >= currProposition.getStartIndex() &&
-                                rightIdx == currProposition.getEndIndex()) {
+
+                        int compareRight = rightIdx - (leftIdx - realIdx);
+                        if(realIdx >= currProposition.getStartIndex() &&
+                                compareRight == currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_END;
-                        } else if(leftIdx == currProposition.getStartIndex() &&
-                                rightIdx <= currProposition.getEndIndex()) {
+                        } else if(realIdx == currProposition.getStartIndex() &&
+                                compareRight <= currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION_START;
-                        } else if(leftIdx >= currProposition.getStartIndex() &&
-                                rightIdx <= currProposition.getEndIndex()) {
+                        } else if (realIdx >= currProposition.getStartIndex() &&
+                                compareRight + 1 == currProposition.getEndIndex()
+                                && wasTherePunctuationMark == true &&
+                                ((previousTag == Tag.PROPOSITION || previousTag == Tag.PROPOSITION_START)) ){
+                            tag = Tag.PROPOSITION_END;
+                        } else if(realIdx >= currProposition.getStartIndex() &&
+                                compareRight < currProposition.getEndIndex()) {
                             tag = Tag.PROPOSITION;
-
-//                            if(previousTag != Tag.PROPOSITION && previousTag != Tag.PROPOSITION_START) {
-//                                tag = Tag.PROPOSITION_START;
-//                            }
-
                         }
                     }
                 }
 
-
                 //  is it reason?
                 if(currReason != null) {
-                    if(leftIdx > currReason.getEndIndex()) {
+                    if(realIdx > currReason.getEndIndex()) {
                         if(reasonSortedIterator.hasNext()) {
                             currReason = reasonSortedIterator.next();
                         } else {
@@ -256,34 +291,32 @@ public class CrfPerformer {
                         }
                     }
                     if(currReason != null) {
-                        if(leftIdx >= currReason.getStartIndex() &&
-                                rightIdx == currReason.getEndIndex()) {
+                        int compareRight = rightIdx - (leftIdx - realIdx);
+                        if(realIdx >= currReason.getStartIndex() &&
+                                compareRight == currReason.getEndIndex()) {
                             tag = Tag.REASON_END;
-                        } else if(leftIdx == currReason.getStartIndex() &&
-                                rightIdx <= currReason.getEndIndex()) {
+                        } else if(realIdx == currReason.getStartIndex() &&
+                                compareRight <= currReason.getEndIndex()) {
                             tag = Tag.REASON_START;
-                        } else if(leftIdx >= currReason.getStartIndex() &&
-                                rightIdx <= currReason.getEndIndex()) {
+                        } else if (realIdx >= currReason.getStartIndex()
+                                && compareRight + 1 == currReason.getEndIndex()
+                                && wasTherePunctuationMark == true && ((previousTag == Tag.REASON || previousTag == Tag.REASON_START))) {
+                            tag = Tag.REASON_END;
+                        }
+                        else if(realIdx >= currReason.getStartIndex() &&
+                                compareRight < currReason.getEndIndex()) {
                             tag = Tag.REASON;
-
-//                            if(previousTag != Tag.REASON && previousTag != Tag.REASON_START) {
-//                                tag = Tag.REASON_START;
-//                            }
-
                         }
                     }
                 }
 
-
+                previousTag = tag;
                 final String selectedWord = text.substring(leftIdx, rightIdx).toLowerCase();
-
                 final String stem = myWordStemmer.getStemNotNull(selectedWord);
-
                 currSequence.add(new TaggedToken<>(stem, tag.name()));
-
-//                previousTag = tag;
             }
         }
+
         if(currProposition != null || currReason != null) {
             throw new CorpusCreationException("Not all the propositions or reasons were properly parsed");
         }
