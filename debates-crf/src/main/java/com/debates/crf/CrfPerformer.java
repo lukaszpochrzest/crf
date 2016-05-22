@@ -14,9 +14,10 @@ import org.crf.crf.run.CrfInferencePerformer;
 import org.crf.utilities.TaggedToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
