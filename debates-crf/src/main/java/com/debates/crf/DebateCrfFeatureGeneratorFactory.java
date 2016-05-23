@@ -1,5 +1,6 @@
 package com.debates.crf;
 
+import com.debates.crf.feature.generator.Luke1CrfFeatureGenerator;
 import org.crf.crf.run.CrfFeatureGenerator;
 import org.crf.crf.run.CrfFeatureGeneratorFactory;
 import org.crf.utilities.TaggedToken;
@@ -14,6 +15,6 @@ public class DebateCrfFeatureGeneratorFactory implements CrfFeatureGeneratorFact
 
     @Override
     public CrfFeatureGenerator<String, String> create(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus, Set<String> tags) {
-        return new DebateCrfFeatureGenerator(corpus, tags);
+        return new Luke1CrfFeatureGenerator(corpus, tags);
     }
 }

@@ -55,6 +55,9 @@ public class Main {
                 //  pos statistics
                 corpusStatistics.addPos(PosUtility.getPoS(taggedToken.getToken()));
 
+                //  tag statistics
+                corpusStatistics.addTag(taggedToken.getTag());
+
                 //  PROPOSITION_START and REASON_START statistics
 
                 if(Tag.PROPOSITION_START.name().equals(tokenTag) ||

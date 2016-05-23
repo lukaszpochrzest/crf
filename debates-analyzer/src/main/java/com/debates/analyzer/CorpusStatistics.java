@@ -24,6 +24,8 @@ public class CorpusStatistics {
 
     private final Map<String, Integer> poses;
 
+    private final Map<String, Integer> tags;
+
     public CorpusStatistics() {
         precedingTokensOfTag_PROPOSITION_START = new HashMap<>();
         precedingPosesOfTag_PROPOSITION_START = new HashMap<>();
@@ -31,6 +33,7 @@ public class CorpusStatistics {
         precedingPosesOfTag_REASON_START = new HashMap<>();
         tokens = new HashMap<>();
         poses = new HashMap<>();
+        tags = new HashMap<>();
     }
 
     public void addPrecedingToken(String tag, String precedingToken) {
@@ -72,6 +75,10 @@ public class CorpusStatistics {
         poses.put(pos, poses.getOrDefault(pos, 0) + 1);
     }
 
+    public void addTag(String tag) {
+        tags.put(tag, tags.getOrDefault(tag, 0) + 1);
+    }
+
     @Override
     public String toString() {
 
@@ -108,6 +115,10 @@ public class CorpusStatistics {
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
+        List<Map.Entry<String, Integer>> tagList =
+                tags.entrySet().stream()
+                        .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                        .collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder();
 
@@ -147,6 +158,11 @@ public class CorpusStatistics {
         sb.append("POSes");
         sb.append(System.lineSeparator());
         soak(sb, posList);
+        sb.append(System.lineSeparator());
+
+        sb.append("Tags");
+        sb.append(System.lineSeparator());
+        soak(sb, tagList);
         sb.append(System.lineSeparator());
 
         return sb.toString();

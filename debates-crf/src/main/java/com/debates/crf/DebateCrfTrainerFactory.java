@@ -45,9 +45,9 @@ public class DebateCrfTrainerFactory<K,G> {
         featureGenerator.generateFeatures();
         Set<CrfFilteredFeature<K, G>> setFilteredFeatures = featureGenerator.getFeatures();
 
-//        for(CrfFilteredFeature filteredFeature : setFilteredFeatures) {
-//            System.out.println(filteredFeature.getFeature().toString());
-//        }
+        for(CrfFilteredFeature filteredFeature : setFilteredFeatures) {
+            System.out.println(filteredFeature.getFeature().toString());
+        }
 
         CrfFeaturesAndFilters<K, G> features = createFeaturesAndFiltersObjectFromSetOfFeatures(setFilteredFeatures, filterFactory);
 

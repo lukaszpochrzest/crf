@@ -1,7 +1,7 @@
-package com.debates.crf;
+package com.debates.crf.feature.generator;
 
+import com.debates.crf.Tag;
 import com.debates.crf.feature.PosAndTagFeature;
-import com.debates.crf.feature.PreviousPosAndTagFeature;
 import com.debates.crf.feature.TagFeature;
 import com.debates.crf.feature.filter.PosAndTagFilter;
 import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
@@ -13,12 +13,14 @@ import org.crf.crf.run.CrfFeatureGenerator;
 import org.crf.postagging.postaggers.crf.features.TagTransitionFeature;
 import org.crf.utilities.TaggedToken;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
- * Created by lukasz on 20.04.16.
+ * Created by lukasz on 22.05.16.
  */
-public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
+public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
 
     private static final String[] TAGS_THAT_MAY_BE_FIRST_IN_TEXT_ARRAY = new String[] {
             Tag.OTHER.name(),
@@ -54,8 +56,8 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
 
     protected Set<CrfFilteredFeature<String, String>> setFilteredFeatures = null;
 
-    public DebateCrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
-                                     Set<String> tags) {
+    public Luke1CrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
+                                    Set<String> tags) {
         super(corpus, tags);
     }
 
@@ -65,10 +67,10 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
     @Override
     public void generateFeatures() {
         setFilteredFeatures = new LinkedHashSet<>();
-        addTagFeatures();
+//        addTagFeatures();
 //        addTagTransitionFeatures();
 //        addPosAndTagFeatures();
-//        addPreviousPosAndTagFeatures();
+        addPreviousPosAndTagFeatures();
     }
 
     @Override
@@ -138,25 +140,38 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         }
     }
 
+
+
     /**
+     *
      * generates features like:
      * is_current_label_PROPOSITION_and_is_previous_token_ADJECTIVE
      */
     private void addPreviousPosAndTagFeatures() {
-        for (List<? extends TaggedToken<String, String> > sentence : corpus) {
-            String previousPos = null;
-            for (TaggedToken<String, String> taggedToken : sentence) {
-                String pos = PosUtility.getPoS(taggedToken.getToken());
-                if(previousPos != null) {   //TODO allow null maybe?
+//        for (List<? extends TaggedToken<String, String> > sentence : corpus) {
+//            String previousPos = null;
+//            for (TaggedToken<String, String> taggedToken : sentence) {
+//                String pos = PosUtility.getPoS(taggedToken.getToken());
+//                if(previousPos != null) {   //TODO allow null maybe?
+//                    setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                            new PreviousPosAndTagFeature(previousPos, taggedToken.getTag()),
+//                            new PreviousPosAndTagFilter(previousPos, taggedToken.getTag()),
+//                            true
+//                    ));
+//                }
+//                previousPos = pos;
+//            }
+//        }
+        for(String possiblePos : PosUtility.possiblePoses()) {
+            for(Tag possibleTag : Tag.values()) {
                     setFilteredFeatures.add(new CrfFilteredFeature<>(
-                            new PreviousPosAndTagFeature(previousPos, taggedToken.getTag()),
-                            new PreviousPosAndTagFilter(previousPos, taggedToken.getTag()),
-                            true
+                            PreviousPosAndTagFeatureBuilder.buildFeature(possiblePos, possibleTag.name()),
+                            new PreviousPosAndTagFilter(possiblePos, possibleTag.name()),
+                            false
                     ));
-                }
-                previousPos = pos;
             }
         }
+
     }
 
 }

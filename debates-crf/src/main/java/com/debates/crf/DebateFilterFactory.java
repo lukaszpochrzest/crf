@@ -1,5 +1,7 @@
 package com.debates.crf;
 
+import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
+import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.Filter;
 import org.crf.crf.filters.FilterFactory;
 import org.crf.crf.filters.TagFilter;
@@ -21,13 +23,13 @@ public class DebateFilterFactory implements FilterFactory<String, String> {
 
 //        String token = sequence[tokenIndex];
         Set<Filter<String, String>> ret = new LinkedHashSet<>();
-        ret.add(new TagFilter<>(currentTag));
+//        ret.add(new TagFilter<>(currentTag));
 //        ret.add(new TwoTagsFilter<>(currentTag, previousTag));
 //        ret.add(new PosAndTagFilter(PosUtility.getPoS(token), currentTag));
-//        if(tokenIndex > 0) {
-//            String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
-//            ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
-//        }
+        if(tokenIndex > 0) {
+            String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
+            ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+        }
         return ret;
     }
 }

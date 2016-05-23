@@ -14,17 +14,22 @@ public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
 
     private final String forPreviousPos;
     private final String forTag;
+    private final double weight;
 
-    public PreviousPosAndTagFeature(String forPreviousPos, String forTag) {
+    public PreviousPosAndTagFeature(String forPreviousPos, String forTag, double weight) {
         this.forPreviousPos = forPreviousPos;
         this.forTag = forTag;
+        this.weight = weight;
     }
 
     @Override
     public double value(String[] sequence, int indexInSequence, String currentTag, String previousTag) {
+        if(indexInSequence == 0) {  //there is no previous pos
+            return 0.0d;
+        }
         double ret = 0.0;
-        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence]), forPreviousPos)) {
-            ret = 1.0;
+        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence-1]), forPreviousPos)) {
+            ret = weight;
         }
         return ret;
     }
