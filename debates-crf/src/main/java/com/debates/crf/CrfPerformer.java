@@ -1,6 +1,8 @@
 package com.debates.crf;
 
 import com.debates.crf.exception.CorpusCreationException;
+import com.debates.crf.implementation.luke.Luke1CrfFeatureGeneratorFactory;
+import com.debates.crf.implementation.luke.Luke1FilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.jjlteam.domain.Document;
@@ -60,8 +62,9 @@ public class CrfPerformer {
         // Create trainer
         DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
                 corpus,
-                new DebateCrfFeatureGeneratorFactory(),
-                new DebateFilterFactory());
+                /** change these two to switch between implementations  */
+                new Luke1CrfFeatureGeneratorFactory(),
+                new Luke1FilterFactory());
 
         // Run training with the loaded corpus.
         trainer.train(corpus);

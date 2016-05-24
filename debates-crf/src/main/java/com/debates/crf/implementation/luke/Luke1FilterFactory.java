@@ -1,10 +1,9 @@
-package com.debates.crf;
+package com.debates.crf.implementation.luke;
 
-import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
+import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.Filter;
 import org.crf.crf.filters.FilterFactory;
-import org.crf.crf.filters.TagFilter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.Set;
 /**
  * Created by lukasz on 20.04.16.
  */
-public class DebateFilterFactory implements FilterFactory<String, String> {
+public class Luke1FilterFactory implements FilterFactory<String, String> {
 
     @Override
     public Set<Filter<String, String>> createFilters(String[] sequence,

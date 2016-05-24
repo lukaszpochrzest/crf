@@ -1,7 +1,7 @@
-package com.debates.crf.feature.generator;
+package com.debates.crf.implementation.luke.utils;
 
 import com.debates.crf.Tag;
-import com.debates.crf.feature.PreviousPosAndTagFeature;
+import com.debates.crf.implementation.luke.feature.PreviousPosAndTagFeature;
 
 import java.util.HashMap;
 

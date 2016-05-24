@@ -1,4 +1,4 @@
-package com.debates.crf.feature.filter;
+package com.debates.crf.implementation.luke.filter;
 
 import org.crf.crf.filters.Filter;
 
@@ -7,7 +7,7 @@ import org.crf.crf.filters.Filter;
  *
  * only for performance reasons
  */
-public class PosAndTagFilter extends Filter<String, String> {
+public class PreviousPosAndTagFilter extends Filter<String, String> {
 
     private final String pos;
     private final String currentTag;
@@ -15,7 +15,7 @@ public class PosAndTagFilter extends Filter<String, String> {
     private transient int hashCodeValue = 0;
     private transient boolean hashCodeCalculated = false;
 
-    public PosAndTagFilter(String pos, String currentTag) {
+    public PreviousPosAndTagFilter(String pos, String currentTag) {
         this.pos = pos;
         this.currentTag = currentTag;
     }
@@ -47,7 +47,7 @@ public class PosAndTagFilter extends Filter<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PosAndTagFilter other = (PosAndTagFilter) obj;
+        PreviousPosAndTagFilter other = (PreviousPosAndTagFilter) obj;
         if (currentTag == null)
         {
             if (other.currentTag != null)
