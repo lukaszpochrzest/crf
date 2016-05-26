@@ -1,4 +1,4 @@
-package com.debates.crf.feature;
+package com.debates.crf.implementation.luke.feature;
 
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.CrfFeature;
@@ -8,21 +8,28 @@ import static org.crf.utilities.PosTaggerUtilities.equalObjects;
 /**
  * Created by lukasz on 20.04.16.
  */
-public class PosAndTagFeature extends CrfFeature<String, String> {
 
-    private final String forPos;
+
+public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
+
+    private final String forPreviousPos;
     private final String forTag;
+    private final double weight;
 
-    public PosAndTagFeature(String forPos, String forTag) {
-        this.forPos = forPos;
+    public PreviousPosAndTagFeature(String forPreviousPos, String forTag, double weight) {
+        this.forPreviousPos = forPreviousPos;
         this.forTag = forTag;
+        this.weight = weight;
     }
 
     @Override
     public double value(String[] sequence, int indexInSequence, String currentTag, String previousTag) {
+        if(indexInSequence == 0) {  //there is no previous pos
+            return 0.0d;
+        }
         double ret = 0.0;
-        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence]), forPos)) {
-            ret = 1.0;
+        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence-1]), forPreviousPos)) {
+            ret = weight;
         }
         return ret;
     }
@@ -35,18 +42,18 @@ public class PosAndTagFeature extends CrfFeature<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PosAndTagFeature other = (PosAndTagFeature) obj;
+        PreviousPosAndTagFeature other = (PreviousPosAndTagFeature) obj;
         if (forTag == null)
         {
             if (other.forTag != null)
                 return false;
         } else if (!forTag.equals(other.forTag))
             return false;
-        if (forPos == null)
+        if (forPreviousPos == null)
         {
-            if (other.forPos != null)
+            if (other.forPreviousPos != null)
                 return false;
-        } else if (!forPos.equals(other.forPos))
+        } else if (!forPreviousPos.equals(other.forPreviousPos))
             return false;
         return true;
     }
@@ -57,13 +64,13 @@ public class PosAndTagFeature extends CrfFeature<String, String> {
         int result = 1;
         result = prime * result + ((forTag == null) ? 0 : forTag.hashCode());
         result = prime * result
-                + ((forPos == null) ? 0 : forPos.hashCode());
+                + ((forPreviousPos == null) ? 0 : forPreviousPos.hashCode());
         return result;
     }
 
     @Override
     public String toString() {
-        return "PosAndTagFeature [forPos=" + forPos + ", forTag="
+        return "PosAndTagFeature [forPreviousPos=" + forPreviousPos + ", forTag="
                 + forTag + "]";
     }
 }

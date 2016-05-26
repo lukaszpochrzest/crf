@@ -1,11 +1,11 @@
-package com.debates.crf.feature.filter;
+package com.debates.crf.implementation.witek.filter;
 
 import org.crf.crf.filters.Filter;
 
 /**
  * Created by Witek on 2016-05-14.
  */
-public class WordAndTagFeatureFilter extends Filter<String, String> {
+public class WordAndTagFilter extends Filter<String, String> {
 
     private final String word;
     private final String currentTag;
@@ -13,7 +13,7 @@ public class WordAndTagFeatureFilter extends Filter<String, String> {
     private transient int hashCodeValue = 0;
     private transient boolean hashCodeCalculated = false;
 
-    public WordAndTagFeatureFilter(String word, String currentTag) {
+    public WordAndTagFilter(String word, String currentTag) {
         this.word = word;
         this.currentTag = currentTag;
     }
@@ -45,7 +45,7 @@ public class WordAndTagFeatureFilter extends Filter<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        WordAndTagFeatureFilter other = (WordAndTagFeatureFilter) obj;
+        WordAndTagFilter other = (WordAndTagFilter) obj;
         if (currentTag == null)
         {
             if (other.currentTag != null)

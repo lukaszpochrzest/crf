@@ -1,13 +1,9 @@
-package com.debates.crf;
+package com.debates.crf.implementation.witek;
 
-import com.debates.crf.feature.PosAndTagFeature;
-import com.debates.crf.feature.PreviousPosAndTagFeature;
-import com.debates.crf.feature.TagFeature;
-import com.debates.crf.feature.WordAndTagFeature;
-import com.debates.crf.feature.filter.PosAndTagFilter;
-import com.debates.crf.feature.filter.PreviousPosAndTagFilter;
-import com.debates.crf.feature.filter.WordAndTagFeatureFilter;
-import com.debates.crf.utils.PosUtility;
+import com.debates.crf.Tag;
+import com.debates.crf.implementation.common.feature.TagFeature;
+import com.debates.crf.implementation.witek.feature.WordAndTagFeature;
+import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
 import org.crf.crf.filters.TwoTagsFilter;
@@ -15,12 +11,11 @@ import org.crf.crf.run.CrfFeatureGenerator;
 import org.crf.postagging.postaggers.crf.features.TagTransitionFeature;
 import org.crf.utilities.TaggedToken;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
-/**
- * Created by lukasz on 20.04.16.
- */
-public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
+public class WitekCrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
 
     private static final String[] TAGS_THAT_MAY_BE_FIRST_IN_TEXT_ARRAY = new String[] {
             Tag.OTHER.name(),
@@ -56,7 +51,7 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
 
     protected Set<CrfFilteredFeature<String, String>> setFilteredFeatures = null;
 
-    public DebateCrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
+    public WitekCrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
                                      Set<String> tags) {
         super(corpus, tags);
     }
@@ -71,8 +66,6 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         addTagTransitionFeatures();
         addPropositionsFeatures();
         addReasonFeatures();
-//        addPosAndTagFeatures();
-//        addPreviousPosAndTagFeatures();
     }
 
     @Override
@@ -126,22 +119,22 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
     }
 
     private static final String[] PROPOSITION_BEGIN = new String[]{
-        "można", "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby",
-        "powinniśmy", "powinny", "powinno", "powinna", "powinien",
-        "myśleć",
-        "gdyby"
+            "można", "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby",
+            "powinniśmy", "powinny", "powinno", "powinna", "powinien",
+            "myśleć",
+            "gdyby"
     };
 
     private static final String[] REASON_BEGIN = new String[]{
-        "ponieważ", "bo", "gdyż"
+            "ponieważ", "bo", "gdyż"
     };
 
     private void addPropositionsFeatures()
     {
         for( String keyWord : PROPOSITION_BEGIN ) {
             setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new PosAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),
-                    new PosAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),
+                    new WordAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
+                    new WordAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
                     true
             ));
         }
@@ -152,48 +145,12 @@ public class DebateCrfFeatureGenerator extends CrfFeatureGenerator<String, Strin
         for( String keyWord : REASON_BEGIN ) {
             setFilteredFeatures.add(new CrfFilteredFeature<>(
                     new WordAndTagFeature( keyWord, Tag.REASON_START.toString() ),
-                    new WordAndTagFeatureFilter( keyWord, Tag.REASON_START.toString() ),
+                    new WordAndTagFilter( keyWord, Tag.REASON_START.toString() ),
                     true
             ));
         }
     }
 
-    /**
-     * generates features like:
-     * is_current_label_PROPOSITION_and_is_current_token_ADJECTIVE
-     */
-    private void addPosAndTagFeatures() {
-        for (List<? extends TaggedToken<String, String> > sentence : corpus) {
-            for (TaggedToken<String, String> taggedToken : sentence) {
-                String pos = PosUtility.getPoS(taggedToken.getToken());
-                setFilteredFeatures.add(new CrfFilteredFeature<>(
-                        new PosAndTagFeature(pos, taggedToken.getTag()),
-                        new PosAndTagFilter(pos, taggedToken.getTag()),
-                        true
-                ));
-            }
-        }
-    }
 
-    /**
-     * generates features like:
-     * is_current_label_PROPOSITION_and_is_previous_token_ADJECTIVE
-     */
-    private void addPreviousPosAndTagFeatures() {
-        for (List<? extends TaggedToken<String, String> > sentence : corpus) {
-            String previousPos = null;
-            for (TaggedToken<String, String> taggedToken : sentence) {
-                String pos = PosUtility.getPoS(taggedToken.getToken());
-                if(previousPos != null) {   //TODO allow null maybe?
-                    setFilteredFeatures.add(new CrfFilteredFeature<>(
-                            new PreviousPosAndTagFeature(previousPos, taggedToken.getTag()),
-                            new PreviousPosAndTagFilter(previousPos, taggedToken.getTag()),
-                            true
-                    ));
-                }
-                previousPos = pos;
-            }
-        }
-    }
 
 }

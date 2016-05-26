@@ -1,22 +1,20 @@
-package com.debates.crf.feature.filter;
+package com.debates.crf.implementation.martyna.filter;
 
 import org.crf.crf.filters.Filter;
 
 /**
- * Created by lukasz on 20.04.16.
- *
- * only for performance reasons
+ * Created by Martyna on 2016-05-16.
  */
-public class PreviousPosAndTagFilter extends Filter<String, String> {
+public class DebateFeatureFilter extends Filter<String, String> {
 
-    private final String pos;
+    private final String word;
     private final String currentTag;
 
     private transient int hashCodeValue = 0;
     private transient boolean hashCodeCalculated = false;
 
-    public PreviousPosAndTagFilter(String pos, String currentTag) {
-        this.pos = pos;
+    public DebateFeatureFilter(String word, String currentTag) {
+        this.word = word;
         this.currentTag = currentTag;
     }
 
@@ -32,7 +30,7 @@ public class PreviousPosAndTagFilter extends Filter<String, String> {
             int result = 1;
             result = prime * result
                     + ((currentTag == null) ? 0 : currentTag.hashCode());
-            result = prime * result + ((pos == null) ? 0 : pos.hashCode());
+            result = prime * result + word.hashCode();
             hashCodeValue = result;
             hashCodeCalculated = true;
             return result;
@@ -47,19 +45,15 @@ public class PreviousPosAndTagFilter extends Filter<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PreviousPosAndTagFilter other = (PreviousPosAndTagFilter) obj;
+        DebateFeatureFilter other = (DebateFeatureFilter) obj;
         if (currentTag == null)
         {
             if (other.currentTag != null)
                 return false;
         } else if (!currentTag.equals(other.currentTag))
             return false;
-        if (pos == null)
-        {
-            if (other.pos != null)
-                return false;
-        } else if (!pos.equals(other.pos))
-            return false;
-        return true;
+        if ( word.equals( other.word ) )
+            return true;
+        return false;
     }
 }

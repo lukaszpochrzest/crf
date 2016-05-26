@@ -8,3 +8,5 @@ gradle/
 .gradle/
 gradlew.bat
 gradlew
+debates-analyzer/build/
+debates-analyzer/libs/

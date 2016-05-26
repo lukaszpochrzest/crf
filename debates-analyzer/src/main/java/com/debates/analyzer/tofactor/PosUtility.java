@@ -1,4 +1,4 @@
-package com.debates.crf.utils;
+package com.debates.analyzer.tofactor;
 
 import morfologik.stemming.IStemmer;
 import morfologik.stemming.WordData;
@@ -7,7 +7,6 @@ import morfologik.stemming.polish.PolishStemmer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by lukasz on 20.04.16.
@@ -52,10 +51,6 @@ public class PosUtility {
             "comp",  //  mine
             "burk"  //  mine
     ));
-
-    public static Set<String> possiblePoses() {
-        return morfeuszPoses;
-    }
 
     private static IStemmer stemmer = new PolishStemmer();
 

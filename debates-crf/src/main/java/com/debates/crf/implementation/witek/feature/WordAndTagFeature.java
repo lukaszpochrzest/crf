@@ -1,29 +1,26 @@
-package com.debates.crf.feature;
+package com.debates.crf.implementation.witek.feature;
 
-import com.debates.crf.utils.PosUtility;
 import org.crf.crf.CrfFeature;
 
 import static org.crf.utilities.PosTaggerUtilities.equalObjects;
 
 /**
- * Created by lukasz on 20.04.16.
+ * Created by Witek on 2016-05-14.
  */
+public class WordAndTagFeature extends CrfFeature<String, String> {
 
-
-public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
-
-    private final String forPreviousPos;
+    private final String word;
     private final String forTag;
 
-    public PreviousPosAndTagFeature(String forPreviousPos, String forTag) {
-        this.forPreviousPos = forPreviousPos;
+    public WordAndTagFeature(String word, String forTag) {
+        this.word = word;
         this.forTag = forTag;
     }
 
     @Override
     public double value(String[] sequence, int indexInSequence, String currentTag, String previousTag) {
         double ret = 0.0;
-        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence]), forPreviousPos)) {
+        if (equalObjects(currentTag,forTag) && sequence[indexInSequence].equals( word ) ) {
             ret = 1.0;
         }
         return ret;
@@ -37,20 +34,16 @@ public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PreviousPosAndTagFeature other = (PreviousPosAndTagFeature) obj;
+        WordAndTagFeature other = (WordAndTagFeature) obj;
         if (forTag == null)
         {
             if (other.forTag != null)
                 return false;
         } else if (!forTag.equals(other.forTag))
             return false;
-        if (forPreviousPos == null)
-        {
-            if (other.forPreviousPos != null)
-                return false;
-        } else if (!forPreviousPos.equals(other.forPreviousPos))
-            return false;
-        return true;
+        if ( word.equals( other.word ) )
+            return true;
+        return false;
     }
 
     @Override
@@ -59,13 +52,13 @@ public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
         int result = 1;
         result = prime * result + ((forTag == null) ? 0 : forTag.hashCode());
         result = prime * result
-                + ((forPreviousPos == null) ? 0 : forPreviousPos.hashCode());
+                + word.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "PosAndTagFeature [forPreviousPos=" + forPreviousPos + ", forTag="
+        return "PosAndTagFeature [word=" + word + ", forTag="
                 + forTag + "]";
     }
 }
