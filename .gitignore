@@ -1,0 +1,10 @@
+debates-crf/build/
+statistics/
+.idea/
+debates.iml
+debates-crf/src/main/main.iml
+debates-crf/debates-crf.iml
+gradle/
+.gradle/
+gradlew.bat
+gradlew
