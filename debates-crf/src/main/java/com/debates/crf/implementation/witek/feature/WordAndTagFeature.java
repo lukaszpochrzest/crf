@@ -58,7 +58,7 @@ public class WordAndTagFeature extends CrfFeature<String, String> {
 
     @Override
     public String toString() {
-        return "PosAndTagFeature [word=" + word + ", forTag="
+        return "WordAndTagFeature [word=" + word + ", forTag="
                 + forTag + "]";
     }
 }

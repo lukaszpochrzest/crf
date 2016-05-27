@@ -3,6 +3,8 @@ package com.debates.crf;
 import com.debates.crf.exception.CorpusCreationException;
 import com.debates.crf.implementation.luke.Luke1CrfFeatureGeneratorFactory;
 import com.debates.crf.implementation.luke.Luke1FilterFactory;
+import com.debates.crf.implementation.witek.WitekCrfFeatureGeneratorFactory;
+import com.debates.crf.implementation.witek.WitekFilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.jjlteam.domain.Document;
@@ -12,6 +14,8 @@ import com.jjlteam.parser.BratParser;
 import morfologik.stemming.polish.PolishStemmer;
 import org.apache.commons.io.IOUtils;
 import org.crf.crf.CrfModel;
+import org.crf.crf.filters.CrfFeaturesAndFilters;
+import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.run.CrfInferencePerformer;
 import org.crf.utilities.TaggedToken;
 import org.slf4j.Logger;
@@ -63,15 +67,17 @@ public class CrfPerformer {
         DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
                 corpus,
                 /** change these two to switch between implementations  */
-                new Luke1CrfFeatureGeneratorFactory(),
-                new Luke1FilterFactory());
+                //new Luke1CrfFeatureGeneratorFactory(),
+                //new Luke1FilterFactory());
+                new WitekCrfFeatureGeneratorFactory(),
+                new WitekFilterFactory());
 
         // Run training with the loaded corpus.
         trainer.train(corpus);
 
         // Get the model
         CrfModel<String, String> crfModel = trainer.getLearnedModel();
-
+        printFeaturesWeights( crfModel );
 //        // Save the model into the disk.
 //        File file = new File("example.ser");
 //        save(crfModel,file);
@@ -126,6 +132,20 @@ public class CrfPerformer {
             ++i;
         }
         System.out.println();
+    }
+
+    private static void printFeaturesWeights( CrfModel<String, String> crfModel )
+    {
+        CrfFeaturesAndFilters< String, String > features = crfModel.getFeatures();
+        ArrayList< Double > weights = crfModel.getParameters();
+
+        int idx = 0;
+        for( CrfFilteredFeature filteredFeature : features.getFilteredFeatures() )
+        {
+            System.out.println(filteredFeature.getFeature().toString() + "          " + weights.get( idx ).toString() );
+
+            ++idx;
+        }
     }
 
 //    public static void save(Object object, File file)

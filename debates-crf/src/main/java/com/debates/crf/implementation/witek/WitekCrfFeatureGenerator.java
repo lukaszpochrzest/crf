@@ -119,8 +119,8 @@ public class WitekCrfFeatureGenerator extends CrfFeatureGenerator<String, String
     }
 
     private static final String[] PROPOSITION_BEGIN = new String[]{
-            "można", "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby",
-            "powinniśmy", "powinny", "powinno", "powinna", "powinien",
+            "można"/*, "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby"*/,
+            /*"powinniśmy", "powinny", "powinno", "powinna",*/ "powinien",
             "myśleć",
             "gdyby"
     };

@@ -1,0 +1,13 @@
+debates-analyzer/build/classes/main/com/debates/analyzer/CorpusStatistics.class
+.idea/
+debates-analyzer/build/
+debates-crf/build/
+statistics/stats.txt
+statistics/
+.gradle/
+debates-crf/debates-crf.iml
+debates-crf/src/main/main.iml
+debates.iml
+gradle/
+gradlew.bat
+gradlew
