@@ -61,9 +61,16 @@ public class Main {
                 //  PROPOSITION_START and REASON_START statistics
 
                 if(Tag.PROPOSITION_START.name().equals(tokenTag) ||
-                        Tag.REASON_START.name().equals(tokenTag)) {
+                        Tag.REASON_START.name().equals(tokenTag) ||
+                        Tag.OTHER.name().equals(tokenTag)) {
                     corpusStatistics.addPrecedingToken(tokenTag, previousTaggedToken.getToken());
                     corpusStatistics.addPrecedingPos(tokenTag, PosUtility.getPoS(previousTaggedToken.getToken()));
+                }
+
+                if(tokenTag.startsWith(Tag.PROPOSITION.name())) {
+                    corpusStatistics.addTagAndToken(Tag.PROPOSITION.name() + "*", taggedToken.getToken());
+                } else if (tokenTag.startsWith(Tag.REASON.name())) {
+                    corpusStatistics.addTagAndToken(Tag.REASON.name() + "*", taggedToken.getToken());
                 }
 
                 previousTaggedToken = taggedToken;
@@ -79,7 +86,8 @@ public class Main {
 
         // Print the result:
         for (TaggedToken<String, String> taggedToken : taggedSentence) {
-            System.out.print(taggedToken.getToken() +
+            String token  = taggedToken.getToken();
+            System.out.print(token + "_" + PosUtility.getPoS(token) +
                     "(" +
                     taggedToken.getTag().substring(0,2) +
                     ") ");

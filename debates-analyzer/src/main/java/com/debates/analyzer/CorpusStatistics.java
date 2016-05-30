@@ -20,6 +20,14 @@ public class CorpusStatistics {
 
     private final Map<String, Integer> precedingPosesOfTag_REASON_START;
 
+    private final Map<String, Integer> precedingTokensOfTag_OTHER;
+
+    private final Map<String, Integer> precedingPosesOfTag_OTHER;
+
+    private final Map<String, Integer> tokensOfTag_PROPOSITION_STAR;
+
+    private final Map<String, Integer> tokensOfTag_REASON_STAR;
+
     private final Map<String, Integer> tokens;
 
     private final Map<String, Integer> poses;
@@ -31,6 +39,10 @@ public class CorpusStatistics {
         precedingPosesOfTag_PROPOSITION_START = new HashMap<>();
         precedingTokensOfTag_REASON_START = new HashMap<>();
         precedingPosesOfTag_REASON_START = new HashMap<>();
+        precedingTokensOfTag_OTHER = new HashMap<>();
+        precedingPosesOfTag_OTHER = new HashMap<>();
+        tokensOfTag_PROPOSITION_STAR = new HashMap<>();
+        tokensOfTag_REASON_STAR = new HashMap<>();
         tokens = new HashMap<>();
         poses = new HashMap<>();
         tags = new HashMap<>();
@@ -44,6 +56,28 @@ public class CorpusStatistics {
             mapToUpdate = precedingTokensOfTag_PROPOSITION_START;
         } else if(Tag.REASON_START.name().equals(tag)) {
             mapToUpdate = precedingTokensOfTag_REASON_START;
+        } else if(Tag.OTHER.name().equals(tag)) {
+            mapToUpdate = precedingTokensOfTag_OTHER;
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+        mapToUpdate.put(precedingToken, mapToUpdate.getOrDefault(precedingToken, 0) + 1);
+
+    }
+
+    private final String TAG_PROPOSITION_STAR = Tag.PROPOSITION.name() + "*";
+
+    private final String TAG_REASON_STAR = Tag.REASON.name() + "*";
+
+    public void addTagAndToken(String tag, String precedingToken) {
+
+        Map<String, Integer> mapToUpdate;
+
+        if(TAG_PROPOSITION_STAR.equals(tag)) {
+            mapToUpdate = tokensOfTag_PROPOSITION_STAR;
+        } else if(TAG_REASON_STAR.equals(tag)) {
+            mapToUpdate = tokensOfTag_REASON_STAR;
         } else {
             throw new IllegalArgumentException();
         }
@@ -60,6 +94,8 @@ public class CorpusStatistics {
             mapToUpdate = precedingPosesOfTag_PROPOSITION_START;
         } else if(Tag.REASON_START.name().equals(tag)) {
             mapToUpdate = precedingPosesOfTag_REASON_START;
+        } else if(Tag.OTHER.name().equals(tag)) {
+            mapToUpdate = precedingPosesOfTag_OTHER;
         } else {
             throw new IllegalArgumentException();
         }
@@ -101,6 +137,29 @@ public class CorpusStatistics {
 
         List<Map.Entry<String, Integer>> precedingPosesOfTag_REASON_START_List =
                 precedingPosesOfTag_REASON_START.entrySet().stream()
+                        .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                        .collect(Collectors.toList());
+
+        List<Map.Entry<String, Integer>> precedingTokensOfTag_OTHER_List =
+                precedingTokensOfTag_OTHER.entrySet().stream()
+                        .filter(e -> e.getValue() > 50)
+                        .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                        .collect(Collectors.toList());
+
+        List<Map.Entry<String, Integer>> precedingPosesOfTag_OTHER_List =
+                precedingPosesOfTag_OTHER.entrySet().stream()
+                        .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                        .collect(Collectors.toList());
+
+        List<Map.Entry<String, Integer>> tokensOfTag_PROPOSITION_STAR_List =
+                tokensOfTag_PROPOSITION_STAR.entrySet().stream()
+                        .filter(e -> e.getValue() > 10)
+                        .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                        .collect(Collectors.toList());
+
+        List<Map.Entry<String, Integer>> tokensOfTag_REASON_STAR_List =
+                tokensOfTag_REASON_STAR.entrySet().stream()
+                        .filter(e -> e.getValue() > 10)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
@@ -149,6 +208,35 @@ public class CorpusStatistics {
         sb.append(System.lineSeparator());
         soak(sb, precedingPosesOfTag_REASON_START_List);
         sb.append(System.lineSeparator());
+
+        sb.append(Tag.OTHER.name());
+        sb.append(" ");
+        sb.append("preceding tokens");
+        sb.append(System.lineSeparator());
+        soak(sb, precedingTokensOfTag_OTHER_List);
+        sb.append(System.lineSeparator());
+
+        sb.append(Tag.OTHER.name());
+        sb.append(" ");
+        sb.append("preceding poses");
+        sb.append(System.lineSeparator());
+        soak(sb, precedingPosesOfTag_OTHER_List);
+        sb.append(System.lineSeparator());
+
+        sb.append(TAG_PROPOSITION_STAR);
+        sb.append(" ");
+        sb.append("tokens");
+        sb.append(System.lineSeparator());
+        soak(sb, tokensOfTag_PROPOSITION_STAR_List);
+        sb.append(System.lineSeparator());
+
+        sb.append(TAG_REASON_STAR);
+        sb.append(" ");
+        sb.append("tokens");
+        sb.append(System.lineSeparator());
+        soak(sb, tokensOfTag_REASON_STAR_List);
+        sb.append(System.lineSeparator());
+
 
         sb.append("Tokens (filtered to only those ones which appeared 50 and more times)");
         sb.append(System.lineSeparator());
