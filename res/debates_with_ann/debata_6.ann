@@ -165,7 +165,7 @@ E37	Reason:T91 Reason_of:T90
 A37	Reception E37 -0.2
 T92	Proposition 66617 66702	wprowadzeniem większej ilości zajęć na platformach internetowych dla uczelni wyższych
 T93	Proposition 73435 73503	opublikować wyniki tych ankiet ewaluacyjnych do wglądu dla studentów
-T94	Reason 73767 73831	wtedy można by było trafniej wybrać ćwiczenia w swoim programie,
+T94	Reason 73767 73831	wtedy można by było trafniej wybrać ćwiczenia w swoim programie
 E38	Reason:T94 Reason_of:T93
 A38	Reception E38 0.6
 T95	Proposition 76624 76811	wszyscy studenci, których średnia ocen w trakcie studiów na pierwszym kierunku jest powyżej 4.5 powinni mieć możliwość wzięcia drugiego, studiowania na drugim kierunku bez wnoszenia opłat

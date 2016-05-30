@@ -200,7 +200,7 @@ T91	Proposition 59896 59915	jest to obowiązkowe
 T92	Reason 59923 59999	w tym wirtualnym dziekanacie nic nie zrobię, dopóki tej ankiety nie wypełnię
 E55	Reason:T92 Reason_of:T91
 A55	Reception E55 -0.2
-T93	Proposition 60610 60655	ankietę wypełnić właśnie w formie papierowej.
+T93	Proposition 60610 60655	ankietę wypełnić właśnie w formie papierowej
 T94	Reason 60523 60572	duży odstęp czasu jest, wg mnie, sporym problemem
 E56	Reason:T94 Reason_of:T93
 A56	Reception E56 -0.2

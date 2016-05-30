@@ -12,7 +12,7 @@ T7	Proposition 6105 6173	W związku z tym uczelnia nie jest zobowiązana do ucze
 T8	Reason 6184 6248	każdy z nas powinien znać prawo i powinien te prawa przestrzegać
 E3	Reason:T8 Reason_of:T7
 A3	Reception E3 0.4
-T9	Proposition 8158 8233	wykładowcy powinni przestrzegać studentów ucząc na konkretnych przykładach.
+T9	Proposition 8158 8233	wykładowcy powinni przestrzegać studentów ucząc na konkretnych przykładach
 T10	Proposition 8848 8881	proponuję przejść do innego wątku
 T11	Reason 8908 9055	mniej więcej przedstawiliście swoje poglądy na temat tego czym jest plagiat i jak uczelnie powinny się odnosić w stosunku do tego co jest plagiatem
 E4	Reason:T11 Reason_of:T10
