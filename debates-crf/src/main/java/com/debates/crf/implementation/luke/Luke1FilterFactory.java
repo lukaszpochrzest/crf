@@ -1,9 +1,11 @@
 package com.debates.crf.implementation.luke;
 
+import com.debates.crf.Tag;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.Filter;
 import org.crf.crf.filters.FilterFactory;
+import org.crf.crf.filters.TagFilter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -25,10 +27,23 @@ public class Luke1FilterFactory implements FilterFactory<String, String> {
 //        ret.add(new TagFilter<>(currentTag));
 //        ret.add(new TwoTagsFilter<>(currentTag, previousTag));
 //        ret.add(new PosAndTagFilter(PosUtility.getPoS(token), currentTag));
+
+//        if(tokenIndex > 0) {
+//            String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
+//            ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+//        }
+
         if(tokenIndex > 0) {
             String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
-            ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+            if("comp".equals(previousPos) && (
+                    currentTag.equals(Tag.PROPOSITION_START.name())
+                            || currentTag.equals(Tag.REASON_START.name())
+//                            || currentTag.equals(Tag.OTHER.name())
+            )) {
+                ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+            }
         }
+
         return ret;
     }
 }

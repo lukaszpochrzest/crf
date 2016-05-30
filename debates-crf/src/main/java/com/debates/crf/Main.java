@@ -35,8 +35,14 @@ public class Main {
             //  lets do some crf
             final List<TextWithAnnotations> trainingData = loadTrainingData(trainingDataDir);
 
-            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, trainingData.size() - 1);
-            TextWithAnnotations testTwa = trainingData.get(0);
+            List<TextWithAnnotations> trainingTwas = trainingData.subList(0, trainingData.size()-2);
+
+            TextWithAnnotations testTwa;
+            if(pp.getTestDataFile() != null) {
+                testTwa = new TextWithAnnotations(new File(pp.getTestDataFile()), null);
+            } else {
+                testTwa = trainingData.get(0);
+            }
 
             CrfPerformer.perform(trainingTwas, testTwa);
         } catch (IOException e) {
@@ -63,9 +69,11 @@ public class Main {
                         .substring(0, trainFile.getPath().length() - 4) + ".ann";
                 File annotationsFile = new File(annotationsPath);
                 if(!annotationsFile.exists()) {
-                    throw new IOException("File with annotations: " + annotationsPath + " does not exist");
+                    trainData.add(new TextWithAnnotations(trainFile, null));
+                } else {
+                    LOGGER.info("Loaded: " + annotationsFile.getName().replace(".ann", ""));
+                    trainData.add(new TextWithAnnotations(trainFile, annotationsFile));
                 }
-                trainData.add(new TextWithAnnotations(trainFile, annotationsFile));
             }
         }
         LOGGER.info("Loaded: " + trainData.size() + " training items");

@@ -47,6 +47,7 @@ public class PosUtility {
             "qub",
             "xxs",
             "xxx",
+            "brev",
             "verb",  //  mine
             "interj",  //  mine
             "comp",  //  mine

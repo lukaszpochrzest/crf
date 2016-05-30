@@ -3,10 +3,10 @@ package com.debates.crf;
 import com.debates.crf.exception.CorpusCreationException;
 import com.debates.crf.implementation.luke.Luke1CrfFeatureGeneratorFactory;
 import com.debates.crf.implementation.luke.Luke1FilterFactory;
-import com.debates.crf.implementation.witek.WitekCrfFeatureGeneratorFactory;
-import com.debates.crf.implementation.witek.WitekFilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
+import com.debates.crf.utils.PosUtility;
 import com.debates.crf.utils.TextWithAnnotations;
+import com.debates.crf.utils.Tuple;
 import com.jjlteam.domain.Document;
 import com.jjlteam.domain.Proposition;
 import com.jjlteam.domain.Reason;
@@ -24,6 +24,10 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,10 +71,10 @@ public class CrfPerformer {
         DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
                 corpus,
                 /** change these two to switch between implementations  */
-                //new Luke1CrfFeatureGeneratorFactory(),
-                //new Luke1FilterFactory());
-                new WitekCrfFeatureGeneratorFactory(),
-                new WitekFilterFactory());
+                new Luke1CrfFeatureGeneratorFactory(),
+                new Luke1FilterFactory());
+//                new WitekCrfFeatureGeneratorFactory(),
+//                new WitekFilterFactory());
 
         // Run training with the loaded corpus.
         trainer.train(corpus);
@@ -123,7 +127,8 @@ public class CrfPerformer {
         // Print the result:
         int i = 0;
         for (TaggedToken<String, String> taggedToken : taggedSentence) {
-            System.out.print(taggedToken.getToken() +
+            String token = taggedToken.getToken();
+            System.out.print(token + "_" + PosUtility.getPoS(token) +
                     "(" +
                     taggedToken.getTag().substring(0,2) +
                     "/" +
@@ -131,6 +136,7 @@ public class CrfPerformer {
                     ") ");
             ++i;
         }
+        System.out.println();
         System.out.println();
     }
 
@@ -142,7 +148,7 @@ public class CrfPerformer {
         int idx = 0;
         for( CrfFilteredFeature filteredFeature : features.getFilteredFeatures() )
         {
-            System.out.println(filteredFeature.getFeature().toString() + "          " + weights.get( idx ).toString() );
+            System.out.println(filteredFeature.getFeature().toString() + "          " + weights.get(idx).toString());
 
             ++idx;
         }
@@ -172,6 +178,13 @@ public class CrfPerformer {
 //        }
 //    }
 
+    private static final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
+            "\u0119" + "\u0142" + "u\u017C" + "\u017A" + "\u0144" + "\u0107" + "\u015B" + "\u0104" +
+            "\u0118" + "\u00D3" + "\u0141" + "\u0179" + "\u017B" + "\u0143" + "\u015A" + "\u0106" +
+            "\\-" + "\\%" + "\u22ee]"; //...
+    private static final String punctuationsEndSentence = "[./?!]";
+
+
 
     /**
      * Transforms TextWithAnnotation into corpus, which is a tokenized String from TextWithAnnotation.textFile
@@ -184,18 +197,36 @@ public class CrfPerformer {
     private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
 
-        //LOGGER.info("created");
+        if(twa.getAnnotationsFile() == null) {
+            return createCorpus(twa.getTextFile());
+        } else {
+            return createCorpus(twa.getTextFile(), twa.getAnnotationsFile());
+        }
 
-        final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
-                "\u0119" + "\u0142" + "u\u017C" + "\u017A" + "\u0144" + "\u0107" + "\u015B" + "\u0104" +
-                "\u0118" + "\u00D3" + "\u0141" + "\u0179" + "\u017B" + "\u0143" + "\u015A" + "\u0106" +
-                "\\-" + "\\%" + "\u22ee]"; //...
-        final String punctuationsEndSentence = "[./?!]";
+    }
 
+    private static List<List<? extends TaggedToken<String, String>>> createCorpus(File textFile) throws IOException {
+        List<List<? extends TaggedToken<String, String>>> result = new LinkedList<>();
+        String text = IOUtils.toString(new FileInputStream(textFile), "UTF8");
+        String[] lines = text.split(System.lineSeparator());
+        for(String line : lines) {
+            List<TaggedToken<String, String>> sentence = new LinkedList<>();
+            for(String token : line.split("\\s+")) {
+                if(!token.isEmpty()) {
+                    sentence.add(new TaggedToken<>(token, null));
+                }
+            }
+            if(!sentence.isEmpty()) {
+                result.add(sentence);
+            }
+        }
+        return result;
+    }
+
+    private static List<List<? extends TaggedToken<String, String>>> createCorpus(File textFile, File annFile) throws IOException, CorpusCreationException {
 
         /** read propositions   **/
 
-        File annFile = twa.getAnnotationsFile();
         Document parsedAnnDocument = BratParser.parse(annFile);
 
         List<Proposition> propositions = new ArrayList<>(parsedAnnDocument.getPropositions().values());
@@ -220,10 +251,16 @@ public class CrfPerformer {
         MyWordStemmer myWordStemmer = new MyWordStemmer(new PolishStemmer());
         List<List<? extends TaggedToken<String, String>>> result = new LinkedList<>();
 
-        File textFile = twa.getTextFile();
+        //hack TODO remove
+        List<List<? extends TaggedToken<String, String>>> resultNotStemmed = new LinkedList<>();
+
         String text = IOUtils.toString(new FileInputStream(textFile), "UTF8");
 
         List<TaggedToken<String, String>> currSequence = new ArrayList<>();
+
+        //hack TODO remove
+        List<TaggedToken<String, String>> currSequenceNotStemmed = new ArrayList<>();
+        boolean currSequenceNotStemmedAdd = false;
 
         // tag for previous stem is null
         Tag previousTag = null;
@@ -242,6 +279,14 @@ public class CrfPerformer {
                     realIdx++;
                 result.add(currSequence);
                 currSequence = new ArrayList<>();
+
+                //hack TODO remove
+                if(currSequenceNotStemmedAdd) {
+                    resultNotStemmed.add(currSequenceNotStemmed);
+                }
+                currSequenceNotStemmed = new ArrayList<>();
+                currSequenceNotStemmedAdd = false;
+
                 continue;
             }
 
@@ -338,8 +383,18 @@ public class CrfPerformer {
                 final String selectedWord = text.substring(leftIdx, rightIdx).toLowerCase();
                 final String stem = myWordStemmer.getStemNotNull(selectedWord);
                 currSequence.add(new TaggedToken<>(stem, tag.name()));
+
+                //hack TODO remove
+                if(tag.name().equals(Tag.PROPOSITION_START.name()) ||
+                        tag.name().equals(Tag.REASON_START.name())) {
+                    currSequenceNotStemmedAdd = true;
+                }
+                currSequenceNotStemmed.add(new TaggedToken<>(selectedWord, tag.name()));
             }
         }
+
+        //hack TODO remove
+        writeNotStemmed(resultNotStemmed);
 
         if(currProposition != null || currReason != null) {
             throw new CorpusCreationException("Not all the propositions or reasons were properly parsed");
@@ -349,6 +404,34 @@ public class CrfPerformer {
                 result.stream().filter(taggedTokens -> !taggedTokens.isEmpty()).collect(Collectors.toList());
 
         return filteredResult;
+    }
+
+    private static final int[] files_no = { 3, 6, 7, 4, 5, 8, 2, 9, 1 };
+    private static int ind = 0;
+
+    //hack TODO remove
+    private static void writeNotStemmed(List<List<? extends TaggedToken<String, String>>> corpusNotStemmed) {
+        List<String> lines = new ArrayList<>();
+        for(List<? extends TaggedToken<String, String>> sentence : corpusNotStemmed) {
+            StringBuilder sb = new StringBuilder();
+            for(TaggedToken<String, String> taggedToken : sentence) {
+                sb.append(taggedToken.getToken());
+//                sb.append("(");
+//                sb.append(taggedToken.getTag());
+//                sb.append(") ");
+                sb.append(" ");
+            }
+            lines.add(sb.toString());
+            lines.add(System.lineSeparator());
+        }
+
+
+        Path file = Paths.get("corpus_not_stemmed" + files_no[ind++] + ".txt");
+        try {
+            Files.write(file, lines, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

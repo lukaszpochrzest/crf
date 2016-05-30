@@ -1,12 +1,15 @@
-package com.debates.crf.implementation.luke;
+package com.debates.crf.implementation.luke.solution2;
+
+/**
+ * Created by lukasz on 30.05.16.
+ */
 
 import com.debates.crf.Tag;
-import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
 import com.debates.crf.implementation.common.feature.TagFeature;
+import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
 import com.debates.crf.implementation.luke.filter.PosAndTagFilter;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
 import com.debates.crf.implementation.luke.utils.PreviousPosAndTagFeatureBuilder;
-import com.debates.crf.implementation.luke.utils.PreviousPosAndTagFeatureBuilder2;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
@@ -22,7 +25,7 @@ import java.util.Set;
 /**
  * Created by lukasz on 22.05.16.
  */
-public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
+public class Luke2CrfFeatureGenerator extends CrfFeatureGenerator<String, String> {
 
     private static final String[] TAGS_THAT_MAY_BE_FIRST_IN_TEXT_ARRAY = new String[] {
             Tag.OTHER.name(),
@@ -58,7 +61,7 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
 
     protected Set<CrfFilteredFeature<String, String>> setFilteredFeatures = null;
 
-    public Luke1CrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
+    public Luke2CrfFeatureGenerator(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus,
                                     Set<String> tags) {
         super(corpus, tags);
     }
@@ -73,7 +76,7 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
 //        addTagTransitionFeatures();
 //        addPosAndTagFeatures();
 
-        addPreviousPosAndTagFeatures2();
+        addPreviousPosAndTagFeatures();
     }
 
     @Override
@@ -167,33 +170,13 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
 //        }
         for(String possiblePos : PosUtility.possiblePoses()) {
             for(Tag possibleTag : Tag.values()) {
-                    setFilteredFeatures.add(new CrfFilteredFeature<>(
-                            PreviousPosAndTagFeatureBuilder.buildFeature(possiblePos, possibleTag.name()),
-                            new PreviousPosAndTagFilter(possiblePos, possibleTag.name()),
-                            false
-                    ));
-            }
-        }
-
-    }
-
-    private void addPreviousPosAndTagFeatures2() {
-        String[] possiblePoses = {"comp"};
-        Tag[] possibleTags = {
-                Tag.PROPOSITION_START,
-                Tag.REASON_START,
-//                Tag.OTHER
-        };
-        for(String possiblePos : possiblePoses) {
-            for(Tag possibleTag : possibleTags) {
                 setFilteredFeatures.add(new CrfFilteredFeature<>(
-                        PreviousPosAndTagFeatureBuilder2.buildFeature(possiblePos, possibleTag.name()),
+                        PreviousPosAndTagFeatureBuilder.buildFeature(possiblePos, possibleTag.name()),
                         new PreviousPosAndTagFilter(possiblePos, possibleTag.name()),
                         false
                 ));
             }
         }
-
 
     }
 

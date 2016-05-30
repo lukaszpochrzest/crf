@@ -25,11 +25,14 @@ public class ProgramParams {
 
     private static final String PARAM_TRAINING_DATA_DIR = "-trainDir";
 
+    private static final String PARAM_TEST_DATA_FILE = "-testFile";
+
     private Map<String, String> params = new HashMap<>();
 
     public ProgramParams(String args[]) {
         parseParamHelp(args);
         parseParamTrainingDataDir(args);
+        parseParamTestDataFile(args);
     }
 
     private void parseParamHelp(String args[]) {
@@ -51,12 +54,25 @@ public class ProgramParams {
         }
     }
 
+    private void parseParamTestDataFile(String args[]) {
+        for(int i = 0; i < args.length; ++i) {
+            if(PARAM_TEST_DATA_FILE.equals(args[i]) && i < args.length - 1) {
+                params.put(PARAM_TEST_DATA_FILE, args[i+1]);
+                return;
+            }
+        }
+    }
+
     public boolean isHelp() {
         return params.get(PARAM_HELP[0]) != null;
     }
 
     public String getTrainingDataDir() {
         return params.get(PARAM_TRAINING_DATA_DIR);
+    }
+
+    public String getTestDataFile() {
+        return params.get(PARAM_TEST_DATA_FILE);
     }
 
 }
