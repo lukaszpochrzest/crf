@@ -53,7 +53,7 @@ public class DebateCrfTrainer<K,G>
         logger.info("Creating log likelihood function.");
         DerivableFunction convexNegatedCrfFunction = NegatedFunction.fromDerivableFunction(createLogLikelihoodFunctionConcave(corpus));
         logger.info("Optimizing log likelihood function.");
-        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20, 10);
+        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20, 500);
         lbfgsOptimizer.find();
         double[] parameters = lbfgsOptimizer.getPoint();
         if (parameters.length!=features.getFilteredFeatures().length) {throw new CrfException("Number of parameters, returned by LBFGS optimizer, differs from number of features.");}

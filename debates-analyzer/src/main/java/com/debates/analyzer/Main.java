@@ -47,23 +47,26 @@ public class Main {
         for(List<? extends TaggedToken<String, String>> sentence : corpus) {
             for(TaggedToken<String, String> taggedToken : sentence) {
 
-                String tokenTag = taggedToken.getTag();
+                String tag = taggedToken.getTag();
 
                 //  word statistics
                 corpusStatistics.addToken(taggedToken.getToken());
+                corpusStatistics.addToken(tag, taggedToken.getToken());
 
                 //  pos statistics
-                corpusStatistics.addPos(PosUtility.getPoS(taggedToken.getToken()));
+                String pos = PosUtility.getPoS(taggedToken.getToken());
+                corpusStatistics.addPos(pos);
+                corpusStatistics.addPos(tag, pos);
 
                 //  tag statistics
                 corpusStatistics.addTag(taggedToken.getTag());
 
                 //  PROPOSITION_START and REASON_START statistics
 
-                if(Tag.PROPOSITION_START.name().equals(tokenTag) ||
-                        Tag.REASON_START.name().equals(tokenTag)) {
-                    corpusStatistics.addPrecedingToken(tokenTag, previousTaggedToken.getToken());
-                    corpusStatistics.addPrecedingPos(tokenTag, PosUtility.getPoS(previousTaggedToken.getToken()));
+                if(Tag.PROPOSITION_START.name().equals(tag) ||
+                        Tag.REASON_START.name().equals(tag)) {
+                    corpusStatistics.addPrecedingToken(tag, previousTaggedToken.getToken());
+                    corpusStatistics.addPrecedingPos(tag, PosUtility.getPoS(previousTaggedToken.getToken()));
                 }
 
                 previousTaggedToken = taggedToken;

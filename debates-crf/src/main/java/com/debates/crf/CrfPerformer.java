@@ -67,10 +67,10 @@ public class CrfPerformer {
         DebateCrfTrainer<String, String> trainer = trainerFactory.createTrainer(
                 corpus,
                 /** change these two to switch between implementations  */
-                //new Luke1CrfFeatureGeneratorFactory(),
-                //new Luke1FilterFactory());
-                new WitekCrfFeatureGeneratorFactory(),
-                new WitekFilterFactory());
+                new Luke1CrfFeatureGeneratorFactory(),
+                new Luke1FilterFactory());
+//                new WitekCrfFeatureGeneratorFactory(),
+//                new WitekFilterFactory());
 
         // Run training with the loaded corpus.
         trainer.train(corpus);

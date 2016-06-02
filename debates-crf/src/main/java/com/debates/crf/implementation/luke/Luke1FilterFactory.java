@@ -1,6 +1,9 @@
 package com.debates.crf.implementation.luke;
 
+import com.debates.crf.Tag;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
+import com.debates.crf.implementation.martyna.filter.DebateFeatureFilter;
+import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.Filter;
 import org.crf.crf.filters.FilterFactory;
@@ -20,7 +23,7 @@ public class Luke1FilterFactory implements FilterFactory<String, String> {
                                                      String previousTag) {
         //  TODO edit this if new features added
 
-//        String token = sequence[tokenIndex];
+        String token = sequence[tokenIndex];
         Set<Filter<String, String>> ret = new LinkedHashSet<>();
 //        ret.add(new TagFilter<>(currentTag));
 //        ret.add(new TwoTagsFilter<>(currentTag, previousTag));
@@ -28,6 +31,10 @@ public class Luke1FilterFactory implements FilterFactory<String, String> {
         if(tokenIndex > 0) {
             String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
             ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+        }
+
+        if ( Tag.PROPOSITION.name().equals(currentTag) || Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.equals(currentTag)) {
+            ret.add(new WordAndTagFilter(token, currentTag));
         }
         return ret;
     }

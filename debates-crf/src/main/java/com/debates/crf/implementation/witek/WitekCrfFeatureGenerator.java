@@ -138,6 +138,13 @@ public class WitekCrfFeatureGenerator extends CrfFeatureGenerator<String, String
                     true
             ));
         }
+        for( String keyWord : PROPOSITION_BEGIN ) {
+            setFilteredFeatures.add(new CrfFilteredFeature<>(
+                    new WordAndTagFeature( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
+                    new WordAndTagFilter( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
+                    true
+            ));
+        }
     }
 
     private void addReasonFeatures()

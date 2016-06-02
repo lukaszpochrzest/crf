@@ -35,7 +35,10 @@ public class Main {
             //  lets do some crf
             final List<TextWithAnnotations> trainingData = loadTrainingData(trainingDataDir);
 
-            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, trainingData.size() - 1);
+            trainingData.remove(2);
+            trainingData.remove(5);
+
+            List<TextWithAnnotations> trainingTwas = trainingData.subList(1, trainingData.size());
             TextWithAnnotations testTwa = trainingData.get(0);
 
             CrfPerformer.perform(trainingTwas, testTwa);
@@ -65,6 +68,7 @@ public class Main {
                 if(!annotationsFile.exists()) {
                     throw new IOException("File with annotations: " + annotationsPath + " does not exist");
                 }
+                LOGGER.info("Loaded" + annotationsFile.getName());
                 trainData.add(new TextWithAnnotations(trainFile, annotationsFile));
             }
         }
