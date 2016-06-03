@@ -2,6 +2,7 @@ package com.debates.crf.implementation.luke;
 
 import com.debates.crf.Tag;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
+import com.debates.crf.implementation.luke.filter.PreviousWordAndTagFilter;
 import com.debates.crf.implementation.martyna.filter.DebateFeatureFilter;
 import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
 import com.debates.crf.utils.PosUtility;
@@ -30,12 +31,23 @@ public class Luke1FilterFactory implements FilterFactory<String, String> {
 //        ret.add(new PosAndTagFilter(PosUtility.getPoS(token), currentTag));
         if(tokenIndex > 0) {
             String previousPos = PosUtility.getPoS(sequence[tokenIndex - 1]);
+//
+//            //  PreviousPosAndTagFilter
             ret.add(new PreviousPosAndTagFilter(previousPos, currentTag));
+
+            //  PreviousWordAndTagFilter
+//            if ( Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.name().equals(currentTag)) {
+//            if(!Tag.OTHER.name().equals(currentTag)) {
+                ret.add(new PreviousWordAndTagFilter(sequence[tokenIndex - 1], currentTag));
+//            }
+//            }
         }
 
-        if ( Tag.PROPOSITION.name().equals(currentTag) || Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.equals(currentTag)) {
+        //  WordAndTagFilter
+//        if ( Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.name().equals(currentTag)) {
             ret.add(new WordAndTagFilter(token, currentTag));
-        }
+//        }
+
         return ret;
     }
 }

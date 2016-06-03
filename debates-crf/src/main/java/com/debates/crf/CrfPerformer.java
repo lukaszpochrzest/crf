@@ -6,6 +6,7 @@ import com.debates.crf.implementation.luke.Luke1FilterFactory;
 import com.debates.crf.implementation.witek.WitekCrfFeatureGeneratorFactory;
 import com.debates.crf.implementation.witek.WitekFilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
+import com.debates.crf.utils.PosUtility;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.jjlteam.domain.Document;
 import com.jjlteam.domain.Proposition;
@@ -38,13 +39,13 @@ public class CrfPerformer {
      * performs CRF on test data (testTwa) using training data(trainingTwas)
      *
      * @param trainingTwas
-     * @param testTwa
+     * @param testTwas
      * @throws IOException
      * @throws CorpusCreationException
      */
     @SuppressWarnings("unchecked")
     public static void perform(List<TextWithAnnotations> trainingTwas,
-                               TextWithAnnotations testTwa) throws IOException, CorpusCreationException {
+                               List<TextWithAnnotations> testTwas) throws IOException, CorpusCreationException {
 
         if (trainingTwas.isEmpty()) {
             LOGGER.info("No training data");
@@ -91,7 +92,10 @@ public class CrfPerformer {
         CrfInferencePerformer<String, String> inferencePerformer = new CrfInferencePerformer<>(crfModel);
 
         //  create test corpus
-        List<List<? extends TaggedToken<String, String>>> testCorpus = createCorpus(testTwa);
+        List<List<? extends TaggedToken<String, String>>> testCorpus = new ArrayList<>();
+        for (TextWithAnnotations twa : testTwas) {
+            testCorpus.addAll(createCorpus(twa));
+        }
 
         // infer tags
         for(List<? extends TaggedToken<String, String>> testSentence
@@ -123,9 +127,9 @@ public class CrfPerformer {
         // Print the result:
         int i = 0;
         for (TaggedToken<String, String> taggedToken : taggedSentence) {
-            System.out.print(taggedToken.getToken() +
+            System.out.print(taggedToken.getToken() + "_" + PosUtility.getPoS(taggedToken.getToken()) +
                     "(" +
-                    taggedToken.getTag().substring(0,2) +
+                    taggedToken.getTag() +
                     "/" +
                     testSentence.get(i).getTag() +   //TODO get(i) potentially so inefficent..
                     ") ");

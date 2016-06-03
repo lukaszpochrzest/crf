@@ -11,17 +11,19 @@ public class WordAndTagFeature extends CrfFeature<String, String> {
 
     private final String word;
     private final String forTag;
+    private final double weight;
 
-    public WordAndTagFeature(String word, String forTag) {
+    public WordAndTagFeature(String word, String forTag, double weight) {
         this.word = word;
         this.forTag = forTag;
+        this.weight = weight;
     }
 
     @Override
     public double value(String[] sequence, int indexInSequence, String currentTag, String previousTag) {
         double ret = 0.0;
         if (equalObjects(currentTag,forTag) && sequence[indexInSequence].equals( word ) ) {
-            ret = 1.0;
+            ret = weight;
         }
         return ret;
     }

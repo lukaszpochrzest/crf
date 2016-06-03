@@ -29,7 +29,7 @@ public class WitekFilterFactory implements FilterFactory<String, String> {
         ret.add(new PosAndTagFilter(PosUtility.getPoS(token), currentTag)); //  for PosAndTagFeatures
 
         //for WordAndTagFeatures
-        if (Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.equals(currentTag)) {
+        if (Tag.PROPOSITION_START.name().equals(currentTag) || Tag.REASON_START.name().equals(currentTag)) {
             ret.add(new DebateFeatureFilter(token, currentTag));
         }
 

@@ -1,8 +1,5 @@
 package com.debates.crf;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.crf.crf.CrfLogLikelihoodFunction;
 import org.crf.crf.CrfModel;
@@ -14,6 +11,9 @@ import org.crf.function.optimization.LbfgsMinimizer;
 import org.crf.function.optimization.NegatedFunction;
 import org.crf.utilities.CrfException;
 import org.crf.utilities.TaggedToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -53,7 +53,7 @@ public class DebateCrfTrainer<K,G>
         logger.info("Creating log likelihood function.");
         DerivableFunction convexNegatedCrfFunction = NegatedFunction.fromDerivableFunction(createLogLikelihoodFunctionConcave(corpus));
         logger.info("Optimizing log likelihood function.");
-        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20, 500);
+        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20,400);
         lbfgsOptimizer.find();
         double[] parameters = lbfgsOptimizer.getPoint();
         if (parameters.length!=features.getFilteredFeatures().length) {throw new CrfException("Number of parameters, returned by LBFGS optimizer, differs from number of features.");}

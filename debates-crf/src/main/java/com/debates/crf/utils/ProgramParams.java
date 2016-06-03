@@ -13,7 +13,8 @@ public class ProgramParams {
     public static String description() {
         return  "\tProgram takes single arg: dir to folder with .txt and .ann files and prints crf result in format:\n\t\tWORD(CRF_LABEL,ORYG_LABEL) ...\n\n" +
                 "\t" + PARAM_HELP[0] + "\thelp\n" +
-                "\t" + PARAM_TRAINING_DATA_DIR + "\ttraining data directory (with txt and ann files)\n";
+//                "\t" + PARAM_TRAINING_DATA_DIR + "\ttraining data directory (with txt and ann files)\n";
+                "\t" + PARAM_CONFIG_FILE + "\tconfig file\n";
     }
 
     private static final String[] PARAM_HELP = {
@@ -23,12 +24,15 @@ public class ProgramParams {
             "h"
     };
 
-    private static final String PARAM_TRAINING_DATA_DIR = "-trainDir";
+//    private static final String PARAM_TRAINING_DATA_DIR = "-trainDir";
+
+    private static final String PARAM_CONFIG_FILE = "-conf";
 
     private Map<String, String> params = new HashMap<>();
 
     public ProgramParams(String args[]) {
         parseParamHelp(args);
+//        parseParamTrainingDataDir(args);
         parseParamTrainingDataDir(args);
     }
 
@@ -42,10 +46,19 @@ public class ProgramParams {
         }
     }
 
+//    private void parseParamTrainingDataDir(String args[]) {
+//        for(int i = 0; i < args.length; ++i) {
+//            if(PARAM_TRAINING_DATA_DIR.equals(args[i]) && i < args.length - 1) {
+//                params.put(PARAM_TRAINING_DATA_DIR, args[i+1]);
+//                return;
+//            }
+//        }
+//    }
+
     private void parseParamTrainingDataDir(String args[]) {
         for(int i = 0; i < args.length; ++i) {
-            if(PARAM_TRAINING_DATA_DIR.equals(args[i]) && i < args.length - 1) {
-                params.put(PARAM_TRAINING_DATA_DIR, args[i+1]);
+            if(PARAM_CONFIG_FILE.equals(args[i]) && i < args.length - 1) {
+                params.put(PARAM_CONFIG_FILE, args[i+1]);
                 return;
             }
         }
@@ -55,8 +68,12 @@ public class ProgramParams {
         return params.get(PARAM_HELP[0]) != null;
     }
 
-    public String getTrainingDataDir() {
-        return params.get(PARAM_TRAINING_DATA_DIR);
+//    public String getTrainingDataDir() {
+//        return params.get(PARAM_TRAINING_DATA_DIR);
+//    }
+
+    public String getParamConfigFile() {
+        return params.get(PARAM_CONFIG_FILE);
     }
 
 }

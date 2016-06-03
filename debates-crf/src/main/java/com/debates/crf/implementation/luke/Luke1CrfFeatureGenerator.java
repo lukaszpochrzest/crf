@@ -3,9 +3,13 @@ package com.debates.crf.implementation.luke;
 import com.debates.crf.Tag;
 import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
 import com.debates.crf.implementation.common.feature.TagFeature;
+import com.debates.crf.implementation.luke.feature.PreviousWordAndTagFeature;
 import com.debates.crf.implementation.luke.filter.PosAndTagFilter;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
+import com.debates.crf.implementation.luke.filter.PreviousWordAndTagFilter;
 import com.debates.crf.implementation.luke.utils.PreviousPosAndTagFeatureBuilder;
+import com.debates.crf.implementation.luke.utils.PreviousWordAndTagFeatureBuilder;
+import com.debates.crf.implementation.luke.utils.WordAndTagFeatureBuilder;
 import com.debates.crf.implementation.witek.feature.WordAndTagFeature;
 import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
 import com.debates.crf.utils.PosUtility;
@@ -73,8 +77,9 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
 //        addTagFeatures();
 //        addTagTransitionFeatures();
 //        addPosAndTagFeatures();
-        addPreviousPosAndTagFeatures();
 
+        addPreviousPosAndTagFeatures();
+        addPreviousWordAndTagFeatures();
         //witek
         addPropositionsFeatures();
         addReasonFeatures();
@@ -181,39 +186,110 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
 
     }
 
+    private static final String[] WORDS_BEFORE_PROPOSITION_START = new String[]{
+            "że"
+    };
 
+    private static final String[] WORDS_BEFORE_REASON_START = new String[]{
+            "ponieważ", "bo", "że"
+    };
+
+    private void addPreviousWordAndTagFeatures() {
+//        for( String keyWord : WORDS_BEFORE_PROPOSITION_START) {
+//
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new PreviousWordAndTagFeature( keyWord, Tag.PROPOSITION_START.name() ),
+//                    new PreviousWordAndTagFilter( keyWord, Tag.PROPOSITION_START.name() ),
+//                    true
+//            ));
+//        }
+//
+//        for( String keyWord : WORDS_BEFORE_REASON_START) {
+//
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new PreviousWordAndTagFeature( keyWord, Tag.REASON_START.name() ),
+//                    new PreviousWordAndTagFilter( keyWord, Tag.REASON_START.name() ),
+//                    true
+//            ));
+//        }
+
+        for( String keyWord : WORDS_BEFORE_PROPOSITION_START) {
+            for(Tag possibleTag : Tag.values()) {
+//                if(!Tag.OTHER.name().equals(possibleTag)) {
+                    setFilteredFeatures.add(new CrfFilteredFeature<>(
+                            PreviousWordAndTagFeatureBuilder.buildFeature(keyWord, possibleTag.name()),
+                            new PreviousWordAndTagFilter(keyWord, possibleTag.name()),
+                            false
+                    ));
+//                }
+            }
+        }
+
+        for( String keyWord : WORDS_BEFORE_REASON_START) {
+            for(Tag possibleTag : Tag.values()) {
+//                if(!Tag.OTHER.name().equals(possibleTag)) {
+                    setFilteredFeatures.add(new CrfFilteredFeature<>(
+                            PreviousWordAndTagFeatureBuilder.buildFeature(keyWord, possibleTag.name()),
+                            new PreviousWordAndTagFilter(keyWord, possibleTag.name()),
+                            false
+                    ));
+//                }
+            }
+        }
+
+    }
 
     /** WITEK**/
-    private static final String[] PROPOSITION_BEGIN = new String[]{
-            "można"/*, "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby"*/,
-            /*"powinniśmy", "powinny", "powinno", "powinna",*/ "powinien",
+    private static final String[] WORDS_AS_PROPOSITION_START = new String[]{
+            "powinien", /*"można", "mogło", "mogli", "mogliśmy", "mógłby","mogłaby", "mogłoby",
+            "powinniśmy", "powinny", "powinno", "powinna",
             "myśleć",
-            "gdyby"
+            "gdyby"*/
     };
 
-    private static final String[] REASON_BEGIN = new String[]{
-            "ponieważ", "bo", "gdyż"
-    };
+    private static final String[] WORDS_AS_REASON_START = WORDS_BEFORE_REASON_START;
 
     private void addPropositionsFeatures()
     {
-        for( String keyWord : PROPOSITION_BEGIN ) {
-            setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new WordAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
-                    new WordAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
-                    true
-            ));
+//        for( String keyWord : WORDS_AS_PROPOSITION_START) {
+//
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new WordAndTagFeature( keyWord, Tag.PROPOSITION_START.name() ),
+//                    new WordAndTagFilter( keyWord, Tag.PROPOSITION_START.name() ),
+//                    true
+//            ));
+//        }
+
+        for( String keyWord : WORDS_AS_PROPOSITION_START) {
+            for(Tag possibleTag : Tag.values()) {
+                setFilteredFeatures.add(new CrfFilteredFeature<>(
+                        WordAndTagFeatureBuilder.buildFeature(keyWord, possibleTag.name()),
+                        new WordAndTagFilter(keyWord, possibleTag.name()),
+                        false
+                ));
+            }
         }
+
     }
 
     private void addReasonFeatures()
     {
-        for( String keyWord : REASON_BEGIN ) {
-            setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new WordAndTagFeature( keyWord, Tag.REASON_START.toString() ),
-                    new WordAndTagFilter( keyWord, Tag.REASON_START.toString() ),
-                    true
-            ));
+//        for( String keyWord : WORDS_AS_REASON_START) {
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new WordAndTagFeature( keyWord, Tag.REASON_START.name() ),
+//                    new WordAndTagFilter( keyWord, Tag.REASON_START.name() ),
+//                    true
+//            ));
+//        }
+
+        for( String keyWord : WORDS_AS_REASON_START) {
+            for(Tag possibleTag : Tag.values()) {
+                setFilteredFeatures.add(new CrfFilteredFeature<>(
+                        WordAndTagFeatureBuilder.buildFeature(keyWord, possibleTag.name()),
+                        new WordAndTagFilter(keyWord, possibleTag.name()),
+                        false
+                ));
+            }
         }
     }
 

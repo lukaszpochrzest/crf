@@ -1,0 +1,15 @@
+{
+  "trainFileNames": [
+    "../res/debates_with_ann/debata_2.txt",
+    "../res/debates_with_ann/debata_4.txt",
+    "../res/debates_with_ann/debata_5.txt",
+    "../res/debates_with_ann/debata_6.txt",
+    "../res/debates_with_ann/debata_7.txt",
+    "../res/debates_with_ann/debata_8.txt"
+  ],
+  "testFileNames": [
+    "../res/debates_with_ann/debata_3.txt",
+	"../res/debates_with_ann/debata_1.txt",
+    "../res/debates_with_ann/debata_9.txt",
+  ]
+}

@@ -6,29 +6,27 @@ import org.crf.crf.CrfFeature;
 import static org.crf.utilities.PosTaggerUtilities.equalObjects;
 
 /**
- * Created by lukasz on 20.04.16.
+ * Created by lukasz on 03.06.16.
  */
+public class PreviousWordAndTagFeature extends CrfFeature<String, String> {
 
-
-public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
-
-    private final String forPreviousPos;
+    private final String forPreviousWord;
     private final String forTag;
     private final double weight;
 
-    public PreviousPosAndTagFeature(String forPreviousPos, String forTag, double weight) {
-        this.forPreviousPos = forPreviousPos;
+    public PreviousWordAndTagFeature(String forPreviousWord, String forTag, double weight) {
+        this.forPreviousWord = forPreviousWord;
         this.forTag = forTag;
         this.weight = weight;
     }
 
     @Override
     public double value(String[] sequence, int indexInSequence, String currentTag, String previousTag) {
-        if(indexInSequence == 0) {  //there is no previous pos
+        if(indexInSequence == 0) {  //there is no previous word
             return 0.0d;
         }
         double ret = 0.0;
-        if (equalObjects(currentTag,forTag) && equalObjects(PosUtility.getPoS(sequence[indexInSequence-1]), forPreviousPos)) {
+        if (equalObjects(currentTag,forTag) && equalObjects(sequence[indexInSequence - 1], forPreviousWord)) {
             ret = weight;
         }
         return ret;
@@ -42,18 +40,18 @@ public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PreviousPosAndTagFeature other = (PreviousPosAndTagFeature) obj;
+        PreviousWordAndTagFeature other = (PreviousWordAndTagFeature) obj;
         if (forTag == null)
         {
             if (other.forTag != null)
                 return false;
         } else if (!forTag.equals(other.forTag))
             return false;
-        if (forPreviousPos == null)
+        if (forPreviousWord == null)
         {
-            if (other.forPreviousPos != null)
+            if (other.forPreviousWord != null)
                 return false;
-        } else if (!forPreviousPos.equals(other.forPreviousPos))
+        } else if (!forPreviousWord.equals(other.forPreviousWord))
             return false;
         return true;
     }
@@ -64,13 +62,13 @@ public class PreviousPosAndTagFeature extends CrfFeature<String, String> {
         int result = 1;
         result = prime * result + ((forTag == null) ? 0 : forTag.hashCode());
         result = prime * result
-                + ((forPreviousPos == null) ? 0 : forPreviousPos.hashCode());
+                + ((forPreviousWord == null) ? 0 : forPreviousWord.hashCode());
         return result;
     }
 
     @Override
     public String toString() {
-        return "PreviousPosAndTagFeature [forPreviousPos=" + forPreviousPos + ", forTag="
+        return "PreviousWordAndTagFeature [forPreviousWord=" + forPreviousWord + ", forTag="
                 + forTag + "]";
     }
 }

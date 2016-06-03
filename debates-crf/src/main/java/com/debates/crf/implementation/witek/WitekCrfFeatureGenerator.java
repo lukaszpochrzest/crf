@@ -131,31 +131,31 @@ public class WitekCrfFeatureGenerator extends CrfFeatureGenerator<String, String
 
     private void addPropositionsFeatures()
     {
-        for( String keyWord : PROPOSITION_BEGIN ) {
-            setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new WordAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
-                    new WordAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
-                    true
-            ));
-        }
-        for( String keyWord : PROPOSITION_BEGIN ) {
-            setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new WordAndTagFeature( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
-                    new WordAndTagFilter( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
-                    true
-            ));
-        }
+//        for( String keyWord : PROPOSITION_BEGIN ) {
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new WordAndTagFeature( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
+//                    new WordAndTagFilter( keyWord, Tag.PROPOSITION_START.toString() ),// TODO thats pretty bad one
+//                    true
+//            ));
+//        }
+//        for( String keyWord : PROPOSITION_BEGIN ) {
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new WordAndTagFeature( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
+//                    new WordAndTagFilter( keyWord, Tag.PROPOSITION.toString() ),// TODO thats pretty bad one
+//                    true
+//            ));
+//        }
     }
 
     private void addReasonFeatures()
     {
-        for( String keyWord : REASON_BEGIN ) {
-            setFilteredFeatures.add(new CrfFilteredFeature<>(
-                    new WordAndTagFeature( keyWord, Tag.REASON_START.toString() ),
-                    new WordAndTagFilter( keyWord, Tag.REASON_START.toString() ),
-                    true
-            ));
-        }
+//        for( String keyWord : REASON_BEGIN ) {
+//            setFilteredFeatures.add(new CrfFilteredFeature<>(
+//                    new WordAndTagFeature( keyWord, Tag.REASON_START.toString() ),
+//                    new WordAndTagFilter( keyWord, Tag.REASON_START.toString() ),
+//                    true
+//            ));
+//        }
     }
 
 
