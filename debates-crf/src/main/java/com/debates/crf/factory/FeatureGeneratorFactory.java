@@ -1,4 +1,4 @@
-package com.debates.crf.implementation.feature;
+package com.debates.crf.factory;
 
 import org.crf.crf.run.CrfFeatureGenerator;
 import org.crf.crf.run.CrfFeatureGeneratorFactory;
@@ -10,10 +10,10 @@ import java.util.Set;
 /**
  * Created by lukasz on 20.04.16.
  */
-public class Luke1CrfFeatureGeneratorFactory implements CrfFeatureGeneratorFactory<String, String> {
+public class FeatureGeneratorFactory implements CrfFeatureGeneratorFactory<String, String> {
 
     @Override
     public CrfFeatureGenerator<String, String> create(Iterable<? extends List<? extends TaggedToken<String, String>>> corpus, Set<String> tags) {
-        return new Luke1CrfFeatureGenerator(corpus, tags);
+        return new FeatureGenerator(corpus, tags);
     }
 }

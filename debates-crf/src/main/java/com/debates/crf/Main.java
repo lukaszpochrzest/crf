@@ -31,11 +31,6 @@ public class Main {
                 System.out.println(ProgramParams.description());
                 System.exit(1);
             }
-//            String trainingDataDir = pp.getTrainingDataDir();
-//            if(trainingDataDir == null) {
-//                System.out.println(ProgramParams.description());
-//                System.exit(1);
-//            }
             String configFile = pp.getParamConfigFile();
             if(configFile == null) {
                 System.out.println(ProgramParams.description());

@@ -13,7 +13,6 @@ public class ProgramParams {
     public static String description() {
         return  "\tProgram takes single arg path to config file\n\n" +
                 "\t" + PARAM_HELP[0] + "\thelp\n" +
-//                "\t" + PARAM_TRAINING_DATA_DIR + "\ttraining data directory (with txt and ann files)\n";
                 "\t" + PARAM_CONFIG_FILE + "\tconfig file\n";
     }
 
@@ -24,15 +23,12 @@ public class ProgramParams {
             "h"
     };
 
-//    private static final String PARAM_TRAINING_DATA_DIR = "-trainDir";
-
     private static final String PARAM_CONFIG_FILE = "-conf";
 
     private Map<String, String> params = new HashMap<>();
 
     public ProgramParams(String args[]) {
         parseParamHelp(args);
-//        parseParamTrainingDataDir(args);
         parseParamTrainingDataDir(args);
     }
 
@@ -46,15 +42,6 @@ public class ProgramParams {
         }
     }
 
-//    private void parseParamTrainingDataDir(String args[]) {
-//        for(int i = 0; i < args.length; ++i) {
-//            if(PARAM_TRAINING_DATA_DIR.equals(args[i]) && i < args.length - 1) {
-//                params.put(PARAM_TRAINING_DATA_DIR, args[i+1]);
-//                return;
-//            }
-//        }
-//    }
-
     private void parseParamTrainingDataDir(String args[]) {
         for(int i = 0; i < args.length; ++i) {
             if(PARAM_CONFIG_FILE.equals(args[i]) && i < args.length - 1) {
@@ -67,10 +54,6 @@ public class ProgramParams {
     public boolean isHelp() {
         return params.get(PARAM_HELP[0]) != null;
     }
-
-//    public String getTrainingDataDir() {
-//        return params.get(PARAM_TRAINING_DATA_DIR);
-//    }
 
     public String getParamConfigFile() {
         return params.get(PARAM_CONFIG_FILE);
