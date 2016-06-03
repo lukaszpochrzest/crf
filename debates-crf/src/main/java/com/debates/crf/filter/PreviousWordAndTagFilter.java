@@ -1,4 +1,4 @@
-package com.debates.crf.implementation.luke.filter;
+package com.debates.crf.filter;
 
 import org.crf.crf.filters.Filter;
 

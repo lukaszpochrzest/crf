@@ -3,7 +3,7 @@ package com.debates.crf.utils;
 /**
  * Created by lukasz on 03.06.16.
  */
-public class ConfigRepositoty {
+public class ConfigRepository {
 
     private static Config config;
 
@@ -12,6 +12,6 @@ public class ConfigRepositoty {
     }
 
     public static void setConfig(Config config) {
-        ConfigRepositoty.config = config;
+        ConfigRepository.config = config;
     }
 }

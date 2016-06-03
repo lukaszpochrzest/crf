@@ -1,4 +1,4 @@
-package com.debates.crf.implementation.luke.feature;
+package com.debates.crf.feature;
 
 import org.crf.crf.CrfFeature;
 import org.crf.utilities.PosTaggerUtilities;

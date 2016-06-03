@@ -1,4 +1,4 @@
-package com.debates.crf.implementation.luke.utils;
+package com.debates.crf.tools;
 
 import com.debates.crf.Tag;
 

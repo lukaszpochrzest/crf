@@ -1,10 +1,8 @@
-package com.debates.crf.implementation.luke;
+package com.debates.crf.implementation.feature;
 
-import com.debates.crf.Tag;
-import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
-import com.debates.crf.implementation.luke.filter.PreviousWordAndTagFilter;
-import com.debates.crf.implementation.martyna.filter.DebateFeatureFilter;
-import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
+import com.debates.crf.filter.PreviousPosAndTagFilter;
+import com.debates.crf.filter.PreviousWordAndTagFilter;
+import com.debates.crf.filter.WordAndTagFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.Filter;
 import org.crf.crf.filters.FilterFactory;

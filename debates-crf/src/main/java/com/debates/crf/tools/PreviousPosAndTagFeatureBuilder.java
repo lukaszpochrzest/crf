@@ -1,9 +1,10 @@
-package com.debates.crf.implementation.luke.utils;
+package com.debates.crf.tools;
 
-import com.debates.crf.implementation.luke.feature.PreviousPosAndTagFeature;
 
-import static com.debates.crf.implementation.luke.utils.TagStatistics.lowestCount;
-import static com.debates.crf.implementation.luke.utils.TagStatistics.tagCounts;
+import com.debates.crf.feature.PreviousPosAndTagFeature;
+
+import static com.debates.crf.tools.TagStatistics.lowestCount;
+import static com.debates.crf.tools.TagStatistics.tagCounts;
 
 /**
  * Created by lukasz on 23.05.16.

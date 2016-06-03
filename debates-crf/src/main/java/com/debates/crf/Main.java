@@ -2,22 +2,19 @@ package com.debates.crf;
 
 import com.debates.crf.exception.CorpusCreationException;
 import com.debates.crf.utils.Config;
-import com.debates.crf.utils.ConfigRepositoty;
+import com.debates.crf.utils.ConfigRepository;
 import com.debates.crf.utils.ProgramParams;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.io.IOUtils;
 import org.crf.crf.CrfModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,7 +46,7 @@ public class Main {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
             Config config = gson.fromJson(configFileString, Config.class);
-            ConfigRepositoty.setConfig(config);
+            ConfigRepository.setConfig(config);
 
             if(config.getMinimizerConvergence() == null) {
                 System.out.println("Minimizer convergence must be defined");

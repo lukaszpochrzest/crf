@@ -1,10 +1,9 @@
 package com.debates.crf;
 
 import com.debates.crf.exception.CorpusCreationException;
-import com.debates.crf.implementation.luke.Luke1CrfFeatureGeneratorFactory;
-import com.debates.crf.implementation.luke.Luke1FilterFactory;
+import com.debates.crf.implementation.feature.Luke1CrfFeatureGeneratorFactory;
+import com.debates.crf.implementation.feature.Luke1FilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
-import com.debates.crf.utils.PosUtility;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.debates.crf.utils.Tuple;
 import com.jjlteam.domain.Document;
@@ -18,8 +17,6 @@ import org.crf.crf.filters.CrfFeaturesAndFilters;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.run.CrfInferencePerformer;
 import org.crf.utilities.TaggedToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;

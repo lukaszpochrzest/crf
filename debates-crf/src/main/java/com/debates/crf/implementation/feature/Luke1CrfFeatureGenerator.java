@@ -1,16 +1,17 @@
-package com.debates.crf.implementation.luke;
+package com.debates.crf.implementation.feature;
 
 import com.debates.crf.Tag;
-import com.debates.crf.implementation.common.feature.TagFeature;
-import com.debates.crf.implementation.luke.feature.MyTagTransitionFeature;
-import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
-import com.debates.crf.implementation.luke.filter.PosAndTagFilter;
-import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
-import com.debates.crf.implementation.luke.filter.PreviousWordAndTagFilter;
-import com.debates.crf.implementation.luke.utils.PreviousPosAndTagFeatureBuilder;
-import com.debates.crf.implementation.luke.utils.PreviousWordAndTagFeatureBuilder;
-import com.debates.crf.implementation.luke.utils.WordAndTagFeatureBuilder;
-import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
+
+import com.debates.crf.feature.MyTagTransitionFeature;
+import com.debates.crf.feature.PosAndTagFeature;
+import com.debates.crf.feature.TagFeature;
+import com.debates.crf.filter.PosAndTagFilter;
+import com.debates.crf.filter.PreviousPosAndTagFilter;
+import com.debates.crf.filter.PreviousWordAndTagFilter;
+import com.debates.crf.filter.WordAndTagFilter;
+import com.debates.crf.tools.PreviousPosAndTagFeatureBuilder;
+import com.debates.crf.tools.PreviousWordAndTagFeatureBuilder;
+import com.debates.crf.tools.WordAndTagFeatureBuilder;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
