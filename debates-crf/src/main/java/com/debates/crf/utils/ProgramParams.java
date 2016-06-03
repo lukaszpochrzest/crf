@@ -11,7 +11,7 @@ import java.util.Map;
 public class ProgramParams {
 
     public static String description() {
-        return  "\tProgram takes single arg: dir to folder with .txt and .ann files and prints crf result in format:\n\t\tWORD(CRF_LABEL,ORYG_LABEL) ...\n\n" +
+        return  "\tProgram takes single arg path to config file\n\n" +
                 "\t" + PARAM_HELP[0] + "\thelp\n" +
 //                "\t" + PARAM_TRAINING_DATA_DIR + "\ttraining data directory (with txt and ann files)\n";
                 "\t" + PARAM_CONFIG_FILE + "\tconfig file\n";
