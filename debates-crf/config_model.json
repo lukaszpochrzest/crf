@@ -1,0 +1,10 @@
+{
+  "testFileNames": [
+    "../res/debates_with_ann/debata_3.txt",
+	"../res/debates_with_ann/debata_1.txt",
+    "../res/debates_with_ann/debata_9.txt"
+  ],
+  "trainFileNames": null,
+  "modelFileName": "model",
+  "minimizerConvergence": 400
+}

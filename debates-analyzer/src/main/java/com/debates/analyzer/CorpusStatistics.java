@@ -188,43 +188,43 @@ public class CorpusStatistics {
 
         List<Map.Entry<String, Integer>> tokensOfTag_REASON_List =
                 tokensOfTag_REASON.entrySet().stream()
-                        .filter(e -> e.getValue() > 29)
+//                        .filter(e -> e.getValue() > 29)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_REASON_START_List =
                 tokensOfTag_REASON_START.entrySet().stream()
-                        .filter(e -> e.getValue() > 7)
+//                        .filter(e -> e.getValue() > 7)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_REASON_END_List =
                 tokensOfTag_REASON_END.entrySet().stream()
-                        .filter(e -> e.getValue() > 3)
+//                        .filter(e -> e.getValue() > 3)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_PROPOSTION_List =
                 tokensOfTag_PROPOSITION.entrySet().stream()
-                        .filter(e -> e.getValue() > 30)
+//                        .filter(e -> e.getValue() > 30)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_PROPOSTION_START_List =
                 tokensOfTag_PROPOSITION_START.entrySet().stream()
-                        .filter(e -> e.getValue() > 4)
+//                        .filter(e -> e.getValue() > 4)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_PROPOSTION_END_List =
                 tokensOfTag_PROPOSITION_END.entrySet().stream()
-                        .filter(e -> e.getValue() > 3)
+//                        .filter(e -> e.getValue() > 3)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
         List<Map.Entry<String, Integer>> tokensOfTag_OTHER_List =
                 tokensOfTag_OTHER.entrySet().stream()
-                        .filter(e -> e.getValue() > 100)
+//                        .filter(e -> e.getValue() > 100)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 
@@ -268,7 +268,7 @@ public class CorpusStatistics {
 
         List<Map.Entry<String, Integer>> tokenList =
                 tokens.entrySet().stream()
-                        .filter(e -> e.getValue() > 50)
+//                        .filter(e -> e.getValue() > 50)
                         .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                         .collect(Collectors.toList());
 

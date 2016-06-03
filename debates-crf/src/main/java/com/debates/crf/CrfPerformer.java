@@ -3,11 +3,10 @@ package com.debates.crf;
 import com.debates.crf.exception.CorpusCreationException;
 import com.debates.crf.implementation.luke.Luke1CrfFeatureGeneratorFactory;
 import com.debates.crf.implementation.luke.Luke1FilterFactory;
-import com.debates.crf.implementation.witek.WitekCrfFeatureGeneratorFactory;
-import com.debates.crf.implementation.witek.WitekFilterFactory;
 import com.debates.crf.stemming.MyWordStemmer;
 import com.debates.crf.utils.PosUtility;
 import com.debates.crf.utils.TextWithAnnotations;
+import com.debates.crf.utils.Tuple;
 import com.jjlteam.domain.Document;
 import com.jjlteam.domain.Proposition;
 import com.jjlteam.domain.Reason;
@@ -22,9 +21,7 @@ import org.crf.utilities.TaggedToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,8 +29,6 @@ import java.util.stream.Collectors;
  * Created by lukasz on 14.04.16.
  */
 public class CrfPerformer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     /**
      * performs CRF on test data (testTwa) using training data(trainingTwas)
@@ -48,14 +43,15 @@ public class CrfPerformer {
                                List<TextWithAnnotations> testTwas) throws IOException, CorpusCreationException {
 
         if (trainingTwas.isEmpty()) {
-            LOGGER.info("No training data");
+            System.err.println("No training data to perform CRF on");
             return;
         }
 
         // prepare training corpus
         List<List<? extends TaggedToken<String, String>>> corpus = new ArrayList<>();
         for (TextWithAnnotations twa : trainingTwas) {
-            corpus.addAll(createCorpus(twa));
+            Tuple<List<List<? extends TaggedToken<String, String>>>, List<List<String>>> t = createCorpus(twa);
+            corpus.addAll(t.getFirst());
         }
 
         int i = 0;
@@ -78,68 +74,230 @@ public class CrfPerformer {
 
         // Get the model
         CrfModel<String, String> crfModel = trainer.getLearnedModel();
-        printFeaturesWeights( crfModel );
-//        // Save the model into the disk.
-//        File file = new File("example.ser");
-//        save(crfModel,file);
-//
-//        ////////
-//
-//        // Later... Load the model from the disk
-//        crfModel = (CrfModel<String, String>) load(file);
+
+        // Save the model into the disk.
+        System.out.println("Writing a model to a file 'model'");
+        File file = new File("model");
+        save(crfModel, file);
+
+        infer(crfModel, testTwas);
+    }
+
+    /**
+     * performs CRF on test data (testTwa) using model
+     * @param crfModel
+     * @param testTwas
+     * @throws IOException
+     * @throws CorpusCreationException
+     */
+    @SuppressWarnings("unchecked")
+    public static void perform(CrfModel crfModel,
+                               List<TextWithAnnotations> testTwas) throws IOException, CorpusCreationException {
+        infer(crfModel, testTwas);
+    }
+
+
+    private static void infer(CrfModel crfModel, List<TextWithAnnotations> testTwas) throws IOException, CorpusCreationException {
+        printFeaturesWeights(crfModel);
 
         // Create a CrfInferencePerformer, to find tags for test data
         CrfInferencePerformer<String, String> inferencePerformer = new CrfInferencePerformer<>(crfModel);
 
-        //  create test corpus
-        List<List<? extends TaggedToken<String, String>>> testCorpus = new ArrayList<>();
+//          //create test corpus
+//        List<List<? extends TaggedToken<String, String>>> testCorpus = new ArrayList<>();
+        OutputCreator outputCreator = new OutputCreator();
+        List<String> testTwaResults = new ArrayList<>(testTwas.size());
         for (TextWithAnnotations twa : testTwas) {
-            testCorpus.addAll(createCorpus(twa));
+
+            System.out.println("Processing " + twa.getTextFile().getName().replace(",txt", ""));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            Tuple<List<List<? extends TaggedToken<String, String>>>, List<List<String>>> t = createCorpus(twa);
+            List<List<? extends TaggedToken<String, String>>> testCorpus = t.getFirst();
+
+            // infer tags
+            int i=0;
+            for(List<? extends TaggedToken<String, String>> testSentence : testCorpus) {
+
+                //  extract sentence from testSentence
+                List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
+
+                //  infer tags for the sentence
+                List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(sentence);
+
+                outputCreator.soak(stringBuilder, result, testSentence, t.getSecond().get(i++));
+            }
+            testTwaResults.add(stringBuilder.toString());
         }
 
-        // infer tags
-        for(List<? extends TaggedToken<String, String>> testSentence
-                :testCorpus)
+        // save every test twa result to a single file
 
-        {
-
-            //  extract sentence from testSentence
-            List<String> sentence = testSentence.stream().map(TaggedToken::getToken).collect(Collectors.toList());
-
-            //  infer tags for the sentence
-            List<TaggedToken<String, String>> result = inferencePerformer.tagSequence(sentence);
-
-            print(result, testSentence);
-        }
-
-    }
-
-
-
-    /**
-     * prints testSentence in format:
-     *  WORD0(PREDICTED_TAG0, REAL_TAG0) WORD1(PREDICTED_TAG1, REAL_TAG1)
-     * @param taggedSentence
-     * @param testSentence
-     */
-    private static void print(List<TaggedToken<String, String>> taggedSentence,
-                              List<? extends TaggedToken<String, String>> testSentence) {
-        // Print the result:
-        int i = 0;
-        for (TaggedToken<String, String> taggedToken : taggedSentence) {
-            System.out.print(taggedToken.getToken() + "_" + PosUtility.getPoS(taggedToken.getToken()) +
-                    "(" +
-                    taggedToken.getTag() +
-                    "/" +
-                    testSentence.get(i).getTag() +   //TODO get(i) potentially so inefficent..
-                    ") ");
-            ++i;
-        }
         System.out.println();
+        System.out.println("Computing test data finished.");
+        System.out.println();
+
+        int i = 0;
+        for(String testTwaResult : testTwaResults) {
+            String name = testTwas.get(i++).getTextFile().getName() + ".processed";
+            try(  PrintWriter out = new PrintWriter( name )  ){
+                out.println( testTwaResult );
+                System.out.println("Result saved to " + name);
+            }
+        }
+
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println(
+                "Number of tokens predicted as REASON: " + outputCreator.tagsRPredictedCount + System.lineSeparator() +
+                "Number of tokens predicted as REASON_START: " + outputCreator.tagsRSPredictedCount + System.lineSeparator() +
+                "Number of tokens predicted as REASON_END: " + outputCreator.tagsREPredictedCount + System.lineSeparator() +
+                "Number of tokens predicted as PROPOSITION: " + outputCreator.tagsPPredictedCount + System.lineSeparator() +
+                "Number of tokens predicted as PROPOSITION_START: " + outputCreator.tagsPSPredictedCount + System.lineSeparator() +
+                "Number of tokens predicted as PROPOSITION_END: " + outputCreator.tagsPEPredictedCount + System.lineSeparator() +
+
+                        System.lineSeparator() +
+
+                "% of well classified tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsOKCount + "/" + outputCreator.tagsOverall + " = " + (double)outputCreator.tagsOKCount/outputCreator.tagsOverall + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified REASON tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsROKCount + "/" + outputCreator.tagsRCount + (outputCreator.tagsRCount > 0 ? " = " + (double) outputCreator.tagsROKCount /outputCreator.tagsRCount : "") + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified REASON_START tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsRSOKCount + "/" + outputCreator.tagsRSCount + (outputCreator.tagsRSCount > 0 ? " = " + (double) outputCreator.tagsRSOKCount /outputCreator.tagsRSCount : "") + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified REASON_END tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsREOKCount + "/" + outputCreator.tagsRECount + (outputCreator.tagsRECount > 0 ? " = " + (double) outputCreator.tagsREOKCount /outputCreator.tagsRECount : "") + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified PROPOSITION tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsPOKCount + "/" + outputCreator.tagsPCount + (outputCreator.tagsPCount > 0 ? " = " + (double) outputCreator.tagsPOKCount /outputCreator.tagsPCount : "") + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified PROPOSITION_START tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsPSOKCount + "/" + outputCreator.tagsPSCount + (outputCreator.tagsPSCount  >0 ? " = " + (double) outputCreator.tagsPSOKCount /outputCreator.tagsPSCount : "") + System.lineSeparator() + System.lineSeparator() +
+                        "% of well classified PROPOSITION_END tokens:" + System.lineSeparator() + "\t" + outputCreator.tagsPEOKCount + "/" + outputCreator.tagsPECount + (outputCreator.tagsPECount > 0 ? " = " + (double) outputCreator.tagsPEOKCount /outputCreator.tagsPECount : "") + System.lineSeparator() + System.lineSeparator() +
+
+                        System.lineSeparator() +
+
+                "% of well classified PROPOSITION* (with loose constraint .i.e. PROPOSITION == PROPOSITION_START == PROPOSITION_END): " + System.lineSeparator() +
+                        "\t" + outputCreator.tagsOKPSTARPredictedCount + "/" + (outputCreator.tagsPCount + outputCreator.tagsPSCount + outputCreator.tagsPECount) + System.lineSeparator() +
+                        "% of well classified REASON* (with loose constraint .i.e. REASON == REASON_START == REASON_END): " + System.lineSeparator() +
+                        "\t" + outputCreator.tagsOKRSTARPredictedCount + "/" + (outputCreator.tagsRCount + outputCreator.tagsRSCount + outputCreator.tagsRECount) + System.lineSeparator()
+        );
     }
+
+    public static class OutputCreator {
+        public int tagsOverall = 0;
+        public int tagsOKCount = 0;
+
+        public int tagsRCount = 0;
+        public int tagsRSCount = 0;
+        public int tagsRECount = 0;
+        public int tagsPCount = 0;
+        public int tagsPSCount = 0;
+        public int tagsPECount = 0;
+
+        public int tagsROKCount = 0;
+        public int tagsRSOKCount = 0;
+        public int tagsREOKCount = 0;
+        public int tagsPOKCount = 0;
+        public int tagsPSOKCount = 0;
+        public int tagsPEOKCount = 0;
+
+        public int tagsRPredictedCount = 0;
+        public int tagsRSPredictedCount = 0;
+        public int tagsREPredictedCount = 0;
+        public int tagsPPredictedCount = 0;
+        public int tagsPSPredictedCount = 0;
+        public int tagsPEPredictedCount = 0;
+
+        public int tagsOKRSTARPredictedCount = 0;
+        public int tagsOKPSTARPredictedCount = 0;
+
+
+        /**
+         * prints testSentence in format:
+         *  WORD0_pos0(PREDICTED_TAG0, REAL_TAG0) WORD1_pos1(PREDICTED_TAG1, REAL_TAG1) ...
+         * @param taggedSentence
+         * @param testSentence
+         */
+        public void soak(StringBuilder stringBuilder,
+                                 List<TaggedToken<String, String>> taggedSentence,
+                                 List<? extends TaggedToken<String, String>> testSentence,
+                         List<String> notStemmedTestSentence) {
+
+
+            // Print the result:
+            int i = 0;
+            for (TaggedToken<String, String> taggedToken : taggedSentence) {
+                String originalToken = notStemmedTestSentence.get(i);
+                String originalTag = testSentence.get(i).getTag();
+                String predictedTag = taggedToken.getTag();
+
+                if(predictedTag.equals(originalTag)) {
+                    ++tagsOKCount;
+                    if (Tag.REASON.name().equals(predictedTag)) {
+                        ++tagsROKCount;
+                    } else if(Tag.REASON_START.name().equals(predictedTag)) {
+                        ++tagsRSOKCount;
+                    } else if(Tag.REASON_END.name().equals(predictedTag)) {
+                        ++tagsREOKCount;
+                    } else if (Tag.PROPOSITION.name().equals(predictedTag)) {
+                        ++tagsPOKCount;
+                    } else if(Tag.PROPOSITION_START.name().equals(predictedTag)) {
+                        ++tagsPSOKCount;
+                    } else if(Tag.PROPOSITION_END.name().equals(predictedTag)) {
+                        ++tagsPEOKCount;
+                    }
+                }
+
+                if (Tag.REASON.name().equals(originalTag)) {
+                    ++tagsRCount;
+                } else if(Tag.REASON_START.name().equals(originalTag)) {
+                    ++tagsRSCount;
+                } else if(Tag.REASON_END.name().equals(originalTag)) {
+                    ++tagsRECount;
+                } else if (Tag.PROPOSITION.name().equals(originalTag)) {
+                    ++tagsPCount;
+                } else if(Tag.PROPOSITION_START.name().equals(originalTag)) {
+                    ++tagsPSCount;
+                } else if(Tag.PROPOSITION_END.name().equals(originalTag)) {
+                    ++tagsPECount;
+                }
+
+                if (Tag.REASON.name().equals(predictedTag)) {
+                    ++tagsRPredictedCount;
+                } else if(Tag.REASON_START.name().equals(predictedTag)) {
+                    ++tagsRSPredictedCount;
+                } else if(Tag.REASON_END.name().equals(predictedTag)) {
+                    ++tagsREPredictedCount;
+                } else if (Tag.PROPOSITION.name().equals(predictedTag)) {
+                    ++tagsPPredictedCount;
+                } else if(Tag.PROPOSITION_START.name().equals(predictedTag)) {
+                    ++tagsPSPredictedCount;
+                } else if(Tag.PROPOSITION_END.name().equals(predictedTag)) {
+                    ++tagsPEPredictedCount;
+                }
+
+                String firstTwoLetters = predictedTag.substring(0,2);
+                if(firstTwoLetters.equals(originalTag.substring(0,2))) {
+                    if(firstTwoLetters.equals(Tag.REASON.name().substring(0,2))) {
+                        ++tagsOKRSTARPredictedCount;
+                    } else if(firstTwoLetters.equals(Tag.PROPOSITION.name().substring(0,2))) {
+                        ++tagsOKPSTARPredictedCount;
+                    }
+                }
+
+
+                stringBuilder.append(originalToken +
+                        "(" +
+                        predictedTag +
+                        "/" +
+                        originalTag +
+                        ") ");
+                ++i;
+            }
+            tagsOverall += taggedSentence.size();
+            stringBuilder.append("\r\n");
+        }
+    }
+
+
 
     private static void printFeaturesWeights( CrfModel<String, String> crfModel )
     {
+        System.out.println("Printing model...(features and their weights):");
+
         CrfFeaturesAndFilters< String, String > features = crfModel.getFeatures();
         ArrayList< Double > weights = crfModel.getParameters();
 
@@ -152,17 +310,17 @@ public class CrfPerformer {
         }
     }
 
-//    public static void save(Object object, File file)
-//    {
-//        try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file)))
-//        {
-//            stream.writeObject(object);
-//        }
-//        catch (IOException e)
-//        {
-//            throw new RuntimeException("Failed to save",e);
-//        }
-//    }
+    public static void save(Object object, File file)
+    {
+        try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file)))
+        {
+            stream.writeObject(object);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException("Failed to save",e);
+        }
+    }
 //
 //    public static Object load(File file)
 //    {
@@ -185,10 +343,8 @@ public class CrfPerformer {
      * @throws IOException
      * @throws CorpusCreationException
      */
-    private static List<List<? extends TaggedToken<String, String>>> createCorpus (TextWithAnnotations twa)
+    private static Tuple<List<List<? extends TaggedToken<String, String>>>, List<List<String>>> createCorpus (TextWithAnnotations twa)
             throws IOException, CorpusCreationException {
-
-        //LOGGER.info("created");
 
         final String wordLetters = "[a-zA-Z0-9\u00F3\u0105" +
                 "\u0119" + "\u0142" + "u\u017C" + "\u017A" + "\u0144" + "\u0107" + "\u015B" + "\u0104" +
@@ -223,11 +379,13 @@ public class CrfPerformer {
 
         MyWordStemmer myWordStemmer = new MyWordStemmer(new PolishStemmer());
         List<List<? extends TaggedToken<String, String>>> result = new LinkedList<>();
+        List<List<String>> resultNotStemmed = new LinkedList<>();
 
         File textFile = twa.getTextFile();
         String text = IOUtils.toString(new FileInputStream(textFile), "UTF8");
 
         List<TaggedToken<String, String>> currSequence = new ArrayList<>();
+        List<String> currSequenceNotStemmed = new ArrayList<>();
 
         // tag for previous stem is null
         Tag previousTag = null;
@@ -246,6 +404,8 @@ public class CrfPerformer {
                     realIdx++;
                 result.add(currSequence);
                 currSequence = new ArrayList<>();
+                resultNotStemmed.add(currSequenceNotStemmed);
+                currSequenceNotStemmed = new ArrayList<>();
                 continue;
             }
 
@@ -342,6 +502,7 @@ public class CrfPerformer {
                 final String selectedWord = text.substring(leftIdx, rightIdx).toLowerCase();
                 final String stem = myWordStemmer.getStemNotNull(selectedWord);
                 currSequence.add(new TaggedToken<>(stem, tag.name()));
+                currSequenceNotStemmed.add(selectedWord);
             }
         }
 
@@ -352,7 +513,10 @@ public class CrfPerformer {
         List<List<? extends TaggedToken<String, String>>> filteredResult =
                 result.stream().filter(taggedTokens -> !taggedTokens.isEmpty()).collect(Collectors.toList());
 
-        return filteredResult;
+        List<List<String>> filteredResultNotStemmed =
+                resultNotStemmed.stream().filter(sequence -> !sequence.isEmpty()).collect(Collectors.toList());
+
+        return new Tuple<>(filteredResult, filteredResultNotStemmed);
     }
 
 }

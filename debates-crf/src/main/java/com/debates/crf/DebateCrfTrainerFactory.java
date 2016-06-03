@@ -35,15 +35,15 @@ public class DebateCrfTrainerFactory<K,G> {
                                                CrfFeatureGeneratorFactory<K,G> featureGeneratorFactory,
                                                FilterFactory<K, G> filterFactory)
     {
-        logger.info("Extracting tags.");
         CrfTagsBuilder<G> tagsBuilder = new CrfTagsBuilder<G>(corpus);
         tagsBuilder.build();
         CrfTags<G> crfTags = tagsBuilder.getCrfTags();
 
-        logger.info("Generating features.");
         CrfFeatureGenerator<K,G> featureGenerator = featureGeneratorFactory.create(corpus, crfTags.getTags());
         featureGenerator.generateFeatures();
         Set<CrfFilteredFeature<K, G>> setFilteredFeatures = featureGenerator.getFeatures();
+
+        System.out.println("Generated features:");
 
         for(CrfFilteredFeature filteredFeature : setFilteredFeatures) {
             System.out.println(filteredFeature.getFeature().toString());
@@ -51,7 +51,6 @@ public class DebateCrfTrainerFactory<K,G> {
 
         CrfFeaturesAndFilters<K, G> features = createFeaturesAndFiltersObjectFromSetOfFeatures(setFilteredFeatures, filterFactory);
 
-        logger.info("CrfPosTaggerTrainer has been created.");
         return new DebateCrfTrainer<K,G>(features,crfTags);
     }
 

@@ -1,5 +1,6 @@
 package com.debates.crf;
 
+import com.debates.crf.utils.ConfigRepositoty;
 import org.apache.log4j.Logger;
 import org.crf.crf.CrfLogLikelihoodFunction;
 import org.crf.crf.CrfModel;
@@ -49,11 +50,11 @@ public class DebateCrfTrainer<K,G>
 
     public void train(List<? extends List<? extends TaggedToken<K, G> >> corpus)
     {
-        logger.info("CRF training: Number of tags = "+crfTags.getTags().size()+". Number of features = "+features.getFilteredFeatures().length +".");
-        logger.info("Creating log likelihood function.");
+        System.out.println("CRF training: Number of tags = " + crfTags.getTags().size() + ". Number of features = " + features.getFilteredFeatures().length + ".");
+        System.out.println("Creating log likelihood function.");
         DerivableFunction convexNegatedCrfFunction = NegatedFunction.fromDerivableFunction(createLogLikelihoodFunctionConcave(corpus));
-        logger.info("Optimizing log likelihood function.");
-        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20,400);
+        System.out.println("Optimizing log likelihood function.");
+        LbfgsMinimizer lbfgsOptimizer = new LbfgsMinimizer(convexNegatedCrfFunction, 20, ConfigRepositoty.getConfig().getMinimizerConvergence());
         lbfgsOptimizer.find();
         double[] parameters = lbfgsOptimizer.getPoint();
         if (parameters.length!=features.getFilteredFeatures().length) {throw new CrfException("Number of parameters, returned by LBFGS optimizer, differs from number of features.");}
@@ -65,7 +66,7 @@ public class DebateCrfTrainer<K,G>
         }
 
         learnedModel = new CrfModel<K, G>(crfTags,features,parametersAsList);
-        logger.info("Training of CRF - done.");
+        System.out.println("Training of CRF - done.");
     }
 
 
@@ -99,7 +100,5 @@ public class DebateCrfTrainer<K,G>
     private final double sigmaSquare_inverseRegularizationFactor;
 
     private CrfModel<K, G> learnedModel = null;
-
-    private static final Logger logger = Logger.getLogger(DebateCrfTrainer.class);
 
 }

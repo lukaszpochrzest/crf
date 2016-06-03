@@ -2,17 +2,20 @@ package com.debates.crf;
 
 import com.debates.crf.exception.CorpusCreationException;
 import com.debates.crf.utils.Config;
+import com.debates.crf.utils.ConfigRepositoty;
 import com.debates.crf.utils.ProgramParams;
 import com.debates.crf.utils.TextWithAnnotations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.io.IOUtils;
+import org.crf.crf.CrfModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +24,6 @@ import java.util.List;
  * Created by lukasz on 12.04.16.
  */
 public class Main {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws CorpusCreationException {
         try {
@@ -48,14 +49,56 @@ public class Main {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
             Config config = gson.fromJson(configFileString, Config.class);
+            ConfigRepositoty.setConfig(config);
 
-            //  lets do some crf
-            final List<TextWithAnnotations> trainingTwas = loadTextWithAnnotationPairs(config.getTrainFileNames());
+            if(config.getMinimizerConvergence() == null) {
+                System.out.println("Minimizer convergence must be defined");
+                System.exit(1);
+            }
+
+            if(config.getMinimizerConvergence() <= 0.0d) {
+                System.out.println("Minimizer convergence must be > 0");
+                System.exit(1);
+            }
+
+            if(config.getTestFileNames() == null) {
+                System.out.println("Test file list must be defined in config file");
+                System.exit(1);
+            }
+
+            System.out.println("Loading test files:");
+
             final List<TextWithAnnotations> testTwas = loadTextWithAnnotationPairs(config.getTestFileNames());
 
-            CrfPerformer.perform(trainingTwas, testTwas);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+            System.out.println();
+
+            if(config.getTrainFileNames() != null && config.getModelFileName() != null) {
+                System.out.println("Config file needs to have either model or training files defined, but not both of them");
+                System.exit(1);
+            }
+
+            if (config.getTrainFileNames() != null) {
+                System.out.println("Loading training files:");
+
+                final List<TextWithAnnotations> trainingTwas = loadTextWithAnnotationPairs(config.getTrainFileNames());
+
+                System.out.println();
+
+                CrfPerformer.perform(trainingTwas, testTwas);
+            } else if(config.getModelFileName() != null) {
+                CrfModel crfModel = load(new File(config.getModelFileName()));
+
+                System.out.println("Model loaded");
+
+                CrfPerformer.perform(crfModel, testTwas);
+            } else {
+                System.out.println("Either model or training file list must be defined in config file");
+                System.exit(1);
+            }
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(e.getMessage());
             System.exit(1);
         }
     }
@@ -77,37 +120,47 @@ public class Main {
                 if(!annotationsFile.exists()) {
                     throw new IOException("File with annotations: " + annotationsPath + " does not exist");
                 }
-                LOGGER.info("Loaded" + annotationsFile.getName());
+                System.out.println("Loaded " + annotationsFile.getName().replace(".ann", ""));
                 result.add(new TextWithAnnotations(textFile, annotationsFile));
             }
         }
         return result;
     }
 
-    private static List<TextWithAnnotations> loadTextWithAnnotationPairs(String trainingDataDir) throws IOException {
+//    private static List<TextWithAnnotations> loadTextWithAnnotationPairs(String trainingDataDir) throws IOException {
+//
+//
+//        final File dirWithTrainingData = new File(trainingDataDir);
+//        if(!dirWithTrainingData.isDirectory()) {
+//            throw new IOException("Path should be a directory");
+//        }
+//
+//        List<TextWithAnnotations> trainData = new ArrayList<>();
+//
+//        for(File trainFile: dirWithTrainingData.listFiles()) {
+//            if(trainFile.getPath().endsWith(".txt")) {
+//                // find a file with annotations
+//                String annotationsPath = trainFile.getPath()
+//                        .substring(0, trainFile.getPath().length() - 4) + ".ann";
+//                File annotationsFile = new File(annotationsPath);
+//                if(!annotationsFile.exists()) {
+//                    throw new IOException("File with annotations: " + annotationsPath + " does not exist");
+//                }
+//                LOGGER.info("Loaded" + annotationsFile.getName());
+//                trainData.add(new TextWithAnnotations(trainFile, annotationsFile));
+//            }
+//        }
+//        LOGGER.info("Loaded: " + trainData.size() + " training items");
+//        return trainData;
+//    }
 
 
-        final File dirWithTrainingData = new File(trainingDataDir);
-        if(!dirWithTrainingData.isDirectory()) {
-            throw new IOException("Path should be a directory");
+    public static CrfModel load(File file) throws IOException, ClassNotFoundException {
+        System.out.println("Loading model...");
+        try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file)))
+        {
+            return (CrfModel)stream.readObject();
         }
-
-        List<TextWithAnnotations> trainData = new ArrayList<>();
-
-        for(File trainFile: dirWithTrainingData.listFiles()) {
-            if(trainFile.getPath().endsWith(".txt")) {
-                // find a file with annotations
-                String annotationsPath = trainFile.getPath()
-                        .substring(0, trainFile.getPath().length() - 4) + ".ann";
-                File annotationsFile = new File(annotationsPath);
-                if(!annotationsFile.exists()) {
-                    throw new IOException("File with annotations: " + annotationsPath + " does not exist");
-                }
-                LOGGER.info("Loaded" + annotationsFile.getName());
-                trainData.add(new TextWithAnnotations(trainFile, annotationsFile));
-            }
-        }
-        LOGGER.info("Loaded: " + trainData.size() + " training items");
-        return trainData;
     }
+
 }

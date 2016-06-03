@@ -1,23 +1,21 @@
 package com.debates.crf.implementation.luke;
 
 import com.debates.crf.Tag;
-import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
 import com.debates.crf.implementation.common.feature.TagFeature;
-import com.debates.crf.implementation.luke.feature.PreviousWordAndTagFeature;
+import com.debates.crf.implementation.luke.feature.MyTagTransitionFeature;
+import com.debates.crf.implementation.luke.feature.PosAndTagFeature;
 import com.debates.crf.implementation.luke.filter.PosAndTagFilter;
 import com.debates.crf.implementation.luke.filter.PreviousPosAndTagFilter;
 import com.debates.crf.implementation.luke.filter.PreviousWordAndTagFilter;
 import com.debates.crf.implementation.luke.utils.PreviousPosAndTagFeatureBuilder;
 import com.debates.crf.implementation.luke.utils.PreviousWordAndTagFeatureBuilder;
 import com.debates.crf.implementation.luke.utils.WordAndTagFeatureBuilder;
-import com.debates.crf.implementation.witek.feature.WordAndTagFeature;
 import com.debates.crf.implementation.witek.filter.WordAndTagFilter;
 import com.debates.crf.utils.PosUtility;
 import org.crf.crf.filters.CrfFilteredFeature;
 import org.crf.crf.filters.TagFilter;
 import org.crf.crf.filters.TwoTagsFilter;
 import org.crf.crf.run.CrfFeatureGenerator;
-import org.crf.postagging.postaggers.crf.features.TagTransitionFeature;
 import org.crf.utilities.TaggedToken;
 
 import java.util.LinkedHashSet;
@@ -75,7 +73,7 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
     public void generateFeatures() {
         setFilteredFeatures = new LinkedHashSet<>();
 //        addTagFeatures();
-//        addTagTransitionFeatures();
+        addTagTransitionFeatures();
 //        addPosAndTagFeatures();
 
         addPreviousPosAndTagFeatures();
@@ -117,9 +115,9 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
         for(String tag : TAGS_THAT_MAY_BE_FIRST_IN_TEXT_ARRAY) {
             setFilteredFeatures.add(
                     new CrfFilteredFeature<>(
-                            new TagTransitionFeature(null, tag),
+                            new MyTagTransitionFeature(null, tag),
                             new TwoTagsFilter<>(tag, null),
-                            true)
+                            false)
             );
         }
 
@@ -128,11 +126,53 @@ public class Luke1CrfFeatureGenerator extends CrfFeatureGenerator<String, String
             String currTag = POSSIBLE_TAGS_PAIRS[i];
             setFilteredFeatures.add(
                     new CrfFilteredFeature<>(
-                            new TagTransitionFeature(prevTag, currTag),
+                            new MyTagTransitionFeature(prevTag, currTag),
                             new TwoTagsFilter<>(currTag, prevTag),
-                            true)
+                            false)
             );
         }
+
+
+
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.REASON_START.name(), Tag.REASON_START.name()),
+//                        new TwoTagsFilter<>(Tag.REASON.name(), Tag.REASON.name()),
+//                        true)
+//        );
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.REASON.name(), Tag.REASON.name()),
+//                        new TwoTagsFilter<>(Tag.REASON.name(), Tag.REASON.name()),
+//                        true)
+//        );
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.REASON.name(), Tag.REASON_END.name()),
+//                        new TwoTagsFilter<>(Tag.REASON.name(), Tag.REASON_END.name()),
+//                        true)
+//        );
+//
+//
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.PROPOSITION_START.name(), Tag.PROPOSITION_START.name()),
+//                        new TwoTagsFilter<>(Tag.PROPOSITION.name(), Tag.PROPOSITION.name()),
+//                        true)
+//        );
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.PROPOSITION.name(), Tag.PROPOSITION.name()),
+//                        new TwoTagsFilter<>(Tag.PROPOSITION.name(), Tag.PROPOSITION.name()),
+//                        true)
+//        );
+//        setFilteredFeatures.add(
+//                new CrfFilteredFeature<>(
+//                        new TagTransitionFeature(Tag.PROPOSITION.name(), Tag.PROPOSITION_END.name()),
+//                        new TwoTagsFilter<>(Tag.PROPOSITION.name(), Tag.PROPOSITION_END.name()),
+//                        true)
+//        );
+//
     }
 
     /**
